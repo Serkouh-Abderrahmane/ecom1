@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>        
 
         <div class="col-sm-8">
-            <h1><?= $product['title'] ?></h1>
+            <h1><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></h1>
             <div class="row row-info">
                 <div class="col-sm-6"><b><?= lang('price') ?>:</b></div>
                 <div class="col-sm-6"><?= $product['price'] . CURRENCY ?></div>

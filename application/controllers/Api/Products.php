@@ -68,6 +68,10 @@ class Products extends REST_Controller
 
     public function set_post()
     {
+        if (!$this->session->userdata('logged_in')) {
+            $this->response(['message' => 'Unauthorized'], REST_Controller::HTTP_UNAUTHORIZED);
+            return;
+        }
         $errors = [];
         $_POST['image'] = $this->uploadImage();
         if (!isset($_POST['translations']) || empty($_POST['translations'])) {
@@ -129,6 +133,10 @@ class Products extends REST_Controller
 
     public function productDel_delete($id)
     {
+        if (!$this->session->userdata('logged_in')) {
+            $this->response(['message' => 'Unauthorized'], REST_Controller::HTTP_UNAUTHORIZED);
+            return;
+        }
         $id = (int) $id;
         // Validate the id.
         if ($id <= 0) {

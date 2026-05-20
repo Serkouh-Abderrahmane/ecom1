@@ -58,7 +58,7 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
         <div class="lg:col-span-6">
             <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
                 <div class="flex items-start justify-between gap-4">
-                    <h1 class="text-2xl font-bold tracking-tight text-slate-900"><?= $product['title'] ?></h1>
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-900"><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></h1>
                     <a href="<?= LANG_URL ?>" class="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 md:inline-flex">
                         <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i><?= lang('back_to_shop') ?>
                     </a>
