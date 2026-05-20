@@ -104,7 +104,7 @@ class Checkout extends MY_Controller
             redirect(LANG_URL . '/checkout/successcash');
         }
         if ($_POST['payment_type'] == 'PayPal') {
-            @set_cookie('paypal', $this->orderId, 2678400);
+            $_SESSION['paypal_order_id'] = $this->orderId;
             $_SESSION['discountAmount'] = $_POST['discountAmount'];
             redirect(LANG_URL . '/checkout/paypalpayment');
         }
@@ -196,11 +196,11 @@ class Checkout extends MY_Controller
 
     public function paypal_cancel()
     {
-        if (get_cookie('paypal') == null) {
+        if (empty($_SESSION['paypal_order_id'])) {
             redirect(base_url());
         }
-        @delete_cookie('paypal');
-        $orderId = get_cookie('paypal');
+        $orderId = $_SESSION['paypal_order_id'];
+        unset($_SESSION['paypal_order_id']);
         $this->Public_model->changePaypalOrderStatus($orderId, 'canceled');
         $data = array();
         $head = array();
@@ -212,12 +212,12 @@ class Checkout extends MY_Controller
 
     public function paypal_success()
     {
-        if (get_cookie('paypal') == null) {
+        if (empty($_SESSION['paypal_order_id'])) {
             redirect(base_url());
         }
-        @delete_cookie('paypal');
+        $orderId = $_SESSION['paypal_order_id'];
+        unset($_SESSION['paypal_order_id']);
         $this->shoppingcart->clearShoppingCart();
-        $orderId = get_cookie('paypal');
         $this->Public_model->changePaypalOrderStatus($orderId, 'payed');
         $data = array();
         $head = array();
