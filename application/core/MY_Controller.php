@@ -151,7 +151,14 @@ class MY_Controller extends MX_Controller
             if (!isset($_SERVER['HTTP_REFERER'])) {
                 $ref = 'Direct';
             } else {
-                $ref = $_SERVER['HTTP_REFERER'];
+                $raw = $_SERVER['HTTP_REFERER'];
+                $parsed = parse_url($raw);
+                $scheme = isset($parsed['scheme']) ? strtolower($parsed['scheme']) : '';
+                if (in_array($scheme, ['http', 'https'], true) && strlen($raw) <= 500) {
+                    $ref = $raw;
+                } else {
+                    $ref = 'Direct';
+                }
             }
             $this->session->set_userdata('referrer', $ref);
         }

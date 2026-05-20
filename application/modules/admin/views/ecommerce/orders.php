@@ -115,8 +115,8 @@ if (!isset($_GET['settings'])) {
                                                 <td><b>Come from site</b></td>
                                                 <td>
                                                     <?php if ($tr['referrer'] != 'Direct') { ?>
-                                                        <a target="_blank" href="<?= $tr['referrer'] ?>" class="orders-referral">
-                                                            <?= $tr['referrer'] ?>
+                                                        <a target="_blank" href="<?= htmlspecialchars($tr['referrer'], ENT_QUOTES, 'UTF-8') ?>" class="orders-referral" rel="noopener noreferrer">
+                                                            <?= htmlspecialchars($tr['referrer'], ENT_QUOTES, 'UTF-8') ?>
                                                         </a>
                                                     <?php } else { ?>
                                                         Direct traffic or referrer is not visible                       
