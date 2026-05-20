@@ -34,7 +34,14 @@ class VENDOR_Controller extends MX_Controller
     protected function loginCheck()
     {
         if (!isset($_SESSION['logged_vendor']) && get_cookie('logged_vendor') != null) {
-            $_SESSION['logged_vendor'] = get_cookie('logged_vendor');
+            $this->load->model('Vendorprofile_model');
+            $token_hash = hash('sha256', get_cookie('logged_vendor'));
+            $email = $this->Vendorprofile_model->getEmailByRememberToken($token_hash);
+            if ($email !== null) {
+                $_SESSION['logged_vendor'] = $email;
+            } else {
+                delete_cookie('logged_vendor');
+            }
         }
         $authPages = array(
             'vendor/login',
@@ -55,7 +62,10 @@ class VENDOR_Controller extends MX_Controller
     protected function setLoginSession($email, $remember_me)
     {
         if ($remember_me == true) {
-            set_cookie('logged_vendor', $email, 2678400);
+            $raw_token = bin2hex(random_bytes(32));
+            $this->load->model('Vendorprofile_model');
+            $this->Vendorprofile_model->setRememberToken($email, hash('sha256', $raw_token));
+            set_cookie('logged_vendor', $raw_token, 2678400);
         }
         $_SESSION['logged_vendor'] = $email;
     }

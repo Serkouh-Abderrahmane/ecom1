@@ -33,6 +33,9 @@ class VendorProfile extends VENDOR_Controller
 
     public function logout()
     {
+        if (isset($_SESSION['logged_vendor']) && get_cookie('logged_vendor') != null) {
+            $this->Vendorprofile_model->clearRememberToken($_SESSION['logged_vendor']);
+        }
         unset($_SESSION['logged_vendor']);
         delete_cookie('logged_vendor');
         redirect(LANG_URL . '/vendor/login');

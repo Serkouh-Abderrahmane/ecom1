@@ -15,6 +15,26 @@ class Vendorprofile_model extends CI_Model
         return $result->row_array();
     }
 
+    public function setRememberToken($email, $token_hash)
+    {
+        $this->db->where('email', $email);
+        $this->db->update('vendors', ['remember_token' => $token_hash]);
+    }
+
+    public function getEmailByRememberToken($token_hash)
+    {
+        $this->db->where('remember_token', $token_hash);
+        $result = $this->db->get('vendors');
+        $row = $result->row_array();
+        return $row ? $row['email'] : null;
+    }
+
+    public function clearRememberToken($email)
+    {
+        $this->db->where('email', $email);
+        $this->db->update('vendors', ['remember_token' => null]);
+    }
+
     public function getVendorByUrlAddress($urlAddr)
     {
         $this->db->where('url', $urlAddr);
