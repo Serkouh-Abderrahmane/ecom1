@@ -34,7 +34,7 @@ class ShoppingCart
                 unset($_SESSION['shopping_cart'][$key]);
             }
         }
-        @set_cookie('shopping_cart', serialize($_SESSION['shopping_cart']), $this->cookieExpTime);
+        @set_cookie('shopping_cart', json_encode($_SESSION['shopping_cart']), $this->cookieExpTime);
         $result = 0;
         if (!empty($_SESSION['shopping_cart'])) {
             $result = $this->getCartItems();
@@ -54,13 +54,24 @@ class ShoppingCart
             }
             $i++;
         } while ($i <= $count);
-        @set_cookie('shopping_cart', serialize($_SESSION['shopping_cart']), $this->cookieExpTime);
+        @set_cookie('shopping_cart', json_encode($_SESSION['shopping_cart']), $this->cookieExpTime);
     }
 
     public function getCartItems()
     {
         if ((!isset($_SESSION['shopping_cart']) || empty($_SESSION['shopping_cart'])) && get_cookie('shopping_cart') != NULL) {
-            $_SESSION['shopping_cart'] = unserialize(get_cookie('shopping_cart'));
+            $decoded = json_decode(get_cookie('shopping_cart'), true);
+            if (!is_array($decoded)) {
+                @delete_cookie('shopping_cart');
+                return 0;
+            }
+            // Accept only positive integer product IDs
+            $filtered = array_values(array_filter(array_map('intval', $decoded), function ($v) { return $v > 0; }));
+            if (empty($filtered)) {
+                @delete_cookie('shopping_cart');
+                return 0;
+            }
+            $_SESSION['shopping_cart'] = $filtered;
         } elseif (!isset($_SESSION['shopping_cart']) || !is_array($_SESSION['shopping_cart'])) {
             return 0;
         }
