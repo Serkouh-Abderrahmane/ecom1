@@ -80,13 +80,21 @@ class AddProduct extends VENDOR_Controller
     public function do_upload_others_images()
     {
         if ($this->input->is_ajax_request()) {
+            $base_dir = realpath('./attachments/shop_images');
+            if ($base_dir === false) {
+                return;
+            }
             $folder = basename($_POST['folder'] ?? '');
             if ($folder === '' || $folder === '.') {
                 return;
             }
-            $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
+            $upath = $base_dir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
             if (!file_exists($upath)) {
-                mkdir($upath, 0777);
+                mkdir($upath, 0755);
+            }
+            $resolved_dir = realpath($upath);
+            if ($resolved_dir === false || strpos($resolved_dir . DIRECTORY_SEPARATOR, $base_dir . DIRECTORY_SEPARATOR) !== 0) {
+                return;
             }
 
             $this->load->library('upload');
@@ -102,7 +110,7 @@ class AddProduct extends VENDOR_Controller
                 $_FILES['others']['size'] = $files['others']['size'][$i];
 
                 $this->upload->initialize(array(
-                    'upload_path' => $upath,
+                    'upload_path' => $resolved_dir . DIRECTORY_SEPARATOR,
                     'allowed_types' => $this->allowed_img_types
                 ));
                 $this->upload->do_upload('others');
@@ -113,14 +121,16 @@ class AddProduct extends VENDOR_Controller
     public function loadOthersImages()
     {
         $output = '';
+        $base_dir = realpath('./attachments/shop_images');
         $folder = basename($_POST['folder'] ?? '');
-        if (isset($_POST['folder']) && $folder !== '' && $folder !== '.') {
-            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
-            if (is_dir($dir)) {
-                if ($dh = opendir($dir)) {
+        if ($base_dir !== false && isset($_POST['folder']) && $folder !== '' && $folder !== '.') {
+            $dir = $base_dir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
+            $resolved_dir = realpath($dir);
+            if ($resolved_dir !== false && strpos($resolved_dir . DIRECTORY_SEPARATOR, $base_dir . DIRECTORY_SEPARATOR) === 0 && is_dir($resolved_dir)) {
+                if ($dh = opendir($resolved_dir)) {
                     $i = 0;
                     while (($file = readdir($dh)) !== false) {
-                        if (is_file($dir . $file)) {
+                        if (is_file($resolved_dir . DIRECTORY_SEPARATOR . $file)) {
                             $output .= '
                                 <div class="other-img" id="image-container-' . $i . '">
                                     <img src="' . base_url('attachments/shop_images/' . htmlspecialchars($folder, ENT_QUOTES, 'UTF-8') . '/' . $file) . '" style="width:100px; height: 100px;">
@@ -150,13 +160,21 @@ class AddProduct extends VENDOR_Controller
     public function removeSecondaryImage()
     {
         if ($this->input->is_ajax_request()) {
+            $base_dir = realpath('./attachments/shop_images');
+            if ($base_dir === false) {
+                return;
+            }
             $folder = basename($_POST['folder'] ?? '');
             $image  = basename($_POST['image'] ?? '');
             if ($folder === '' || $folder === '.' || $image === '') {
                 return;
             }
-            $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $image;
-            unlink($img);
+            $img_path = $base_dir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $image;
+            $resolved = realpath($img_path);
+            if ($resolved === false || strpos($resolved, $base_dir . DIRECTORY_SEPARATOR) !== 0) {
+                return;
+            }
+            unlink($resolved);
         }
     }
 
