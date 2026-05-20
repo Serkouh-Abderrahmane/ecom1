@@ -80,7 +80,11 @@ class AddProduct extends VENDOR_Controller
     public function do_upload_others_images()
     {
         if ($this->input->is_ajax_request()) {
-            $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
+            $folder = basename($_POST['folder'] ?? '');
+            if ($folder === '' || $folder === '.') {
+                return;
+            }
+            $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
             if (!file_exists($upath)) {
                 mkdir($upath, 0777);
             }
@@ -109,8 +113,9 @@ class AddProduct extends VENDOR_Controller
     public function loadOthersImages()
     {
         $output = '';
-        if (isset($_POST['folder']) && $_POST['folder'] != null) {
-            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
+        $folder = basename($_POST['folder'] ?? '');
+        if (isset($_POST['folder']) && $folder !== '' && $folder !== '.') {
+            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
             if (is_dir($dir)) {
                 if ($dh = opendir($dir)) {
                     $i = 0;
@@ -118,8 +123,8 @@ class AddProduct extends VENDOR_Controller
                         if (is_file($dir . $file)) {
                             $output .= '
                                 <div class="other-img" id="image-container-' . $i . '">
-                                    <img src="' . base_url('attachments/shop_images/' . htmlspecialchars($_POST['folder']) . '/' . $file) . '" style="width:100px; height: 100px;">
-                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage(\'' . $file . '\', \'' . htmlspecialchars($_POST['folder']) . '\', ' . $i . ')">
+                                    <img src="' . base_url('attachments/shop_images/' . htmlspecialchars($folder, ENT_QUOTES, 'UTF-8') . '/' . $file) . '" style="width:100px; height: 100px;">
+                                    <a href="javascript:void(0);" onclick="removeSecondaryProductImage(\'' . $file . '\', \'' . htmlspecialchars($folder, ENT_QUOTES, 'UTF-8') . '\', ' . $i . ')">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </a>
                                 </div>
@@ -145,7 +150,12 @@ class AddProduct extends VENDOR_Controller
     public function removeSecondaryImage()
     {
         if ($this->input->is_ajax_request()) {
-            $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . '' . $_POST['folder'] . DIRECTORY_SEPARATOR . $_POST['image'];
+            $folder = basename($_POST['folder'] ?? '');
+            $image  = basename($_POST['image'] ?? '');
+            if ($folder === '' || $folder === '.' || $image === '') {
+                return;
+            }
+            $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $image;
             unlink($img);
         }
     }
