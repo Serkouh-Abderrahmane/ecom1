@@ -124,7 +124,7 @@ class MY_Controller extends MX_Controller
     {
         if (isset($_POST['subscribeEmail'])) {
             $arr = array();
-            $arr['browser'] = $_SERVER['HTTP_USER_AGENT'];
+            $arr['browser'] = substr(strip_tags($_SERVER['HTTP_USER_AGENT']), 0, 500);
             $arr['ip'] = $_SERVER['REMOTE_ADDR'];
             $arr['time'] = time();
             $arr['email'] = $_POST['subscribeEmail'];

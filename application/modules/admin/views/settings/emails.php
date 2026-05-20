@@ -24,9 +24,9 @@
                 foreach ($emails->result() as $email) {
                     ?>
                     <tr>
-                        <td><?= $email->email ?></td>
-                        <td><?= $email->browser ?></td>
-                        <td><?= $email->ip ?></td>
+                        <td><?= htmlspecialchars($email->email, ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($email->browser, ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars($email->ip, ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= date('Y.m.d / H.m.s', $email->time) ?></td>
                         <td><a href="?delete=<?= $email->id ?>" class="btn-xs btn-danger confirm-delete">Delete</a></td>
                     </tr>
