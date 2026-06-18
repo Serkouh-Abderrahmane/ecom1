@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <a href="<?= LANG_URL ?>" class="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-200 hover:bg-slate-50 md:inline-flex">
             <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
-            <?= lang('back_to_shop') ?>
+            <?= lang('continue_shopping') ?>
         </a>
     </div>
 
@@ -35,19 +35,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="min-w-0">
                                 <a href="<?= LANG_URL . '/' . $item['url'] ?>" class="block truncate text-sm font-semibold text-slate-900 hover:text-slate-700"><?= $item['title'] ?></a>
                                 <div class="mt-1 text-xs text-slate-600">
-                                    <?= $item['price'] . CURRENCY ?> · <?= lang('total') ?>: <?= $item['sum_price'] . CURRENCY ?>
+                                    <?= $item['price'] . CURRENCY ?> &middot; <?= lang('total') ?>: <?= $item['sum_price'] . CURRENCY ?>
                                 </div>
                             </div>
                         </div>
 
                         <div class="flex flex-wrap items-center gap-2">
-                            <a class="refresh-me add-to-cart inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
+                            <a class="refresh-me add-to-cart inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="#!">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </a>
                             <span class="inline-flex min-w-[3rem] items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200">
                                 <?= $item['num_added'] ?>
                             </span>
-                            <a class="inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" onclick="removeProduct(<?= $item['id'] ?>, true)" href="javascript:void(0);">
+                             <a class="inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" onclick="removeProduct(<?= $item['id'] ?>, true); return false;" href="#!">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                             </a>
 
@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="flex flex-col gap-2 sm:flex-row">
                     <a href="<?= LANG_URL ?>" class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50">
                         <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
-                        <?= lang('back_to_shop') ?>
+                        <?= lang('continue_shopping') ?>
                     </a>
                     <a class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800" href="<?= LANG_URL . '/checkout' ?>">
                         <?= lang('checkout') ?>

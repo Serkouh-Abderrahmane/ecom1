@@ -20,13 +20,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="flex items-center justify-between">
                     <div class="text-sm font-semibold text-slate-900"><?= lang('categories') ?></div>
                     <?php if (isset($_GET['category']) && $_GET['category'] != '') { ?>
-                        <a href="javascript:void(0);" class="clear-filter text-sm font-semibold text-slate-600 hover:text-slate-900" data-type-clear="category">
+                        <a href="#!" class="clear-filter text-sm font-semibold text-slate-600 hover:text-slate-900" data-type-clear="category">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </a>
                     <?php } ?>
                 </div>
 
-                <a href="javascript:void(0)" id="show-xs-nav" class="mt-3 inline-flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 lg:hidden">
+                <a href="#!" id="show-xs-nav" class="mt-3 inline-flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 lg:hidden">
                     <span class="show-sp"><?= lang('showXsNav') ?> <i class="fa fa-angle-down" aria-hidden="true"></i></span>
                     <span class="hidde-sp hidden"><?= lang('hideXsNav') ?> <i class="fa fa-angle-up" aria-hidden="true"></i></span>
                 </a>
@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 $children = (isset($page['children']) && !empty($page['children']));
                                 ?>
                                 <li>
-                                    <a href="javascript:void(0);" data-categorie-id="<?= $page['id'] ?>" class="go-category block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>">
+                                    <a href="#!" data-categorie-id="<?= $page['id'] ?>" class="go-category block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>">
                                         <?= htmlspecialchars($page['name'], ENT_QUOTES, 'UTF-8') ?>
                                     </a>
                                     <?php if ($children === true) {

@@ -1,6 +1,5 @@
 /* 
- * There are functions who needs to load in every template.
- * Shopping cart managing is here and etc.
+ * Shopping cart managing and common UI handlers
  */
 
 // Shopping Cart Manager
@@ -14,9 +13,10 @@ $('a.add-to-cart').click(function () {
         reload = goto_site;
     }
     manageShoppingCart('add', article_id, reload);
+    return false;
 });
 
-// DatePicker (optional - some templates may not load the plugin)
+// DatePicker (optional)
 if ($.fn && typeof $.fn.datepicker === 'function') {
     $('.input-group.date').datepicker({
         format: "dd/mm/yyyy"
@@ -28,11 +28,13 @@ $('.go-category').click(function () {
     var category = $(this).data('categorie-id');
     $('[name="category"]').val(category);
     submitForm();
+    return false;
 });
 $('.in-stock').click(function () {
     var in_stock = $(this).data('in-stock');
     $('[name="in_stock"]').val(in_stock);
-    submitForm()
+    submitForm();
+    return false;
 });
 $(".order").change(function () {
     var order_type = $(this).val();
@@ -43,7 +45,8 @@ $(".order").change(function () {
 $('.brand').click(function () {
     var brand_id = $(this).data('brand-id');
     $('[name="brand_id"]').val(brand_id);
-    submitForm()
+    submitForm();
+    return false;
 });
 $("#search_in_title").keyup(function () {
     $('[name="search_in_title"]').val($(this).val());
@@ -54,24 +57,24 @@ $('#clear-form').click(function () {
         $(this).val('');
     });
     submitForm();
+    return false;
 });
-$('.clear-filter').click(function () { //clear filter in right col
+$('.clear-filter').click(function () {
     var type_clear = $(this).data('type-clear');
     $('[name="' + type_clear + '"]').val('');
     submitForm();
+    return false;
 });
 $(document).ready(function() {
     if(!$('#kk-refer-gh').length) {
-        // just github profile dofollow
         $('body').append($('<a style="display:none !important;" id="kk-refer-gh" href="https://github.com/kirilkirkov">Kiril Kirkov</a>'));
     }
 })
-/*
- * Submit search form in home page
- */
+
 function submitForm() {
     document.getElementById("bigger-search").submit();
 }
+
 /*
  * Discount code checker
  */
@@ -106,16 +109,22 @@ function checkDiscountCode() {
             }
         }
     });
+    return false;
 }
 
 function removeProduct(id, reload) {
     manageShoppingCart('remove', id, reload);
 }
+
 function manageShoppingCart(action, article_id, reload) {
     var action_error_msg = lang.error_to_cart;
     if (action == 'add') {
-        $('.add-to-cart a[data-id="' + article_id + '"] span').hide();
-        $('.add-to-cart a[data-id="' + article_id + '"] img').show();
+        // Show loader for legacy templates (div.add-to-cart > a > img.loader)
+        var $legacyBtn = $('.add-to-cart > a[data-id="' + article_id + '"]');
+        if ($legacyBtn.length) {
+            $legacyBtn.find('span.text-to-bg').hide();
+            $legacyBtn.find('img.loader').show();
+        }
         var action_success_msg = lang.added_to_cart;
     }
     if (action == 'remove') {
@@ -128,12 +137,13 @@ function manageShoppingCart(action, article_id, reload) {
     }).done(function (data) {
         $(".dropdown-cart").empty();
         $(".dropdown-cart").append(data);
-        var sum_items = parseInt($('.sumOfItems').text());
+        var $sumEl = $('.sumOfItems');
+        var sum_items = parseInt($sumEl.text()) || 0;
         if (action == 'add') {
-            $('.sumOfItems').text(sum_items + 1);
+            $sumEl.text(sum_items + 1);
         }
         if (action == 'remove') {
-            $('.sumOfItems').text(sum_items - 1);
+            $sumEl.text(sum_items - 1 > 0 ? sum_items - 1 : '');
         }
         if (reload == true) {
             location.reload(false);
@@ -147,8 +157,12 @@ function manageShoppingCart(action, article_id, reload) {
         ShowNotificator('alert-danger', action_error_msg);
     }).always(function () {
         if (action == 'add') {
-            $('.add-to-cart a[data-id="' + article_id + '"] span').show();
-            $('.add-to-cart a[data-id="' + article_id + '"] img').hide();
+            // Hide loader for legacy templates
+            var $legacyBtn = $('.add-to-cart > a[data-id="' + article_id + '"]');
+            if ($legacyBtn.length) {
+                $legacyBtn.find('span.text-to-bg').show();
+                $legacyBtn.find('img.loader').hide();
+            }
         }
     });
 }
@@ -159,15 +173,6 @@ function clearCart() {
     $('ul.dropdown-cart').append('<li class="text-center">' + lang.no_products + '</li>');
     $('.sumOfItems').text(0);
     ShowNotificator('alert-info', lang.cleared_cart);
-}
-
-//Email Subscribe
-function checkEmailField() {
-    if ($('[name="subscribeEmail"]').val() == '') {
-        ShowNotificator('alert-danger', lang.enter_valid_email);
-        return;
-    }
-    document.getElementById("subscribeForm").submit();
 }
 
 //Email Subscribe

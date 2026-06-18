@@ -201,10 +201,10 @@ $messages = [];
 $errors = [];
 
 $prefill = [
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => '',
+	'hostname' => getenv('DB_HOST') ?: 'localhost',
+	'username' => getenv('DB_USERNAME') ?: 'root',
+	'password' => getenv('DB_PASSWORD') ?: '',
+	'database' => getenv('DB_NAME') ?: '',
 ];
 
 if (is_file($dbConfigPath)) {

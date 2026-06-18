@@ -1,87 +1,64 @@
-<footer class="border-t border-slate-200 bg-slate-950 text-slate-100">
-    <div class="mx-auto max-w-7xl px-4 py-12">
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
-            <div class="md:col-span-4">
-                <div class="flex items-center gap-3">
-                    <div class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white">
-                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-base font-semibold"><?= isset($navitext) && $navitext != null ? $navitext : $_SERVER['HTTP_HOST'] ?></div>
+<footer class="bg-slate-950 text-slate-300 mt-16">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
+            <div class="lg:col-span-4">
+                <div class="text-lg font-bold text-white tracking-tight">LUÔN VUI TƯƠI</div>
+                <p class="mt-4 text-sm leading-relaxed text-slate-400"><?= $footerAboutUs ?? '' ?></p>
+                <div class="flex items-center gap-3 mt-6">
+                    <?php $fb = $footerSocialFacebook ?? ''; if ($fb != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $fb ?>"><i class="fa fa-facebook"></i></a><?php } ?>
+                    <?php $tw = $footerSocialTwitter ?? ''; if ($tw != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $tw ?>"><i class="fa fa-twitter"></i></a><?php } ?>
+                    <?php $pi = $footerSocialPinterest ?? ''; if ($pi != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $pi ?>"><i class="fa fa-pinterest"></i></a><?php } ?>
+                    <?php $ig = $footerSocialInstagram ?? ''; if ($ig != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $ig ?>"><i class="fa fa-instagram"></i></a><?php } ?>
+                    <?php $yt = $footerSocialYoutube ?? ''; if ($yt != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $yt ?>"><i class="fa fa-youtube"></i></a><?php } ?>
                 </div>
-                <p class="mt-4 text-sm leading-relaxed text-slate-300"><?= $footerAboutUs ?></p>
             </div>
-
-            <div class="md:col-span-2">
-                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-200"><?= lang('pages') ?></h3>
-                <ul class="mt-4 space-y-2 text-sm">
-                    <li><a class="text-slate-300 hover:text-white" href="<?= base_url() ?>"><?= lang('home') ?></a></li>
-                    <li><a class="text-slate-300 hover:text-white" href="<?= LANG_URL . '/checkout' ?>"><?= lang('checkout') ?></a></li>
-                    <li><a class="text-slate-300 hover:text-white" href="<?= LANG_URL . '/contacts' ?>"><?= lang('contacts') ?></a></li>
+            <div class="lg:col-span-2">
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500">CHÍNH SÁCH</h3>
+                <ul class="mt-4 space-y-2.5 text-sm">
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách bảo mật thông tin</a></li>
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách giao nhận hàng và kiểm hàng</a></li>
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách đổi trả</a></li>
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách thanh toán</a></li>
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Điều khoản dịch vụ</a></li>
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Giới thiệu</a></li>
+                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Liên hệ</a></li>
                 </ul>
             </div>
-
-            <div class="md:col-span-3">
-                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-200"><?= lang('categories') ?></h3>
-                <?php if (!empty($footerCategories)) { ?>
-                    <ul class="mt-4 space-y-2 text-sm">
-                        <?php foreach ($footerCategories as $key => $categorie) { ?>
-                            <li><a class="go-category text-slate-300 hover:text-white" href="javascript:void(0);" data-categorie-id="<?= $key ?>"><?= htmlspecialchars($categorie, ENT_QUOTES, 'UTF-8') ?></a></li>
-                        <?php } ?>
-                    </ul>
-                <?php } else { ?>
-                    <p class="mt-4 text-sm text-slate-300"><?= lang('no_categories') ?></p>
-                <?php } ?>
+            <div class="lg:col-span-3">
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500">THÔNG TIN CÔNG TY</h3>
+                <ul class="mt-4 space-y-2.5 text-sm">
+                    <li class="text-slate-400">MST: 0202291489</li>
+                    <li class="text-slate-400">Ngày cấp: 12/06/2025, Sở Tài Chính Thành Phố Hải Phòng</li>
+                    <li class="text-slate-400">Số 122 đường Khúc Hạo, Phường An Biên, TP Hải Phòng</li>
+                </ul>
             </div>
-
-            <div class="md:col-span-3">
-                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-200"><?= lang('newsletter') ?></h3>
-                <p class="mt-4 text-sm text-slate-300"><?= lang('email_address') ?></p>
-                <form method="POST" id="subscribeForm" class="mt-3 flex flex-col gap-2">
-                    <input type="text" class="w-full rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/10" name="subscribeEmail" placeholder="<?= lang('email_address') ?>">
-                    <button class="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100" onclick="checkEmailField()" type="button">
-                        <?= lang('subscribe') ?> <i class="fa fa-long-arrow-right"></i>
-                    </button>
+            <div class="lg:col-span-3">
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500"><?= lang('newsletter') ?></h3>
+                <p class="mt-4 text-sm text-slate-400"><?= lang('subscribe_to_newsletter') ?></p>
+                <form method="POST" id="subscribeForm" class="mt-3">
+                    <div class="flex gap-2">
+                        <input type="text" class="flex-1 rounded-xl border-0 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-white/10" name="subscribeEmail" placeholder="Email của bạn">
+                        <button class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition-colors" onclick="checkEmailField()" type="button">
+                            Đăng Ký
+                        </button>
+                    </div>
                 </form>
-
-                <div class="mt-6">
-                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-200"><?= lang('contacts') ?></div>
-                    <div class="mt-3 space-y-2 text-sm text-slate-300">
-                        <?php if ($footerContactAddr != '') { ?>
-                            <div class="flex gap-2"><i class="fa fa-map-marker mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><div><?= $footerContactAddr ?></div></div>
-                        <?php } ?>
-                        <?php if ($footerContactPhone != '') { ?>
-                            <div class="flex gap-2"><i class="fa fa-phone mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><div><?= $footerContactPhone ?></div></div>
-                        <?php } ?>
-                        <?php if ($footerContactEmail != '') { ?>
-                            <div class="flex gap-2"><i class="fa fa-envelope mt-0.5 w-4 text-slate-400" aria-hidden="true"></i><a class="text-slate-300 hover:text-white" href="mailto:<?= $footerContactEmail ?>"><?= $footerContactEmail ?></a></div>
-                        <?php } ?>
-                    </div>
-
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <?php if ($footerSocialFacebook != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/15" href="<?= $footerSocialFacebook ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a><?php } ?>
-                        <?php if ($footerSocialTwitter != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/15" href="<?= $footerSocialTwitter ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a><?php } ?>
-                        <?php if ($footerSocialGooglePlus != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/15" href="<?= $footerSocialGooglePlus ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a><?php } ?>
-                        <?php if ($footerSocialPinterest != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/15" href="<?= $footerSocialPinterest ?>"><i class="fa fa-pinterest" aria-hidden="true"></i></a><?php } ?>
-                        <?php if ($footerSocialYoutube != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/15" href="<?= $footerSocialYoutube ?>"><i class="fa fa-youtube" aria-hidden="true"></i></a><?php } ?>
-                    </div>
+                <div class="mt-6 space-y-2.5 text-sm">
+                    <div class="flex gap-2 text-slate-400"><i class="fa fa-envelope mt-0.5 w-4"></i><span>hello@luonvuituoi.co</span></div>
+                    <div class="flex gap-2 text-slate-400"><i class="fa fa-phone mt-0.5 w-4"></i><span>0386524760</span></div>
+                    <div class="flex gap-2 text-slate-400"><i class="fa fa-clock-o mt-0.5 w-4"></i><span>Thứ 2 - Thứ 7 (08h00 - 17h00)</span></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="border-t border-slate-800">
-        <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
-            <p>
-                <?= $footercopyright ?>
-                <br>
-                <!-- Please do not remove this referention -->
-                Powered by <a class="text-slate-300 hover:text-white" href="https://github.com/kirilkirkov">Kiril Kirkov</a>
-            </p>
-            <div class="flex items-center gap-3 text-xl text-slate-300">
-                <i class="fa fa-cc-visa" aria-hidden="true"></i>
-                <i class="fa fa-cc-mastercard" aria-hidden="true"></i>
-                <i class="fa fa-cc-amex" aria-hidden="true"></i>
-                <i class="fa fa-cc-paypal" aria-hidden="true"></i>
+        <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+            <p><?= $footercopyright ?? 'Copyright © 2026, Luôn Vui Tươi' ?></p>
+            <div class="flex items-center gap-4 text-xl">
+                <i class="fa fa-cc-visa"></i>
+                <i class="fa fa-cc-mastercard"></i>
+                <i class="fa fa-cc-amex"></i>
+                <i class="fa fa-cc-paypal"></i>
             </div>
         </div>
     </div>
@@ -92,9 +69,8 @@
             ShowNotificator('alert-info', '<?= lang('email_added') ?>');
         });
     </script>
-    <?php
-}
-echo $addJs;
+<?php }
+echo $addJs ?? '';
 ?>
 </div>
 </div>

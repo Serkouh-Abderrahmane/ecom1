@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ecom1
+    env: php
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: CI_ENV
+        value: production
+      - key: DB_HOST
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: BASE_URL
+        sync: false

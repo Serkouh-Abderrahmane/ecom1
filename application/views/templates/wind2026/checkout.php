@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="text-sm font-semibold text-slate-900"><?= lang('freeShippingHeader') ?></div>
                 <div class="mt-2 text-sm text-slate-700">
                     <span class="font-semibold"><?= lang('promo') ?></span>
-                    — <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
+                    &mdash; <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
                 </div>
             </div>
         <?php } ?>
@@ -90,7 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <label class="text-sm font-semibold text-slate-700"><?= lang('discount_code') ?></label>
                                 <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center">
                                     <input class="w-full flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="discountCode" value="<?= htmlspecialchars((string)($_POST['discountCode'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" placeholder="<?= lang('enter_discount_code') ?>" type="text">
-                                    <a href="javascript:void(0);" class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-100" onclick="checkDiscountCode()">
+                                    <a href="#!" class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-100" onclick="checkDiscountCode(); return false;">
                                         <?= lang('check_code') ?>
                                     </a>
                                 </div>
@@ -98,8 +98,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php } ?>
 
                         <div class="rounded-2xl bg-white ring-1 ring-slate-200">
-                            <div class="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900"><?= lang('products') ?></div>
-                            <div class="p-4 space-y-3">
+                            <div class="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900"><?= lang('order_summary') ?></div>
+                            <div class="space-y-3 p-4">
                                 <?php foreach ($cartItems['array'] as $item) { ?>
                                     <?php
                                     $productImage = base_url('/attachments/no-image-frontend.png');
@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="min-w-0">
                                                 <a href="<?= LANG_URL . '/' . $item['url'] ?>" class="block truncate text-sm font-semibold text-slate-900 hover:text-slate-700"><?= $item['title'] ?></a>
                                                 <div class="mt-1 text-xs text-slate-600">
-                                                    <?= $item['price'] . CURRENCY ?> · <?= lang('total') ?>: <?= $item['sum_price'] . CURRENCY ?>
+                                                    <?= $item['price'] . CURRENCY ?> &middot; <?= lang('total') ?>: <?= $item['sum_price'] . CURRENCY ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,13 +124,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
                                             <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
 
-                                            <a class="refresh-me add-to-cart inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="javascript:void(0);">
+                                            <a class="refresh-me add-to-cart inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="#!">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </a>
                                             <span class="inline-flex min-w-[3rem] items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200">
                                                 <?= $item['num_added'] ?>
                                             </span>
-                                            <a class="inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" onclick="removeProduct(<?= $item['id'] ?>, true)" href="javascript:void(0);">
+                                             <a class="inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" onclick="removeProduct(<?= $item['id'] ?>, true); return false;" href="#!">
                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                             </a>
                                             <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['id'] . '&back-to=checkout') ?>" class="inline-flex items-center justify-center rounded-xl bg-rose-600 px-3 py-2 text-sm font-semibold text-white hover:bg-rose-700">
@@ -140,14 +140,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 <?php } ?>
 
-                                <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-sm font-semibold text-slate-900">
-                                    <div><?= lang('total') ?></div>
-                                    <div>
-                                        <span class="final-amount"><?= $cartItems['finalSum'] ?></span><?= CURRENCY ?>
-                                        <input type="hidden" class="final-amount" name="final_amount" value="<?= $cartItems['finalSum'] ?>">
-                                        <input type="hidden" name="amount_currency" value="<?= CURRENCY ?>">
-                                        <input type="hidden" name="discountAmount" value="">
-                                    </div>
+                                <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-sm text-slate-900">
+                                    <div class="font-semibold"><?= lang('subtotal') ?></div>
+                                    <div class="font-semibold"><?= $cartItems['finalSum'] . CURRENCY ?></div>
                                 </div>
 
                                 <?php
@@ -158,7 +153,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div><?= lang('shipping') ?></div>
                                         <div><span class="final-amount"><?= (int)$shippingAmount ?></span><?= CURRENCY ?></div>
                                     </div>
+                                <?php } else { ?>
+                                    <div class="flex items-center justify-between text-sm font-semibold text-green-600">
+                                        <div><?= lang('shipping') ?></div>
+                                        <div><?= lang('free') ?></div>
+                                    </div>
                                 <?php } ?>
+
+                                <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-sm font-bold text-slate-900">
+                                    <div><?= lang('total') ?></div>
+                                    <div>
+                                        <span class="final-amount"><?= $cartItems['finalSum'] ?></span><?= CURRENCY ?>
+                                        <input type="hidden" class="final-amount" name="final_amount" value="<?= $cartItems['finalSum'] ?>">
+                                        <input type="hidden" name="amount_currency" value="<?= CURRENCY ?>">
+                                        <input type="hidden" name="discountAmount" value="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -166,12 +176,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <a href="<?= LANG_URL ?>" class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50">
                             <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
-                            <?= lang('back_to_shop') ?>
+                            <?= lang('continue_shopping') ?>
                         </a>
-                        <a href="javascript:void(0);" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800" onclick="document.getElementById('goOrder').submit();">
-                            <?= lang('custom_order') ?>
+                        <a href="#!" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800" onclick="document.getElementById('goOrder').submit(); return false;">
+                            <?= lang('place_order') ?>
                             <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
                         </a>
+                    </div>
+
+                    <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
+                        <a href="<?= LANG_URL ?>/contacts" class="underline hover:text-slate-900"><?= lang('payment_policy') ?></a>
+                        <a href="<?= LANG_URL ?>/contacts" class="underline hover:text-slate-900"><?= lang('terms_of_service') ?></a>
                     </div>
                 </div>
             </div>

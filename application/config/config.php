@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-$config['base_url'] = defined('BASE_URL')?BASE_URL:'';
+$config['base_url'] = defined('BASE_URL') ? BASE_URL : (getenv('BASE_URL') ?: 'http://localhost:8080/');
 
 /**
  * Show/Hide social share buttons in product pages
@@ -100,10 +100,10 @@ $config['admin_history'] = false;
   | hepler for help.. :)
   |
  */
-$config['language'] = 'english';
-$config['language_abbr'] = 'en';
-$config['currency'] = '€';
-$config['currencyKey'] = 'EUR';
+$config['language'] = 'vietnamese';
+$config['language_abbr'] = 'vi';
+$config['currency'] = '₫';
+$config['currencyKey'] = 'VND';
 
 /*
   |--------------------------------------------------------------------------
@@ -569,7 +569,7 @@ $config['proxy_ips'] = '';
   | By default is redlabel.
   |
  */
-$config['template'] = 'redlabel';
+$config['template'] = 'wind2026';
 
 /**
  * Add allowed FTP hosts for elFinder plugin into the administration

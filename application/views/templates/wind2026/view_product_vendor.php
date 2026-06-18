@@ -93,18 +93,18 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
 
                 <div class="mt-5 flex flex-wrap items-center gap-2">
                     <div class="text-sm font-semibold text-slate-700"><?= lang('in_category') ?>:</div>
-                    <a href="javascript:void(0);" class="go-category inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" data-categorie-id="<?= $product['shop_categorie'] ?>">
+                    <a href="#!" class="go-category inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" data-categorie-id="<?= $product['shop_categorie'] ?>">
                         <?= $product['categorie_name'] ?>
                     </a>
                 </div>
 
                 <div class="mt-6 flex flex-col gap-2 sm:flex-row">
                     <?php if ($product['quantity'] > 0) { ?>
-                        <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/shopping-cart' ?>" class="add-to-cart inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
+                        <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/shopping-cart' ?>" class="add-to-cart inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <?= lang('add_to_cart') ?>
                         </a>
-                        <a href="javascript:void(0);" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50">
+                        <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50">
                             <i class="fa fa-bolt" aria-hidden="true"></i>
                             <?= lang('buy_now') ?>
                         </a>
@@ -147,8 +147,8 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
                 <span class="img-series"></span>
             </div>
         </div>
-        <a href="javascript:void(0);" class="inner-next"></a>
-        <a href="javascript:void(0);" class="inner-prev"></a>
+        <a href="#!" class="inner-next"></a>
+        <a href="#!" class="inner-prev"></a>
     </div>
     <div id="caption"></div>
 </div>
