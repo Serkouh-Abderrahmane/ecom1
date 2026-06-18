@@ -64,8 +64,8 @@ function updateDatabaseConfigFile(string $path, array $values, string &$error): 
 
 	foreach ($replacements as $key => $val) {
 		$escaped = phpSingleQuoteEscape((string)$val);
-		$pattern = "/('".$key."'\\s*=>\\s*)'((?:\\\\\\\\'|[^'])*)'/";
-		$configText = preg_replace($pattern, "$1'".$escaped."'", $configText, 1, $counts[$key]);
+		$pattern = "/('".$key."'\\s*=>\\s*).*?(,\\s*\\n|\\n)/s";
+		$configText = preg_replace($pattern, "$1'".$escaped."'$2", $configText, 1, $counts[$key]);
 		if (!is_string($configText)) {
 			$error = "Failed to update '".$key."' in database config (regex error).";
 			return false;
