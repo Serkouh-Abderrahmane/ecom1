@@ -14,7 +14,7 @@ function pagination($url, $rowscount, $per_page, $segment = 2)
     $config["total_rows"] = $rowscount;
     $config["per_page"] = $per_page;
     $config["uri_segment"] = $segment;
-    $config['full_tag_open'] = '<nav><ul class="pagination">';
+    $config['full_tag_open'] = '<nav><ul class="m-pagination">';
     $config['full_tag_close'] = '</ul></nav>';
     $config['num_tag_open'] = '<li>';
     $config['num_tag_close'] = '</li>';

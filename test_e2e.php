@@ -131,7 +131,7 @@ test('3. Header has all 8 categories', function() {
 // === STEP 4: Footer contact ===
 test('4. Footer has contact info', function() {
     $body = fetch('/');
-    $items = ['hello@luonvuituoi.co', '0386524760'];
+    $items = ['contact@xuongmaynhacong.vn', '0386524760'];
     $missing = [];
     foreach ($items as $item) {
         if (stripos($body, $item) === false) $missing[] = $item;
@@ -247,7 +247,7 @@ test('13. Admin login accessible', function() {
 // === STEP 14: Contacts page ===
 test('14. Contacts page in Vietnamese', function() {
     $body = fetch('/contacts');
-    $items = ['hello@luonvuituoi.co', 'Liên hệ'];
+    $items = ['contact@xuongmaynhacong.vn', 'Liên hệ'];
     $missing = [];
     foreach ($items as $item) {
         if (stripos($body, $item) === false) $missing[] = $item;
