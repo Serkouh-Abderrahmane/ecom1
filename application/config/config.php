@@ -24,12 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-$detected_https = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
-    || getenv('RAILWAY_SERVICE_ID') !== false  // Railway always serves HTTPS
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
+$is_railway = strpos($host, 'railway.app') !== false;
+$detected_https = $is_railway
+    || (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
     || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
     || (isset($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
 $protocol = $detected_https ? 'https://' : 'http://';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
 $config['base_url'] = defined('BASE_URL') ? BASE_URL : $protocol . rtrim($host, '/') . '/';
 
 /**
