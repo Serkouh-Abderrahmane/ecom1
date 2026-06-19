@@ -24,7 +24,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-$config['base_url'] = defined('BASE_URL') ? BASE_URL : (getenv('BASE_URL') ?: 'http://localhost:8080/');
+$detected_https = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+    || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+    || (isset($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
+$protocol = $detected_https ? 'https://' : 'http://';
+$env_url = getenv('BASE_URL');
+if ($env_url) {
+    $env_url = preg_replace('#^https?://#', $protocol, $env_url);
+}
+$config['base_url'] = defined('BASE_URL') ? BASE_URL : ($env_url ?: $protocol . 'localhost:8080/');
 
 /**
  * Show/Hide social share buttons in product pages
@@ -442,7 +450,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 $config['cookie_prefix'] = '';
 $config['cookie_domain'] = '';
 $config['cookie_path'] = '/';
-$config['cookie_secure'] = FALSE;
+$config['cookie_secure'] = $detected_https;
 $config['cookie_httponly'] = FALSE;
 
 /*

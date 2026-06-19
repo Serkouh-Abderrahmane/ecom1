@@ -3,7 +3,7 @@
  */
 
 // Shopping Cart Manager
-$('a.add-to-cart').click(function () {
+$(document).on('click', '.add-to-cart', function () {
     var reload = false;
     var article_id = $(this).data('id');
     var goto_site = $(this).data('goto');
