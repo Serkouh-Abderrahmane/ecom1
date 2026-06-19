@@ -270,7 +270,7 @@ test('15. Footer shows Luôn Vui Tươi brand', function() {
 });
 
 // === STEP 16: All product URLs return 200 ===
-test('16. All product URLs return 200', function() {
+test('16. All product URLs return 200', function() use ($BASE) {
     $body = fetch('/');
     preg_match_all('/href=["\']([^"\']*_\d+)["\']/i', $body, $matches);
     $urls = array_unique($matches[1]);
@@ -357,7 +357,7 @@ test('17. No broken internal links', function() {
 });
 
 // === STEP 18: Product images load ===
-test('18. Product images load (no broken images)', function() {
+test('18. Product images load (no broken images)', function() use ($BASE) {
     $body = fetch('/');
     preg_match_all('/<img[^>]+src=["\']([^"\']+)["\']/i', $body, $matches);
     $imgs = array_unique($matches[1]);

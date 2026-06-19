@@ -93,6 +93,20 @@ class Home extends ADMIN_Controller
             }
             $output[] = "<div class='ok'>✅ Connected to MySQL: $dbName on $dbHost</div>";
 
+            // 0. Drop all existing tables first
+            $mysqli->query("SET FOREIGN_KEY_CHECKS = 0");
+            $tables = $mysqli->query("SHOW TABLES");
+            $dropped = 0;
+            if ($tables) {
+                while ($row = $tables->fetch_row()) {
+                    $mysqli->query("DROP TABLE IF EXISTS `{$row[0]}`");
+                    $dropped++;
+                }
+                $tables->free();
+            }
+            $mysqli->query("SET FOREIGN_KEY_CHECKS = 1");
+            $output[] = "<div class='ok'>✅ Dropped $dropped existing tables</div>";
+
             // 1. Import database.sql (schema)
             $schemaFile = FCPATH . 'database.sql';
             if (!file_exists($schemaFile)) {
