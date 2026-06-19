@@ -1054,7 +1054,7 @@ abstract class REST_Controller extends MX_Controller {
                 $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
             }
 
-            $method = strtolower($method);
+            $method = strtolower($method ?? '');
         }
 
         if (empty($method))
@@ -2340,3 +2340,4 @@ abstract class REST_Controller extends MX_Controller {
         }
     }
 }
+

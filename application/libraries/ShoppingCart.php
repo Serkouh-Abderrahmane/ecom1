@@ -30,7 +30,7 @@ class ShoppingCart
             @$_SESSION['shopping_cart'][] = (int) $_POST['article_id'];
         }
         if ($_POST['action'] == 'remove') {
-            if (($key = array_search($_POST['article_id'], $_SESSION['shopping_cart'])) !== false) {
+            if (isset($_SESSION['shopping_cart']) && ($key = array_search($_POST['article_id'], $_SESSION['shopping_cart'])) !== false) {
                 unset($_SESSION['shopping_cart'][$key]);
             }
         }
@@ -46,6 +46,9 @@ class ShoppingCart
 
     public function removeFromCart()
     {
+        if (!isset($_SESSION['shopping_cart']) || !is_array($_SESSION['shopping_cart'])) {
+            return;
+        }
         $count = count(array_keys($_SESSION['shopping_cart'], $_GET['delete-product']));
         $i = 1;
         do {

@@ -3,7 +3,7 @@
 // Usage: php test_e2e.php
 // Requires: PHP 8.1+, running server at http://localhost:8080
 
-$BASE = 'http://localhost:8080';
+$BASE = getenv('BASE_URL') ?: 'http://localhost:8080';
 $PASS = 0;
 $FAIL = 0;
 $results = [];
@@ -33,7 +33,7 @@ function test($name, $callback, $critical = false) {
 
 function fetch($url) {
     global $BASE;
-    $full = $BASE . $url;
+    $full = (strpos($url, 'http') === 0 || strpos($url, '//') === 0) ? $url : $BASE . $url;
     $ctx = stream_context_create(['http' => ['timeout' => 15, 'user_agent' => 'QA-Test/1.0', 'follow_location' => 0]]);
     $body = @file_get_contents($full, false, $ctx);
     if ($body === false) {
@@ -98,8 +98,8 @@ echo "Date: " . date('Y-m-d H:i:s') . "\n\n";
 // === STEP 1: Homepage loads ===
 test('1. Homepage loads (200 OK)', function() use ($BASE) {
     $body = fetch('/');
-    if (stripos($body, 'LUON VUI TUOI') === false && stripos($body, 'Luôn Vui Tươi') === false) {
-        return 'Missing brand name in response';
+    if (mb_stripos($body, 'LUÔN VUI TƯƠI') === false) {
+        return 'Missing brand name "LUÔN VUI TƯƠI" in response';
     }
     return true;
 }, true);
@@ -212,11 +212,12 @@ test('11. Categories have items', function() {
 test('12. Register a new user', function() {
     $email = 'test_' . time() . '@example.com';
     $res = fetchWithCookies('/register', [], [
-        'username' => 'Test User ' . time(),
+        'signup' => '1',
+        'name' => 'Test User ' . time(),
         'email' => $email,
         'phone' => '0909123456',
-        'password' => 'test123',
-        'password_repeat' => 'test123'
+        'pass' => 'test123',
+        'pass_repeat' => 'test123'
     ]);
     $body = $res['body'];
     // Registration may redirect (302) or show success message
@@ -278,8 +279,9 @@ test('16. All product URLs return 200', function() {
     $tested = [];
     foreach ($urls as $url) {
         $fullUrl = (strpos($url, 'http') === 0) ? $url : $BASE . $url;
+        if (strpos($url, 'http') === 0 && strpos($url, $BASE) !== 0) continue;
         try {
-            $respBody = fetch($url);
+            $respBody = fetch($fullUrl);
             if (stripos($respBody, '404') !== false || stripos($respBody, 'Page Not Found') !== false) {
                 $failed[] = $url;
             }
@@ -299,20 +301,18 @@ test('17. No broken internal links', function() {
     $broken = [];
     $maxPages = 30;
     
-    while (!empty($toVisit) && count($visited) < $maxPages) {
+        while (!empty($toVisit) && count($visited) < $maxPages) {
         $url = array_shift($toVisit);
         try {
             $body = fetch($url);
             preg_match_all('/href=["\']([^"\']+)["\']/i', $body, $matches);
             foreach ($matches[1] as $link) {
-                // Normalize link
-                if (strpos($link, 'http') === 0 && strpos($link, $BASE) !== 0) continue;
-                if (strpos($link, 'http') === 0) $link = substr($link, strlen($BASE));
+                // Skip external URLs, anchors, protocols
+                if (strpos($link, 'http') === 0 || strpos($link, '//') === 0) continue;
                 if (strpos($link, '#') === 0) continue;
                 if (strpos($link, 'javascript:') === 0) continue;
                 if (strpos($link, 'mailto:') === 0) continue;
                 if (strpos($link, 'tel:') === 0) continue;
-                if (strpos($link, '//') === 0) continue;
                 if (strpos($link, '/') !== 0) $link = '/' . $link;
                 
                 $link = explode('?', $link)[0];

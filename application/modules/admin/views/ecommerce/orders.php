@@ -146,7 +146,7 @@ if (!isset($_GET['settings'])) {
                                                     $arr_products = unserialize($tr['products']);
                                                     foreach ($arr_products as $product) {
                                                         $total_amount = 0;
-                                                        $total_amount += str_replace(' ', '', str_replace(',', '.',$product['product_info']['price']));
+                                                        $total_amount += (float) str_replace(" ", "", str_replace(",", ".", $product["product_info"]["price"]));
                                                         ?>
                                                         <div style="word-break: break-all;">
                                                             <div>

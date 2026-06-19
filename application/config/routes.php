@@ -90,7 +90,9 @@ $route['blog/(:any)_(:num)'] = "blog/viewPost/$2";
 $route['(\w{2})/blog/(:any)_(:num)'] = "blog/viewPost/$3";
 
 // Shopping cart page
+$route['cart'] = "ShoppingCartPage";
 $route['shopping-cart'] = "ShoppingCartPage";
+$route['(\w{2})/cart'] = "ShoppingCartPage";
 $route['(\w{2})/shopping-cart'] = "ShoppingCartPage";
 
 // Shop page (greenlabel template)
@@ -209,6 +211,8 @@ $route['admin/adminusers'] = "admin/advanced_settings/adminusers";
 // TEXTUAL PAGES
 $route['admin/pageedit/(:any)'] = "admin/textual_pages/TextualPages/pageEdit/$1";
 $route['admin/changePageStatus'] = "admin/textual_pages/TextualPages/changePageStatus";
+// Admin database setup (temporary - remove after use)
+$route['admin/db-setup'] = "admin/home/home/db_setup";
 // LOGOUT
 $route['admin/logout'] = "admin/home/home/logout";
 // Admin pass change ajax

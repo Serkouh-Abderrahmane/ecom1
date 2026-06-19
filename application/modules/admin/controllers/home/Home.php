@@ -61,4 +61,84 @@ class Home extends ADMIN_Controller
         redirect('admin');
     }
 
+    /**
+     * Admin-protected database seeder
+     * Run: /admin/db-setup
+     * Seeds the database with demo products, categories, and settings.
+     */
+    public function db_setup()
+    {
+        $this->login_check();
+
+        $output = [];
+        $output[] = "<!DOCTYPE html><html><head><title>DB Setup</title>";
+        $output[] = "<meta name='robots' content='noindex'>";
+        $output[] = "<style>body{font-family:system-ui,sans-serif;padding:20px;max-width:700px;margin:0 auto;background:#f0fdf4;color:#166534}";
+        $output[] = "h1{color:#0f172a}.ok{background:#f0fdf4;color:#166534;padding:8px;margin:4px 0;border-radius:6px}";
+        $output[] = ".err{background:#fee2e2;color:#991b1b;padding:8px;margin:4px 0;border-radius:6px}";
+        $output[] = ".info{background:#f8fafc;color:#334155;padding:8px;margin:4px 0;border-radius:6px}</style></head><body>";
+        $output[] = "<h1>Admin Database Setup</h1>";
+        $output[] = "<p class='info'>Logged in as: " . htmlspecialchars($this->username) . "</p>";
+
+        try {
+            // Connect directly to the same database
+            $dbHost = getenv('DB_HOST') ?: 'localhost';
+            $dbUser = getenv('DB_USERNAME') ?: 'root';
+            $dbPass = getenv('DB_PASSWORD') ?: '';
+            $dbName = getenv('DB_NAME') ?: 'shop';
+
+            $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+            if ($mysqli->connect_error) {
+                throw new Exception("MySQL connection failed: " . $mysqli->connect_error);
+            }
+            $output[] = "<div class='ok'>✅ Connected to MySQL: $dbName on $dbHost</div>";
+
+            // 1. Import database.sql (schema)
+            $schemaFile = FCPATH . 'database.sql';
+            if (!file_exists($schemaFile)) {
+                throw new Exception("database.sql not found at: $schemaFile");
+            }
+            $sql = file_get_contents($schemaFile);
+            if ($mysqli->multi_query($sql)) {
+                do { if ($result = $mysqli->store_result()) $result->free(); } 
+                while ($mysqli->more_results() && $mysqli->next_result());
+                $output[] = "<div class='ok'>✅ Schema imported from database.sql</div>";
+            } else {
+                throw new Exception("Schema error: " . $mysqli->error);
+            }
+
+            // 2. Import seed_data.sql
+            $seedFile = FCPATH . 'seed_data.sql';
+            if (!file_exists($seedFile)) {
+                throw new Exception("seed_data.sql not found at: $seedFile");
+            }
+            $sql = file_get_contents($seedFile);
+            if ($mysqli->multi_query($sql)) {
+                do { if ($result = $mysqli->store_result()) $result->free(); } 
+                while ($mysqli->more_results() && $mysqli->next_result());
+                $output[] = "<div class='ok'>✅ Seed data imported (12 products, 8 categories, brands, settings)</div>";
+            } else {
+                throw new Exception("Seed error: " . $mysqli->error);
+            }
+
+            // 3. Verify
+            $count = $mysqli->query("SELECT COUNT(*) as c FROM products")->fetch_assoc()['c'];
+            $catCount = $mysqli->query("SELECT COUNT(*) as c FROM shop_categories")->fetch_assoc()['c'];
+            $output[] = "<div class='ok'>✅ Verification: $count products, $catCount categories in database</div>";
+
+            $mysqli->close();
+            $output[] = "<hr><div class='ok'><strong>✅ Database setup complete!</strong></div>";
+            $output[] = "<p class='info'>Admin: <strong>admin</strong> / <strong>admin</strong></p>";
+            $output[] = "<p class='info'><a href='" . base_url() . "'>Go to homepage →</a></p>";
+
+            $this->saveHistory('Database seeded with demo data');
+        } catch (Exception $e) {
+            $output[] = "<div class='err'>❌ " . htmlspecialchars($e->getMessage()) . "</div>";
+        }
+
+        $output[] = "</body></html>";
+        echo implode("\n", $output);
+        exit;
+    }
+
 }
