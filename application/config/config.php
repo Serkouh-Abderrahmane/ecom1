@@ -24,16 +24,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
+$railway_host = getenv('RAILWAY_PUBLIC_DOMAIN') ?: (getenv('RAILWAY_SERVICE_ID') ? getenv('RAILWAY_STATIC_URL') : '');
 $detected_https = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+    || !empty($railway_host)
     || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
-    || (isset($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
-    || (isset($_SERVER['HTTP_HOST']) && preg_match('/railway\.app$/i', $_SERVER['HTTP_HOST']));
+    || (isset($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
 $protocol = $detected_https ? 'https://' : 'http://';
-$env_url = getenv('BASE_URL');
-if ($env_url) {
-    $env_url = preg_replace('#^https?://#', $protocol, $env_url);
-}
-$config['base_url'] = defined('BASE_URL') ? BASE_URL : ($env_url ?: $protocol . ($_SERVER['HTTP_HOST'] ?? 'localhost:8080') . '/');
+$host = $railway_host ?: ($_SERVER['HTTP_HOST'] ?? 'localhost:8080');
+$config['base_url'] = defined('BASE_URL') ? BASE_URL : $protocol . rtrim($host, '/') . '/';
 
 /**
  * Show/Hide social share buttons in product pages
