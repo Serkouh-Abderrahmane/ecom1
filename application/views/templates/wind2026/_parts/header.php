@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
         <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
         <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet" />
+        <link href="<?= base_url('assets/css/custom-theme.css') ?>" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -106,15 +107,15 @@
                                     LUÔN VUI TƯƠI
                                 </a>
                                 <nav class="hidden md:flex items-center gap-1">
-                                    <a href="<?= LANG_URL ?>" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TRANG CHỦ</a>
-                                    <a href="#!" data-categorie-id="1" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO THUN RELAXED FIT</a>
-                                    <a href="#!" data-categorie-id="2" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO THUN RINGER</a>
-                                    <a href="#!" data-categorie-id="3" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TÚI CANVAS</a>
-                                    <a href="#!" data-categorie-id="4" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO BA LỖ</a>
-                                    <a href="#!" data-categorie-id="5" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO THUN DÀI TAY</a>
-                                    <a href="#!" data-categorie-id="6" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO SWEATER</a>
-                                    <a href="#!" data-categorie-id="7" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO HOODIE</a>
-                                    <a href="#!" data-categorie-id="8" class="go-category px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">QUẦN JOGGER & QUẦN ỐNG SUÔNG</a>
+                                    <a href="<?= LANG_URL ?>" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TRANG CHỦ</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=1" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO THUN</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=2" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">RINGER</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=3" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TÚI CANVAS</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=4" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO BA LỖ</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=5" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">DÀI TAY</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=6" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">SWEATER</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=7" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">HOODIE</a>
+                                    <a href="<?= LANG_URL ?>/shop?category=8" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">QUẦN</a>
                                 </nav>
                             </div>
 
@@ -170,14 +171,14 @@
                         <nav class="p-4 space-y-1">
                             <a href="<?= LANG_URL ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">TRANG CHỦ</a>
                             <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 pt-4 pb-1">DANH MỤC</div>
-                            <a href="#!" data-categorie-id="1" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN RELAXED FIT</a>
-                            <a href="#!" data-categorie-id="2" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN RINGER</a>
-                            <a href="#!" data-categorie-id="3" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">TÚI CANVAS</a>
-                            <a href="#!" data-categorie-id="4" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO BA LỖ</a>
-                            <a href="#!" data-categorie-id="5" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN DÀI TAY</a>
-                            <a href="#!" data-categorie-id="6" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO SWEATER</a>
-                            <a href="#!" data-categorie-id="7" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO HOODIE</a>
-                            <a href="#!" data-categorie-id="8" class="go-category block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">QUẦN JOGGER & QUẦN ỐNG SUÔNG</a>
+                            <a href="<?= LANG_URL ?>/shop?category=1" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN RELAXED FIT</a>
+                            <a href="<?= LANG_URL ?>/shop?category=2" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN RINGER</a>
+                            <a href="<?= LANG_URL ?>/shop?category=3" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">TÚI CANVAS</a>
+                            <a href="<?= LANG_URL ?>/shop?category=4" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO BA LỖ</a>
+                            <a href="<?= LANG_URL ?>/shop?category=5" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN DÀI TAY</a>
+                            <a href="<?= LANG_URL ?>/shop?category=6" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO SWEATER</a>
+                            <a href="<?= LANG_URL ?>/shop?category=7" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO HOODIE</a>
+                            <a href="<?= LANG_URL ?>/shop?category=8" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">QUẦN JOGGER & QUẦN ỐNG SUÔNG</a>
                             <div class="border-t border-slate-100 my-2 pt-2"></div>
                             <a href="<?= LANG_URL . '/shopping-cart' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('shopping_cart') ?></a>
                             <a href="<?= LANG_URL . '/checkout' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('checkout') ?></a>

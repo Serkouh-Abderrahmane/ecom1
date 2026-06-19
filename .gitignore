@@ -1,4 +1,4 @@
-/attachments/shop_images/*
+/attachments/shop_images/*/
 /application/logs/*
 /application/config/installed.lock
 node_modules/

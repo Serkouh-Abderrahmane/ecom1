@@ -99,8 +99,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
             <?php if (!empty($products)) { ?>
-                <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    <?php foreach ($products as $article) {
+                <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <?php foreach ($products as $i => $article) {
                         $backgroundImageFile = base_url('/attachments/no-image-frontend.png');
                         if (is_file('attachments/shop_images/' . $article['image'])) {
                             $backgroundImageFile = base_url('/attachments/shop_images/' . $article['image']);
@@ -108,18 +108,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         $productUrl = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
                         $hasOld = ($article['old_price'] != '' && $article['old_price'] != 0 && $article['price'] != '' && $article['price'] != 0);
                     ?>
-                    <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 hover:shadow-md transition-shadow">
-                        <a href="<?= $productUrl ?>" class="block">
-                            <div class="relative aspect-[4/5] bg-slate-50">
-                                <img src="<?= htmlentities($backgroundImageFile) ?>" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" alt="<?= htmlentities($article['title']) ?>">
-                                <?php if ($hasOld) { ?>
-                                    <div class="absolute left-3 top-3 rounded-full bg-rose-600 px-3 py-1 text-xs font-bold text-white">-<?= number_format((($article['old_price'] - $article['price']) / $article['old_price']) * 100) ?>%</div>
+                    <div class="product-card group rounded-2xl bg-white overflow-hidden ring-1 ring-slate-100" style="animation: fadeInUp 0.4s ease-out <?= ($i % 8) * 0.06 ?>s both;">
+                        <div class="img-zoom-container relative aspect-[4/5] bg-slate-50">
+                            <a href="<?= $productUrl ?>">
+                                <img src="<?= htmlentities($backgroundImageFile) ?>" class="w-full h-full object-cover" alt="<?= htmlentities($article['title']) ?>">
+                            </a>
+                            <?php if ($hasOld) { ?>
+                                <div class="discount-badge absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold text-white shadow-lg">-<?= number_format((($article['old_price'] - $article['price']) / $article['old_price']) * 100) ?>%</div>
+                            <?php } ?>
+                            <div class="quick-actions absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+                                <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
+                                    <a href="javascript:void(0);" class="add-to-cart block w-full bg-white text-slate-900 text-center text-sm font-semibold py-2.5 rounded-xl hover:bg-slate-100 transition-all shadow-lg" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">
+                                        <i class="fa fa-shopping-bag mr-1.5"></i> <?= lang('add_to_cart') ?>
+                                    </a>
                                 <?php } ?>
                             </div>
-                        </a>
+                            <button class="add-to-cart absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100 shadow-lg" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>" title="Mua ngay">
+                                <i class="fa fa-bolt text-slate-900 text-sm"></i>
+                            </button>
+                        </div>
                         <div class="p-4">
-                            <a href="<?= $productUrl ?>" class="block text-sm font-medium text-slate-900 hover:text-slate-600 transition-colors"><?= character_limiter($article['title'], 70) ?></a>
-                            <div class="mt-2 flex items-baseline justify-between gap-2">
+                            <a href="<?= $productUrl ?>" class="block text-sm font-medium text-slate-900 hover:text-slate-600 transition-colors leading-snug"><?= character_limiter($article['title'], 70) ?></a>
+                            <div class="mt-2 flex items-center justify-between">
                                 <div class="text-sm font-bold text-slate-900"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></div>
                                 <?php if ($hasOld) { ?>
                                     <div class="text-xs text-slate-400 line-through"><?= number_format($article['old_price'], 2) . CURRENCY ?></div>
@@ -127,10 +137,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                             <div class="mt-3 flex gap-2">
                                 <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
-                                    <a href="javascript:void(0);" class="add-to-cart inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition-colors" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">
+                                    <a href="javascript:void(0);" class="add-to-cart inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-slate-900 px-3 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition-all hover:shadow-lg btn-primary" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">
                                         <i class="fa fa-plus"></i> <?= lang('add_to_cart') ?>
                                     </a>
-                                    <a href="javascript:void(0);" class="add-to-cart inline-flex items-center justify-center rounded-xl bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-100 transition-colors" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">
+                                    <a href="javascript:void(0);" class="add-to-cart inline-flex items-center justify-center rounded-xl bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 ring-1 ring-inset ring-amber-200 hover:bg-amber-100 transition-all" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>" title="Mua ngay">
                                         <i class="fa fa-bolt"></i>
                                     </a>
                                 <?php } else { ?>
