@@ -90,7 +90,7 @@ function fetchWithCookies($url, $cookies = [], $post = null) {
 }
 
 echo "==================================\n";
-echo "LUON VUI TUOI - 15-STEP QA TEST\n";
+echo "XUONG MAY NHA CONG - 18-STEP QA TEST\n";
 echo "==================================\n";
 echo "Target: $BASE\n";
 echo "Date: " . date('Y-m-d H:i:s') . "\n\n";
@@ -98,8 +98,8 @@ echo "Date: " . date('Y-m-d H:i:s') . "\n\n";
 // === STEP 1: Homepage loads ===
 test('1. Homepage loads (200 OK)', function() use ($BASE) {
     $body = fetch('/');
-    if (mb_stripos($body, 'LUÔN VUI TƯƠI') === false) {
-        return 'Missing brand name "LUÔN VUI TƯƠI" in response';
+    if (mb_stripos($body, 'XƯỞNG MAY NHÀ CÔNG') === false) {
+        return 'Missing brand name "XƯỞNG MAY NHÀ CÔNG" in response';
     }
     return true;
 }, true);
@@ -195,7 +195,7 @@ test('9. Checkout page accessible', function() {
 // === STEP 10: Product listing ===
 test('10. Products visible on homepage', function() {
     $body = fetch('/');
-    if (stripos($body, '250.000') === false && stripos($body, 'Luôn Vui Tươi') === false) {
+    if (stripos($body, '250.000') === false && stripos($body, 'Xưởng May') === false) {
         return 'No products visible (check for prices or product names)';
     }
     return true;
@@ -257,9 +257,9 @@ test('14. Contacts page in Vietnamese', function() {
 });
 
 // === STEP 15: Footer brand ===
-test('15. Footer shows Luôn Vui Tươi brand', function() {
+test('15. Footer shows Xưởng May Nhà Công brand', function() {
     $body = fetch('/');
-    if (stripos($body, 'Luôn Vui Tươi') === false && stripos($body, 'LUÔN VUI TƯƠI') === false) {
+    if (stripos($body, 'Xưởng May Nhà Công') === false && stripos($body, 'XƯỞNG MAY NHÀ CÔNG') === false) {
         return 'Brand name not found in footer';
     }
     // Check for copyright
@@ -394,7 +394,7 @@ foreach ($results as $r) {
 }
 
 // Generate test-report.md
-$report = "# Luôn Vui Tươi - QA Test Report\n\n";
+$report = "# Xưởng May Nhà Công - QA Test Report\n\n";
 $report .= "**Date:** " . date('Y-m-d H:i:s') . "\n";
 $report .= "**Server:** http://localhost:8080\n";
 $report .= "**Result:** " . ($FAIL == 0 ? "✅ ALL PASS" : "⚠️ $FAIL failures") . "\n\n";

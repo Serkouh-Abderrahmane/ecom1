@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 py-12">
         <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
             <div class="lg:col-span-4">
-                <div class="text-lg font-bold text-white tracking-tight">LUÔN VUI TƯƠI</div>
+                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="h-12 w-auto brightness-0 invert">
                 <p class="mt-4 text-sm leading-relaxed text-slate-400"><?= $footerAboutUs ?? '' ?></p>
                 <div class="flex items-center gap-3 mt-6">
                     <?php $fb = $footerSocialFacebook ?? ''; if ($fb != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $fb ?>"><i class="fa fa-facebook"></i></a><?php } ?>
@@ -53,7 +53,7 @@
     </div>
     <div class="border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
-            <p><?= $footercopyright ?? 'Copyright © 2026, Luôn Vui Tươi' ?></p>
+            <p><?= $footercopyright ?? 'Copyright © 2026, Xưởng May Nhà Công' ?></p>
             <div class="flex items-center gap-4 text-xl">
                 <i class="fa fa-cc-visa"></i>
                 <i class="fa fa-cc-mastercard"></i>

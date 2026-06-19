@@ -9,6 +9,9 @@
 </style>
 <div class="container">
     <div class="login-container">
+        <div style="text-align:center; margin-bottom:16px;">
+            <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" style="max-width:180px; height:auto;">
+        </div>
         <div id="output">       
             <?php
             if ($this->session->flashdata('err_login')) {

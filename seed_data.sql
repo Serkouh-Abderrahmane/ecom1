@@ -38,7 +38,7 @@ INSERT INTO `shop_categories_translations` (`name`, `abbr`, `for_id`) VALUES
 
 -- Insert brands
 INSERT INTO `brands` (`id`, `name`) VALUES
-(1, 'Luôn Vui Tươi'),
+(1, 'Xưởng May Nhà Công'),
 (2, 'LVT Premium'),
 (3, 'LVT Basics');
 
@@ -133,7 +133,7 @@ ON DUPLICATE KEY UPDATE `abbr` = 'vi', `name` = 'vietnamese', `currency` = '₫'
 
 -- Add admin user if not exists
 INSERT INTO `users` (`username`, `password`, `email`, `last_login`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'hello@luonvuituoi.co', UNIX_TIMESTAMP())
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'contact@xuongmaynhacong.vn', UNIX_TIMESTAMP())
 ON DUPLICATE KEY UPDATE `username` = 'admin';
 
 -- Reset auto_increment
@@ -144,12 +144,12 @@ ON DUPLICATE KEY UPDATE `username` = 'admin';
 -- SEO Pages Translations
 -- ============================================================
 INSERT INTO `seo_pages_translations` (`title`, `description`, `abbr`, `page_type`) VALUES
-('Luôn Vui Tươi - Trang Chủ', 'Luôn Vui Tươi - Thương hiệu thời trang đường phố Việt Nam. Áo thun, hoodie, sweater chất lượng cao.', 'vi', 'home'),
-('Luôn Vui Tươi - Home', 'Luôn Vui Tươi - Vietnamese streetwear brand. High quality t-shirts, hoodies, sweaters.', 'en', 'home'),
-('Thanh Toán - Luôn Vui Tươi', 'Thanh toán đơn hàng của bạn tại Luôn Vui Tươi. Giao hàng toàn quốc.', 'vi', 'checkout'),
-('Checkout - Luôn Vui Tươi', 'Checkout your order at Luôn Vui Tươi. Nationwide delivery.', 'en', 'checkout'),
-('Liên Hệ - Luôn Vui Tươi', 'Liên hệ với Luôn Vui Tươi. Chúng tôi luôn sẵn sàng hỗ trợ bạn.', 'vi', 'contacts'),
-('Contact - Luôn Vui Tươi', 'Contact Luôn Vui Tươi. We are always ready to help you.', 'en', 'contacts');
+('Xưởng May Nhà Công - Trang Chủ', 'Xưởng May Nhà Công - Thương hiệu may mặc Việt Nam. Áo thun, hoodie, sweater chất lượng cao.', 'vi', 'home'),
+('Xưởng May Nhà Công - Home', "Xưởng May Nhà Công - Vietnamese garment brand. High quality t-shirts, hoodies, sweaters.", 'en', 'home'),
+('Thanh Toán - Xưởng May Nhà Công', 'Thanh toán đơn hàng của bạn tại Xưởng May Nhà Công. Giao hàng toàn quốc.', 'vi', 'checkout'),
+("Checkout - Xưởng May Nhà Công", "Checkout your order at Xưởng May Nhà Công. Nationwide delivery.", 'en', 'checkout'),
+('Liên Hệ - Xưởng May Nhà Công', 'Liên hệ với Xưởng May Nhà Công. Chúng tôi luôn sẵn sàng hỗ trợ bạn.', 'vi', 'contacts'),
+("Contact - Xưởng May Nhà Công", "Contact Xưởng May Nhà Công. We are always ready to help you.", 'en', 'contacts');
 
 -- ============================================================
 -- Value Store (settings with default values)
@@ -165,12 +165,12 @@ DELETE FROM `value_store` WHERE `thekey` IN (
 INSERT INTO `value_store` (`thekey`, `value`) VALUES
 ('publicQuantity', '1'),
 ('publicDateAdded', '1'),
-('contactsEmailTo', 'hello@luonvuituoi.co'),
-('footerContactEmail', 'hello@luonvuituoi.co'),
+('contactsEmailTo', 'contact@xuongmaynhacong.vn'),
+('footerContactEmail', 'contact@xuongmaynhacong.vn'),
 ('footerContactPhone', '0386524760'),
 ('footerContactAddr', 'Số 122 đường Khúc Hạo, Phường An Biên, TP Hải Phòng'),
-('footerAboutUs', 'Luôn Vui Tươi - Thương hiệu thời trang đường phố Việt Nam. Chúng tôi mang đến những sản phẩm chất lượng cao với giá cả phải chăng. Sứ mệnh của chúng tôi là giúp bạn thể hiện phong cách cá nhân qua từng bộ trang phục.'),
-('footercopyright', 'Copyright © 2026, Luôn Vui Tươi'),
+('footerAboutUs', 'Xưởng May Nhà Công - Thương hiệu may mặc Việt Nam. Chúng tôi mang đến những sản phẩm chất lượng cao với giá cả phải chăng. Sứ mệnh của chúng tôi là mang đến những bộ trang phục chất lượng nhất cho mọi người.'),
+('footercopyright', 'Copyright © 2026, Xưởng May Nhà Công'),
 ('outOfStock', '1'),
 ('showBrands', '1'),
 ('showInSlider', '1'),

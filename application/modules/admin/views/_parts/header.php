@@ -23,6 +23,9 @@
                 <?php if ($this->session->userdata('logged_in')) { ?>
                     <nav class="navbar navbar-default">
                         <div class="navbar-header">
+                            <a href="<?= base_url('admin') ?>" class="navbar-brand" style="padding:8px 15px;">
+                                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" style="height:34px; width:auto;">
+                            </a>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                 <i class="fa fa-lg fa-bars"></i>
                             </button>

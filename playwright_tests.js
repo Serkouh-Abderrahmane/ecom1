@@ -39,7 +39,7 @@ async function run() {
             expect(resp.status()).toBe(200);
             await page.waitForSelector('nav', { timeout: 5000 });
             const html = await page.content();
-            expect(html).toContain('LUÔN VUI TƯƠI');
+            expect(html).toContain('XƯỞNG MAY NHÀ CÔNG');
         }),
 
         test('2. No PHP warnings on homepage', async (page) => {
@@ -111,7 +111,7 @@ async function run() {
             await page.waitForTimeout(1000);
             const html = await page.content();
             // Should show product info
-            const hasTitle = html.includes('Luôn Vui Tươi');
+            const hasTitle = html.includes('Xưởng May');
             const hasCart = html.includes('Thêm vào giỏ') || html.includes('Mua ngay');
             expect(hasTitle || hasCart).toBe(true);
         }),
@@ -174,8 +174,8 @@ async function run() {
         // ===== FOOTER =====
         test('15. Footer has all content', async (page) => {
             const html = await page.content();
-            expect(html).toContain('Luôn Vui Tươi');
-            expect(html).toContain('hello@luonvuituoi.co');
+            expect(html).toContain('Xưởng May Nhà Công');
+            expect(html).toContain('contact@xuongmaynhacong.vn');
             expect(html).toContain('0386524760');
         }),
 

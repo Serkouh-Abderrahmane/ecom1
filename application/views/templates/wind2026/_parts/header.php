@@ -12,6 +12,8 @@
         <meta property="og:type" content="website" />
         <meta property="og:image" content="<?= isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
         <title><?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?></title>
+        <link rel="icon" type="image/png" href="<?= base_url('assets/imgs/logo.png') ?>" />
+        <link rel="apple-touch-icon" href="<?= base_url('assets/imgs/logo.png') ?>" />
         <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
         <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
         <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet" />
@@ -103,8 +105,8 @@
                             </button>
 
                             <div class="flex items-center gap-8">
-                                <a href="<?= base_url() ?>" class="text-xl md:text-2xl font-bold tracking-tight text-slate-900 no-underline">
-                                    LUÔN VUI TƯƠI
+                                <a href="<?= base_url() ?>" class="flex items-center no-underline">
+                                    <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="h-9 md:h-11 w-auto">
                                 </a>
                                 <nav class="hidden md:flex items-center gap-1">
                                     <a href="<?= LANG_URL ?>" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TRANG CHỦ</a>
@@ -163,7 +165,7 @@
                     <div class="absolute inset-0 bg-black/40" id="mobile-menu-overlay"></div>
                     <div class="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-xl">
                         <div class="flex items-center justify-between p-4 border-b border-slate-100">
-                            <span class="font-bold text-lg">LUÔN VUI TƯƠI</span>
+                            <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="h-8 w-auto">
                             <button type="button" id="mobile-menu-close" class="w-8 h-8 inline-flex items-center justify-center rounded-xl hover:bg-slate-50">
                                 <i class="fa fa-times text-slate-500"></i>
                             </button>

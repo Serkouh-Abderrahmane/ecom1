@@ -1,7 +1,7 @@
 <script src="<?= base_url('assets/highcharts/highcharts.js') ?>"></script>
 <script src="<?= base_url('assets/highcharts/data.js') ?>"></script>
 <script src="<?= base_url('assets/highcharts/drilldown.js') ?>"></script>
-<h1><img src="<?= base_url('assets/imgs/admin-home.png') ?>" class="header-img" style="margin-top:-3px;"> Home</h1>
+<h1><img src="<?= base_url('assets/imgs/logo.png') ?>" style="height:28px; width:auto; margin-top:-4px; margin-right:6px;"> XƯỞNG MAY NHÀ CÔNG — Dashboard</h1>
 <hr>
 <div class="home-page">
     <div class="row">

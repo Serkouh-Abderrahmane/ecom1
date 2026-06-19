@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php 
 $heroBg = base_url('/attachments/no-image-frontend.png');
-$heroTitle = 'LUÔN VUI TƯƠI';
-$heroSubtitle = 'Thương hiệu thời trang đường phố Việt Nam — chất lượng cao, giá cả phải chăng.';
+$heroTitle = 'XƯỞNG MAY NHÀ CÔNG';
+$heroSubtitle = 'Thương hiệu may mặc Việt Nam — chất lượng vải vóc cao cấp, thiết kế tinh tế.';
 $heroBtnText = 'MUA NGAY';
 $heroBtnLink = LANG_URL . '/shop';
 if (is_file('attachments/shop_images/hero.jpg')) {
@@ -17,7 +17,7 @@ if (count($sliderProducts) > 0 && is_file('attachments/shop_images/' . $sliderPr
 <section class="relative bg-slate-900 overflow-hidden min-h-[85vh] flex items-center">
     <div class="hero-overlay absolute inset-0 z-10"></div>
     <div class="absolute inset-0 z-0">
-        <img src="<?= $heroBg ?>" alt="Luôn Vui Tươi" class="w-full h-full object-cover" style="filter: brightness(0.6);">
+        <img src="<?= $heroBg ?>" alt="Xưởng May Nhà Công" class="w-full h-full object-cover" style="filter: brightness(0.6);">
     </div>
     <div class="max-w-7xl mx-auto px-4 py-20 md:py-36 relative z-20 w-full">
         <div class="max-w-3xl">
