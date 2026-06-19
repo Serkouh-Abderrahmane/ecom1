@@ -315,21 +315,25 @@ if (!defined('STDIN')) {
 			$dbConfigPath = FCPATH.'application/config/database.php';
 			$configText = @file_get_contents($dbConfigPath);
 
-			// Parse just the 4 needed values from the config file (it can't be included here).
+			// Parse hostname, username, password, database from config.
+			// Supports both literal strings and getenv('VAR') ?: 'default' patterns.
 			$hostname = $username = $password = $database = null;
 			if (is_string($configText)) {
-				if (preg_match("/'hostname'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
-					$hostname = stripcslashes($m[1]);
-				}
-				if (preg_match("/'username'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
-					$username = stripcslashes($m[1]);
-				}
-				if (preg_match("/'password'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
-					$password = stripcslashes($m[1]);
-				}
-				if (preg_match("/'database'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $configText, $m)) {
-					$database = stripcslashes($m[1]);
-				}
+				// Helper: parse a config value that may be a literal string or getenv() ?: 'default'
+				$parseValue = function ($pattern, $text) {
+					if (preg_match("/'".$pattern."'\\s*=>\\s*getenv\\('([^']+)'\\)\\s*\\?\\:\\s*'((?:\\\\\\\\'|[^'])*)'/", $text, $m)) {
+						$env = getenv($m[1]);
+						return $env !== false ? $env : stripcslashes($m[2]);
+					}
+					if (preg_match("/'".$pattern."'\\s*=>\\s*'((?:\\\\\\\\'|[^'])*)'/", $text, $m)) {
+						return stripcslashes($m[1]);
+					}
+					return null;
+				};
+				$hostname = $parseValue('hostname', $configText);
+				$username = $parseValue('username', $configText);
+				$password = $parseValue('password', $configText);
+				$database = $parseValue('database', $configText);
 			}
 
 			$shouldRedirect = true;
