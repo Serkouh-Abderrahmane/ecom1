@@ -41,18 +41,18 @@ try {
     }
     $output("✅ Connected to MySQL database: $dbName on $dbHost");
     
-    // Clear all existing data first (disable FK checks to avoid order issues)
+    // Drop all existing tables (so CREATE TABLE statements can re-run cleanly)
     $mysqli->query("SET FOREIGN_KEY_CHECKS = 0");
     $tables = $mysqli->query("SHOW TABLES");
     $tableCount = 0;
     while ($row = $tables->fetch_row()) {
         $table = $row[0];
-        $mysqli->query("TRUNCATE TABLE `$table`");
+        $mysqli->query("DROP TABLE IF EXISTS `$table`");
         $tableCount++;
     }
     $tables->free();
     $mysqli->query("SET FOREIGN_KEY_CHECKS = 1");
-    $output("✅ Cleared $tableCount existing tables");
+    $output("✅ Dropped $tableCount existing tables");
     
     // Import database.sql (schema + default data)
     $schemaFile = __DIR__ . '/database.sql';
