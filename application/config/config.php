@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |
  */
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost:8080';
-$is_railway = strpos($host, 'railway.app') !== false;
+$is_railway = strpos($host, 'railway.app') !== false || strpos($host, 'up.railway') !== false;
 $detected_https = $is_railway
     || (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
     || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')

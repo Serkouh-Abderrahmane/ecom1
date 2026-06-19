@@ -2,15 +2,21 @@
 
 if (isset($_SERVER['SERVER_PORT']))
 {
+	$host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
+	$is_https = $_SERVER['SERVER_PORT'] == 443
+		|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+		|| (isset($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
+		|| strpos($host, 'railway.app') !== false
+		|| strpos($host, 'up.railway') !== false;
 	/*
 	|--------------------------------------------------------------------------
 	| Base URL
 	|--------------------------------------------------------------------------
 	*/
 	define('BASE_URL',
-		(!empty($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']==443?'https':'http':FALSE).
-		"://".(!empty($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:FALSE).
-		(!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':' . $_SERVER['SERVER_PORT'] : '').
+		($is_https ? 'https' : 'http').
+		"://".$host.
+		(!$is_https && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':' . $_SERVER['SERVER_PORT'] : '').
 		str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
 
 	/*
@@ -18,7 +24,11 @@ if (isset($_SERVER['SERVER_PORT']))
 	| Current URL
 	|--------------------------------------------------------------------------
 	*/
-	define('CURRENT_URL', (!empty($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']==443?'https':'http':FALSE)."://".(!empty($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:FALSE).(!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':' . $_SERVER['SERVER_PORT'] : '').str_replace('//', '/', $_SERVER['REQUEST_URI']));
+	define('CURRENT_URL',
+		($is_https ? 'https' : 'http').
+		"://".$host.
+		(!$is_https && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':' . $_SERVER['SERVER_PORT'] : '').
+		str_replace('//', '/', $_SERVER['REQUEST_URI']));
 }
 
 defined('BASEPATH') OR exit('No direct script access allowed');
