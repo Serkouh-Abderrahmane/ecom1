@@ -14,209 +14,155 @@ if (count($sliderProducts) > 0 && is_file('attachments/shop_images/' . $sliderPr
     $heroBg = base_url('/attachments/shop_images/' . $sliderProducts[0]['image']);
 }
 ?>
-<section class="relative bg-slate-900 overflow-hidden min-h-[85vh] flex items-center">
-    <div class="hero-overlay absolute inset-0 z-10"></div>
-    <div class="absolute inset-0 z-0">
-        <img src="<?= $heroBg ?>" alt="Xưởng May Nhà Công" class="w-full h-full object-cover" style="filter: brightness(0.6);">
-    </div>
-    <div class="max-w-7xl mx-auto px-4 py-20 md:py-36 relative z-20 w-full">
-        <div class="max-w-3xl">
-            <span class="animate-fade-in inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white/50 mb-4 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-sm"><?= lang('new_collection') ?></span>
-            <h1 class="animate-fade-in animate-delay-1 hero-title text-5xl md:text-7xl lg:text-8xl font-bold text-white mt-6">
-                <?= $heroTitle ?>
-            </h1>
-            <p class="animate-fade-in animate-delay-2 hero-subtitle mt-6 text-lg md:text-xl text-white/80 max-w-xl">
-                <?= $heroSubtitle ?>
-            </p>
-            <div class="animate-fade-in animate-delay-3 flex flex-wrap gap-4 mt-10">
-                <a href="<?= $heroBtnLink ?>" class="btn-primary inline-flex items-center justify-center bg-white text-slate-900 rounded-xl px-8 py-4 text-sm font-bold hover:bg-slate-100 transition-all shadow-lg">
-                    <?= $heroBtnText ?>
-                    <i class="fa fa-arrow-right ml-2"></i>
-                </a>
-                <a href="<?= LANG_URL ?>/shop" class="inline-flex items-center justify-center bg-white/10 text-white rounded-xl px-8 py-4 text-sm font-semibold ring-1 ring-inset ring-white/30 hover:bg-white/20 transition-all backdrop-blur-sm">
-                    <i class="fa fa-grid-2 mr-2"></i>
-                    <?= lang('view_collection') ?>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <a href="#featured-products" class="text-white/60 hover:text-white transition-colors">
-            <i class="fa fa-chevron-down text-xl"></i>
-        </a>
+<section class="m-hero">
+    <div class="m-hero-bg" style="background-image: url('<?= $heroBg ?>'); filter: brightness(0.6);"></div>
+    <div class="m-hero-overlay"></div>
+    <div class="m-hero-content">
+        <h1><?= $heroTitle ?></h1>
+        <p><?= $heroSubtitle ?></p>
+        <a href="<?= $heroBtnLink ?>" class="m-hero-btn"><?= $heroBtnText ?></a>
     </div>
 </section>
 
 <?php if (!empty($bestSellers)) { ?>
-<section id="featured-products" class="py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-end justify-between mb-12">
-            <div>
-                <span class="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400"><?= lang('featured') ?></span>
-                <h2 class="section-title text-2xl md:text-3xl font-bold text-slate-900 mt-2"><?= lang('best_sellers') ?></h2>
-            </div>
-            <a href="<?= LANG_URL ?>/shop" class="hidden md:inline-flex text-sm font-semibold text-slate-900 hover:text-slate-600 transition-colors items-center gap-1.5">
-                <?= lang('view_all') ?> <i class="fa fa-arrow-right ml-1"></i>
-            </a>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7">
-            <?php foreach (array_slice($bestSellers, 0, 8) as $i => $article) {
-                $productImage = base_url('/attachments/no-image-frontend.png');
-                if (is_file('attachments/shop_images/' . $article['image'])) {
-                    $productImage = base_url('/attachments/shop_images/' . $article['image']);
-                }
-                $productUrl = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
-                $hasOld = ($article['old_price'] != '' && $article['old_price'] != 0 && $article['price'] != '' && $article['price'] != 0);
-            ?>
-            <div class="product-card group rounded-2xl bg-white overflow-hidden ring-1 ring-slate-100" style="animation: fadeInUp 0.5s ease-out <?= $i * 0.08 ?>s both;">
-                <div class="img-zoom-container relative aspect-[3/4] bg-slate-50">
-                    <a href="<?= $productUrl ?>">
-                        <img src="<?= $productImage ?>" alt="<?= htmlentities($article['title']) ?>" class="w-full h-full object-cover">
-                    </a>
-                    <?php if ($hasOld) { ?>
-                        <span class="discount-badge absolute top-3 left-3 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg">
-                            -<?= number_format((($article['old_price'] - $article['price']) / $article['old_price']) * 100) ?>%
-                        </span>
+<section class="m-section">
+    <div class="m-section-header">
+        <div class="m-section-title"><?= lang('best_sellers') ?></div>
+        <div class="m-section-subtitle"><?= lang('featured') ?></div>
+    </div>
+    <div class="m-product-grid">
+        <?php foreach (array_slice($bestSellers, 0, 8) as $i => $article) {
+            $productImage = base_url('/attachments/no-image-frontend.png');
+            if (is_file('attachments/shop_images/' . $article['image'])) {
+                $productImage = base_url('/attachments/shop_images/' . $article['image']);
+            }
+            $productUrl = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
+            $hasOld = ($article['old_price'] != '' && $article['old_price'] != 0 && $article['price'] != '' && $article['price'] != 0);
+        ?>
+        <div class="m-product-card">
+            <div class="m-product-card-image">
+                <a href="<?= $productUrl ?>">
+                    <img src="<?= $productImage ?>" alt="<?= htmlentities($article['title']) ?>">
+                </a>
+                <?php if ($hasOld) { ?>
+                    <span class="m-badge">-<?= number_format((($article['old_price'] - $article['price']) / $article['old_price']) * 100) ?>%</span>
+                <?php } ?>
+                <div class="m-product-card-actions">
+                    <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
+                        <a href="#!" class="m-btn-add-cart add-to-cart" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">Thêm vào giỏ</a>
                     <?php } ?>
-                    <div class="quick-actions absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
-                        <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
-                            <a href="#!" class="add-to-cart block w-full bg-white text-slate-900 text-center text-sm font-semibold py-2.5 rounded-xl hover:bg-slate-100 transition-all shadow-lg" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">
-                                <i class="fa fa-shopping-bag mr-1.5"></i> Thêm vào giỏ
-                            </a>
-                        <?php } ?>
-                    </div>
-                    <button class="add-to-cart absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100 shadow-lg" data-id="<?= $article['id'] ?>" title="Mua ngay">
-                        <i class="fa fa-bolt text-slate-900 text-sm"></i>
-                    </button>
-                </div>
-                <div class="p-4">
-                    <a href="<?= $productUrl ?>" class="block text-sm font-medium text-slate-900 hover:text-slate-600 transition-colors leading-snug"><?= character_limiter($article['title'], 50) ?></a>
-                    <div class="mt-2 flex items-center justify-between">
-                        <span class="text-sm font-bold text-slate-900"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></span>
-                        <?php if ($hasOld) { ?>
-                            <span class="text-xs text-slate-400 line-through"><?= number_format($article['old_price'], 2) . CURRENCY ?></span>
-                        <?php } ?>
-                    </div>
                 </div>
             </div>
-            <?php } ?>
+            <div class="m-product-card-info">
+                <a href="<?= $productUrl ?>" class="m-product-card-title"><?= character_limiter($article['title'], 50) ?></a>
+                <div class="m-product-card-price">
+                    <?php if ($hasOld) { ?>
+                        <span class="sale"><?= number_format($article['price'], 2) ?><?= CURRENCY ?></span>
+                        <span class="compare"><?= number_format($article['old_price'], 2) . CURRENCY ?></span>
+                    <?php } else { ?>
+                        <?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
+        <?php } ?>
+    </div>
+    <div class="text-center mt-40">
+        <a href="<?= LANG_URL ?>/shop" class="m-btn"><?= lang('view_all') ?></a>
     </div>
 </section>
 <?php } ?>
 
 <?php if (!empty($home_categories)) { ?>
-<section class="py-16 md:py-24 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-10">
-            <span class="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400"><?= lang('categories') ?></span>
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mt-2"><?= lang('shop_by_category') ?></h2>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            <?php foreach (array_slice($home_categories, 0, 10) as $cat) { ?>
-            <a href="#!" data-categorie-id="<?= $cat['id'] ?>" class="go-category group block relative aspect-square rounded-2xl overflow-hidden bg-slate-200">
-                <?php if (isset($cat['image']) && $cat['image'] != '' && is_file('attachments/shop_images/' . $cat['image'])) { ?>
-                    <img src="<?= base_url('attachments/shop_images/' . $cat['image']) ?>" alt="<?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?>" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
-                <?php } else { ?>
-                    <div class="w-full h-full flex items-center justify-center bg-slate-100">
-                        <i class="fa fa-image text-slate-300 text-3xl"></i>
-                    </div>
-                <?php } ?>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 class="text-sm font-semibold text-white"><?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?></h3>
+<section class="m-section" style="background: var(--color-bg-secondary);">
+    <div class="m-section-header">
+        <div class="m-section-title"><?= lang('shop_by_category') ?></div>
+        <div class="m-section-subtitle"><?= lang('categories') ?></div>
+    </div>
+    <div class="m-cat-grid">
+        <?php foreach (array_slice($home_categories, 0, 10) as $cat) { ?>
+        <a href="#!" data-categorie-id="<?= $cat['id'] ?>" class="m-cat-card go-category">
+            <?php if (isset($cat['image']) && $cat['image'] != '' && is_file('attachments/shop_images/' . $cat['image'])) { ?>
+                <img src="<?= base_url('attachments/shop_images/' . $cat['image']) ?>" alt="<?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?>">
+            <?php } else { ?>
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#ccc;font-size:32px;">
+                    <i class="fa fa-image"></i>
                 </div>
-            </a>
             <?php } ?>
-        </div>
+            <div class="m-cat-card-overlay"></div>
+            <div class="m-cat-card-title"><?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?></div>
+        </a>
+        <?php } ?>
     </div>
 </section>
 <?php } ?>
 
 <?php if (!empty($newProducts)) { ?>
-<section class="py-16 md:py-24">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-end justify-between mb-10">
-            <div>
-                <span class="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400"><?= lang('new_arrivals') ?></span>
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mt-2"><?= lang('new_products') ?></h2>
-            </div>
-            <a href="#!" class="hidden md:inline-flex text-sm font-semibold text-slate-900 hover:text-slate-600 transition-colors">
-                <?= lang('view_all') ?> <i class="fa fa-arrow-right ml-1.5"></i>
-            </a>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <?php foreach (array_slice($newProducts, 0, 6) as $article) {
-                $productImage = base_url('/attachments/no-image-frontend.png');
-                if (is_file('attachments/shop_images/' . $article['image'])) {
-                    $productImage = base_url('/attachments/shop_images/' . $article['image']);
-                }
-                $productUrl = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
-            ?>
-            <div class="group">
-                <div class="relative aspect-[3/4] bg-slate-50 rounded-2xl overflow-hidden">
-                    <a href="<?= $productUrl ?>">
-                        <img src="<?= $productImage ?>" alt="<?= htmlentities($article['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
-                    </a>
-                    <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
-                            <a href="#!" class="add-to-cart block w-full bg-white text-slate-900 text-center text-sm font-semibold py-2.5 rounded-xl hover:bg-slate-100 transition-colors" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">
-                                Thêm vào giỏ
-                            </a>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <a href="<?= $productUrl ?>" class="block text-sm font-medium text-slate-900 hover:text-slate-600 transition-colors"><?= character_limiter($article['title'], 40) ?></a>
-                    <div class="mt-1 text-sm font-bold text-slate-900"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></div>
+<section class="m-section">
+    <div class="m-section-header">
+        <div class="m-section-title"><?= lang('new_products') ?></div>
+        <div class="m-section-subtitle"><?= lang('new_arrivals') ?></div>
+    </div>
+    <div class="m-product-grid">
+        <?php foreach (array_slice($newProducts, 0, 8) as $article) {
+            $productImage = base_url('/attachments/no-image-frontend.png');
+            if (is_file('attachments/shop_images/' . $article['image'])) {
+                $productImage = base_url('/attachments/shop_images/' . $article['image']);
+            }
+            $productUrl = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
+        ?>
+        <div class="m-product-card">
+            <div class="m-product-card-image">
+                <a href="<?= $productUrl ?>">
+                    <img src="<?= $productImage ?>" alt="<?= htmlentities($article['title']) ?>">
+                </a>
+                <div class="m-product-card-actions">
+                    <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
+                        <a href="#!" class="m-btn-add-cart add-to-cart" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">Thêm vào giỏ</a>
+                    <?php } ?>
                 </div>
             </div>
-            <?php } ?>
+            <div class="m-product-card-info">
+                <a href="<?= $productUrl ?>" class="m-product-card-title"><?= character_limiter($article['title'], 50) ?></a>
+                <div class="m-product-card-price"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></div>
+            </div>
         </div>
+        <?php } ?>
     </div>
 </section>
 <?php } ?>
 
-<section class="py-16 md:py-24 bg-slate-950 text-white">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white/40"><?= lang('stay_connected') ?></span>
-        <h2 class="text-2xl md:text-4xl font-bold mt-4"><?= lang('newsletter_title') ?></h2>
-        <p class="mt-3 text-white/60 max-w-md mx-auto"><?= lang('newsletter_description') ?></p>
-        <form method="POST" class="mt-8 max-w-md mx-auto">
-            <div class="flex gap-2">
-                <input type="text" name="subscribeEmail" class="flex-1 border-0 bg-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-white/20" placeholder="<?= lang('email_address') ?>">
-                <button type="submit" class="bg-white text-slate-900 rounded-xl px-6 py-3 text-sm font-semibold hover:bg-slate-100 transition-colors" onclick="checkEmailField()">
-                    <?= lang('subscribe') ?>
-                </button>
-            </div>
-        </form>
-    </div>
+<section class="m-newsletter-section">
+    <h2><?= lang('newsletter_title') ?></h2>
+    <p><?= lang('newsletter_description') ?></p>
+    <form method="POST" class="m-newsletter-form">
+        <input type="text" name="subscribeEmail" class="m-footer-newsletter-input" placeholder="<?= lang('email_address') ?>">
+        <button type="submit" class="m-footer-newsletter-btn" onclick="checkEmailField()"><?= lang('subscribe') ?></button>
+    </form>
 </section>
 
-<div class="max-w-7xl mx-auto px-4 py-12" id="home-page">
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-        <aside class="lg:col-span-3">
-            <div class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
-                <div class="flex items-center justify-between">
-                    <div class="text-sm font-bold text-slate-900"><?= lang('categories') ?></div>
+<div class="m-page" id="home-page">
+    <div style="display:grid;grid-template-columns:260px 1fr;gap:40px;">
+        <aside>
+            <div style="border:1px solid var(--color-border);padding:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                    <div style="font-weight:600;font-size:15px;"><?= lang('categories') ?></div>
                     <?php if (isset($_GET['category']) && $_GET['category'] != '') { ?>
-                        <a href="#!" class="clear-filter text-sm font-semibold text-slate-600 hover:text-slate-900" data-type-clear="category">
-                            <i class="fa fa-times"></i>
-                        </a>
+                        <a href="#!" class="clear-filter" data-type-clear="category" style="font-size:13px;color:#999;">✕</a>
                     <?php } ?>
                 </div>
-                <a href="#!" id="show-xs-nav" class="mt-3 inline-flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 lg:hidden">
-                    <span class="show-sp"><?= lang('showXsNav') ?> <i class="fa fa-angle-down"></i></span>
-                    <span class="hidde-sp hidden"><?= lang('hideXsNav') ?> <i class="fa fa-angle-up"></i></span>
+                <a href="#!" id="show-xs-nav" style="display:flex;justify-content:space-between;padding:10px;border:1px solid var(--color-border);font-size:14px;margin-bottom:12px;">
+                    <span class="show-sp"><?= lang('showXsNav') ?></span>
+                    <span class="hidde-sp hidden"><?= lang('hideXsNav') ?></span>
                 </a>
-                <div id="nav-categories" class="mt-4">
+                <div id="nav-categories">
                     <?php
                     function loop_tree($pages, $is_recursion = false) { ?>
-                        <ul class="<?= $is_recursion === true ? 'ml-4 mt-2 space-y-1' : 'space-y-1' ?>">
+                        <ul style="<?= $is_recursion ? 'margin-left:16px;' : '' ?>">
                             <?php foreach ($pages as $page) {
                                 $children = (isset($page['children']) && !empty($page['children'])); ?>
                                 <li>
-                                    <a href="#!" data-categorie-id="<?= $page['id'] ?>" class="go-category block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['category']) && $_GET['category'] == $page['id'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>">
+                                    <a href="#!" data-categorie-id="<?= $page['id'] ?>" class="go-category" style="display:block;padding:8px 0;font-size:15px;color:#666;border-bottom:1px solid #f5f5f5;">
                                         <?= htmlspecialchars($page['name'], ENT_QUOTES, 'UTF-8') ?>
                                     </a>
                                     <?php if ($children === true) { loop_tree($page['children'], true); } ?>
@@ -228,62 +174,53 @@ if (count($sliderProducts) > 0 && is_file('attachments/shop_images/' . $sliderPr
                 </div>
             </div>
             <?php if ($showBrands == 1) { ?>
-                <div class="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm font-bold text-slate-900"><?= lang('brands') ?></div>
+                <div style="border:1px solid var(--color-border);padding:20px;margin-top:20px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                        <div style="font-weight:600;font-size:15px;"><?= lang('brands') ?></div>
                         <?php if (isset($_GET['brand_id']) && $_GET['brand_id'] != '') { ?>
-                            <a href="#!" class="clear-filter text-sm font-semibold text-slate-600 hover:text-slate-900" data-type-clear="brand_id"><i class="fa fa-times"></i></a>
+                            <a href="#!" class="clear-filter" data-type-clear="brand_id" style="font-size:13px;color:#999;">✕</a>
                         <?php } ?>
                     </div>
-                    <div class="mt-3 space-y-1">
-                        <?php foreach ($brands as $brand) { ?>
-                            <a href="#!" data-brand-id="<?= $brand['id'] ?>" class="brand block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['brand_id']) && $_GET['brand_id'] == $brand['id'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>"><?= $brand['name'] ?></a>
-                        <?php } ?>
-                    </div>
+                    <?php foreach ($brands as $brand) { ?>
+                        <a href="#!" data-brand-id="<?= $brand['id'] ?>" class="brand" style="display:block;padding:8px 0;font-size:15px;color:#666;border-bottom:1px solid #f5f5f5;"><?= $brand['name'] ?></a>
+                    <?php } ?>
                 </div>
             <?php } ?>
             <?php if ($showOutOfStock == 1) { ?>
-                <div class="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm font-bold text-slate-900"><?= lang('store') ?></div>
-                        <?php if (isset($_GET['in_stock']) && $_GET['in_stock'] != '') { ?>
-                            <a href="#!" class="clear-filter text-sm font-semibold text-slate-600 hover:text-slate-900" data-type-clear="in_stock"><i class="fa fa-times"></i></a>
-                        <?php } ?>
-                    </div>
-                    <div class="mt-3 space-y-1">
-                        <a href="#!" data-in-stock="1" class="in-stock block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '1' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>"><?= lang('in_stock') ?> (<?= $countQuantities['in_stock'] ?>)</a>
-                        <a href="#!" data-in-stock="0" class="in-stock block rounded-xl px-3 py-2 text-sm font-medium <?= isset($_GET['in_stock']) && $_GET['in_stock'] == '0' ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-50' ?>"><?= lang('out_of_stock') ?> (<?= $countQuantities['out_of_stock'] ?>)</a>
-                    </div>
+                <div style="border:1px solid var(--color-border);padding:20px;margin-top:20px;">
+                    <div style="font-weight:600;font-size:15px;margin-bottom:12px;"><?= lang('store') ?></div>
+                    <a href="#!" data-in-stock="1" class="in-stock" style="display:block;padding:8px 0;font-size:15px;color:#666;"><?= lang('in_stock') ?> (<?= $countQuantities['in_stock'] ?>)</a>
+                    <a href="#!" data-in-stock="0" class="in-stock" style="display:block;padding:8px 0;font-size:15px;color:#666;"><?= lang('out_of_stock') ?> (<?= $countQuantities['out_of_stock'] ?>)</a>
                 </div>
             <?php } ?>
             <?php if ($shippingOrder != 0 && $shippingOrder != null) { ?>
-                <div class="mt-6 rounded-2xl bg-sky-50 p-5 ring-1 ring-sky-200">
-                    <div class="text-sm font-bold text-slate-900"><?= lang('freeShippingHeader') ?></div>
-                    <div class="mt-2 text-sm text-slate-700 leading-relaxed">
-                        <span class="font-semibold"><?= lang('promo') ?></span> — <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
+                <div style="border:1px solid var(--color-border);padding:20px;margin-top:20px;">
+                    <div style="font-weight:600;font-size:15px;"><?= lang('freeShippingHeader') ?></div>
+                    <div style="margin-top:8px;font-size:14px;color:#666;">
+                        <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
                     </div>
                 </div>
             <?php } ?>
         </aside>
-        <main class="lg:col-span-9" id="products-side">
-            <div class="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 md:flex-row md:items-center md:justify-between">
-                <div class="text-sm font-bold text-slate-900">
-                    <span><?= lang('products') ?></span>
+        <main id="products-side">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:1px solid var(--color-border);margin-bottom:20px;">
+                <div style="font-weight:600;font-size:15px;">
+                    <?= lang('products') ?>
                     <?php if (!empty($products)) { ?>
-                        <span class="text-slate-400 font-normal">(<?= count($products) ?>)</span>
+                        <span style="color:#999;font-weight:400;">(<?= count($products) ?>)</span>
                     <?php } ?>
                 </div>
-                <div class="flex flex-col gap-2 md:flex-row md:items-center">
-                    <select class="order w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10 md:w-auto" data-order-to="order_new">
+                <div style="display:flex;gap:8px;">
+                    <select class="order" data-order-to="order_new" style="padding:8px 12px;border:1px solid var(--color-border);border-radius:var(--radius-input);font-size:14px;font-family:var(--font-body);">
                         <option <?= isset($_GET['order_new']) && $_GET['order_new'] == "desc" ? 'selected' : '' ?> <?= !isset($_GET['order_new']) || $_GET['order_new'] == "" ? 'selected' : '' ?> value="desc"><?= lang('new') ?></option>
                         <option <?= isset($_GET['order_new']) && $_GET['order_new'] == "asc" ? 'selected' : '' ?> value="asc"><?= lang('old') ?></option>
                     </select>
-                    <select class="order w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10 md:w-auto" data-order-to="order_price">
+                    <select class="order" data-order-to="order_price" style="padding:8px 12px;border:1px solid var(--color-border);border-radius:var(--radius-input);font-size:14px;font-family:var(--font-body);">
                         <option label="<?= lang('not_selected') ?>"></option>
                         <option <?= isset($_GET['order_price']) && $_GET['order_price'] == "asc" ? 'selected' : '' ?> value="asc"><?= lang('price_low') ?></option>
                         <option <?= isset($_GET['order_price']) && $_GET['order_price'] == "desc" ? 'selected' : '' ?> value="desc"><?= lang('price_high') ?></option>
                     </select>
-                    <select class="order w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10 md:w-auto" data-order-to="order_procurement">
+                    <select class="order" data-order-to="order_procurement" style="padding:8px 12px;border:1px solid var(--color-border);border-radius:var(--radius-input);font-size:14px;font-family:var(--font-body);">
                         <option label="<?= lang('not_selected') ?>"></option>
                         <option <?= isset($_GET['order_procurement']) && $_GET['order_procurement'] == "desc" ? 'selected' : '' ?> value="desc"><?= lang('procurement_desc') ?></option>
                         <option <?= isset($_GET['order_procurement']) && $_GET['order_procurement'] == "asc" ? 'selected' : '' ?> value="asc"><?= lang('procurement_asc') ?></option>
@@ -291,7 +228,7 @@ if (count($sliderProducts) > 0 && is_file('attachments/shop_images/' . $sliderPr
                 </div>
             </div>
             <?php if (!empty($products)) { ?>
-                <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div class="m-product-grid" style="margin:0;padding:0;">
                     <?php foreach ($products as $i => $article) {
                         $backgroundImageFile = base_url('/attachments/no-image-frontend.png');
                         if (is_file('attachments/shop_images/' . $article['image'])) {
@@ -300,43 +237,28 @@ if (count($sliderProducts) > 0 && is_file('attachments/shop_images/' . $sliderPr
                         $productUrl = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
                         $hasOld = ($article['old_price'] != '' && $article['old_price'] != 0 && $article['price'] != '' && $article['price'] != 0);
                     ?>
-                    <div class="product-card group rounded-2xl bg-white overflow-hidden ring-1 ring-slate-100" style="animation: fadeInUp 0.4s ease-out <?= ($i % 8) * 0.06 ?>s both;">
-                        <div class="img-zoom-container relative aspect-[4/5] bg-slate-50">
+                    <div class="m-product-card">
+                        <div class="m-product-card-image">
                             <a href="<?= $productUrl ?>">
-                                <img src="<?= htmlentities($backgroundImageFile) ?>" class="w-full h-full object-cover" alt="<?= htmlentities($article['title']) ?>">
+                                <img src="<?= htmlentities($backgroundImageFile) ?>" alt="<?= htmlentities($article['title']) ?>">
                             </a>
                             <?php if ($hasOld) { ?>
-                                <div class="discount-badge absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold text-white shadow-lg">-<?= number_format((($article['old_price'] - $article['price']) / $article['old_price']) * 100) ?>%</div>
+                                <span class="m-badge">-<?= number_format((($article['old_price'] - $article['price']) / $article['old_price']) * 100) ?>%</span>
                             <?php } ?>
-                            <div class="quick-actions absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+                            <div class="m-product-card-actions">
                                 <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
-                                    <a href="#!" class="add-to-cart block w-full bg-white text-slate-900 text-center text-sm font-semibold py-2.5 rounded-xl hover:bg-slate-100 transition-all shadow-lg" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">
-                                        <i class="fa fa-shopping-bag mr-1.5"></i> Thêm vào giỏ
-                                    </a>
+                                    <a href="#!" class="m-btn-add-cart add-to-cart" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>">Thêm vào giỏ</a>
                                 <?php } ?>
                             </div>
-                            <button class="add-to-cart absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all opacity-0 group-hover:opacity-100 shadow-lg" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>" title="Mua ngay">
-                                <i class="fa fa-bolt text-slate-900 text-sm"></i>
-                            </button>
                         </div>
-                        <div class="p-4">
-                            <a href="<?= $productUrl ?>" class="block text-sm font-medium text-slate-900 hover:text-slate-600 transition-colors leading-snug"><?= character_limiter($article['title'], 70) ?></a>
-                            <div class="mt-2 flex items-center justify-between">
-                                <div class="text-sm font-bold text-slate-900"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></div>
+                        <div class="m-product-card-info">
+                            <a href="<?= $productUrl ?>" class="m-product-card-title"><?= character_limiter($article['title'], 70) ?></a>
+                            <div class="m-product-card-price">
                                 <?php if ($hasOld) { ?>
-                                    <div class="text-xs text-slate-400 line-through"><?= number_format($article['old_price'], 2) . CURRENCY ?></div>
-                                <?php } ?>
-                            </div>
-                            <div class="mt-3 flex gap-2">
-                                <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
-                                    <a href="#!" class="add-to-cart inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-slate-900 px-3 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition-all btn-primary" data-goto="<?= LANG_URL . '/shopping-cart' ?>" data-id="<?= $article['id'] ?>">
-                                        <i class="fa fa-plus"></i> Thêm vào giỏ
-                                    </a>
-                                    <a href="#!" class="add-to-cart inline-flex items-center justify-center rounded-xl bg-amber-50 px-3 py-2.5 text-xs font-semibold text-amber-700 ring-1 ring-inset ring-amber-200 hover:bg-amber-100 transition-all" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>" title="Mua ngay">
-                                        <i class="fa fa-bolt"></i>
-                                    </a>
+                                    <span class="sale"><?= number_format($article['price'], 2) ?><?= CURRENCY ?></span>
+                                    <span class="compare"><?= number_format($article['old_price'], 2) . CURRENCY ?></span>
                                 <?php } else { ?>
-                                    <div class="flex-1 rounded-xl bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600 ring-1 ring-inset ring-slate-200"><?= lang('out_of_stock_product') ?></div>
+                                    <?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?>
                                 <?php } ?>
                             </div>
                         </div>
@@ -347,7 +269,7 @@ if (count($sliderProducts) > 0 && is_file('attachments/shop_images/' . $sliderPr
                 <script>$(document).ready(function () { ShowNotificator('alert-info', '<?= lang('no_results') ?>'); });</script>
             <?php } ?>
             <?php if ($links_pagination != '') { ?>
-                <div class="mt-8"><?= $links_pagination ?></div>
+                <div class="mt-40"><?= $links_pagination ?></div>
             <?php } ?>
         </main>
     </div>

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="mx-auto max-w-5xl px-4 py-10" id="dynPage">
-    <div class="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-        <div class="prose prose-slate max-w-none">
+<div class="m-page-narrow" style="max-width:800px;">
+    <div style="border:1px solid var(--color-border);padding:40px;">
+        <div style="font-size:15px;color:#666;line-height:1.8;">
             <?= $content ?>
         </div>
     </div>

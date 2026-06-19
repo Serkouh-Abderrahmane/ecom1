@@ -1,193 +1,212 @@
 <!DOCTYPE html>
 <html lang="<?= MY_LANGUAGE_ABBR ?>">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-        <meta name="description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
-        <meta name="keywords" content="<?= htmlspecialchars($keywords ?? '', ENT_QUOTES, 'UTF-8') ?>" />
-        <meta property="og:title" content="<?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?>" />
-        <meta property="og:description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
-        <meta property="og:url" content="<?= LANG_URL ?>" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="<?= isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
-        <title><?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?></title>
-        <link rel="icon" type="image/png" href="<?= base_url('assets/imgs/logo.png') ?>" />
-        <link rel="apple-touch-icon" href="<?= base_url('assets/imgs/logo.png') ?>" />
-        <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
-        <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
-        <link href="<?= base_url('cssloader/theme.css') ?>" rel="stylesheet" />
-        <link href="<?= base_url('assets/css/custom-theme.css') ?>" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-        <script>
-            window.tailwind = window.tailwind || {};
-            window.tailwind.config = {
-                corePlugins: { preflight: false },
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
-                        }
-                    }
-                }
-            };
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+    <meta name="keywords" content="<?= htmlspecialchars($keywords ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+    <meta property="og:title" content="<?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+    <meta property="og:description" content="<?= htmlspecialchars($description ?? '', ENT_QUOTES, 'UTF-8') ?>" />
+    <meta property="og:url" content="<?= LANG_URL ?>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<?= isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
+    <title><?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?></title>
+    <link rel="icon" type="image/png" href="<?= base_url('assets/imgs/logo.png') ?>" />
+    <link rel="apple-touch-icon" href="<?= base_url('assets/imgs/logo.png') ?>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
+    <link href="<?= base_url('assets/css/minimog.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
+    <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
+    <?php if ($cookieLaw != false) { ?>
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message": "<?= $cookieLaw['message'] ?>", "dismiss": "<?= $cookieLaw['button_text'] ?>", "learnMore": "<?= $cookieLaw['learn_more'] ?>", "link": "<?= $cookieLaw['link'] ?>", "theme": "<?= $cookieLaw['theme'] ?>"};
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.0"></script>
-        <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-        <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
-        <?php if ($cookieLaw != false) { ?>
-            <script type="text/javascript">
-                window.cookieconsent_options = {"message": "<?= $cookieLaw['message'] ?>", "dismiss": "<?= $cookieLaw['button_text'] ?>", "learnMore": "<?= $cookieLaw['learn_more'] ?>", "link": "<?= $cookieLaw['link'] ?>", "theme": "<?= $cookieLaw['theme'] ?>"};
-            </script>
-            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
-        <?php } ?>
-    </head>
-    <body class="bg-white text-slate-900 font-sans antialiased">
-        <div id="wrapper" class="min-h-screen flex flex-col">
-            <div id="content" class="flex-1">
-                <?php if ($multiVendor == 1) { ?>
-                    <div class="bg-slate-950 text-white text-xs">
-                        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-                            <span><?= lang('vendor_panel') ?></span>
-                            <div class="flex items-center gap-3">
-                                <a href="<?= LANG_URL . '/vendor/register' ?>" class="hover:text-white/80"><?= lang('register_me') ?></a>
-                                <span class="text-white/30">|</span>
-                                <form method="POST" action="<?= LANG_URL . '/vendor/login' ?>" class="flex items-center gap-2">
-                                    <input type="email" name="u_email" class="bg-white/10 border-0 rounded-lg px-2 py-1 text-xs text-white placeholder-white/50 w-28" placeholder="<?= lang('email') ?>">
-                                    <input type="password" name="u_password" class="bg-white/10 border-0 rounded-lg px-2 py-1 text-xs text-white placeholder-white/50 w-28" placeholder="<?= lang('password') ?>">
-                                    <label class="flex items-center gap-1 text-white/70 text-xs"><input type="checkbox" name="remember_me"> <?= lang('remember_me') ?></label>
-                                    <button type="submit" name="login" class="bg-white text-slate-900 rounded-lg px-3 py-1 text-xs font-semibold hover:bg-white/90"><?= lang('u_login') ?></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+    <?php } ?>
+    <style>
+        .topbar { background: #000; color: #fff; text-align: center; font-size: 13px; padding: 8px 20px; letter-spacing: 0.5px; }
+        .m-site-header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #eee; }
+        .m-header-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .m-header-left { flex: 0 0 auto; }
+        .m-header-center { flex: 1; display: flex; justify-content: center; }
+        .m-header-right { flex: 0 0 auto; display: flex; align-items: center; gap: 4px; }
+        .m-logo img { height: 40px; width: auto; display: block; }
+        .m-nav { display: flex; gap: 0; list-style: none; margin: 0; padding: 0; }
+        .m-nav > li { position: relative; }
+        .m-nav > li > a { display: block; padding: 10px 16px; font-size: 15px; font-weight: 500; color: #262626; letter-spacing: 0.3px; text-decoration: none; transition: color 0.2s; }
+        .m-nav > li > a:hover { color: #000; }
+        .m-nav > li:hover .m-mega { display: block; }
+        .m-mega { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #eee; border-top: 2px solid #000; padding: 30px; min-width: 200px; z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.08); white-space: nowrap; }
+        .m-mega a { display: block; padding: 6px 0; font-size: 15px; color: #666; text-decoration: none; transition: color 0.2s; }
+        .m-mega a:hover { color: #000; }
+        .m-icon { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #262626; text-decoration: none; position: relative; }
+        .m-icon:hover { color: #000; }
+        .m-icon svg { width: 22px; height: 22px; }
+        .m-cart-count { position: absolute; top: 4px; right: 2px; background: #da3f3f; color: #fff; font-size: 10px; font-weight: 600; min-width: 18px; height: 18px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+        .m-mobile-toggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; cursor: pointer; background: none; border: none; color: #262626; }
+        .m-mobile-toggle svg { width: 24px; height: 24px; }
+        @media (max-width: 768px) {
+            .m-nav, .m-header-center { display: none; }
+            .m-mobile-toggle { display: flex; }
+            .m-header-inner { height: 56px; }
+            .m-logo img { height: 32px; }
+        }
+        .m-mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 200; overflow-y: auto; }
+        .m-mobile-menu.active { display: block; }
+        .m-mobile-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid #eee; }
+        .m-mobile-close { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: none; border: none; font-size: 24px; color: #262626; }
+        .m-mobile-nav { padding: 0 20px; }
+        .m-mobile-nav li { border-bottom: 1px solid #eee; }
+        .m-mobile-nav li a { display: block; padding: 14px 0; font-size: 16px; font-weight: 500; color: #262626; text-decoration: none; }
+        .m-search-bar { display: none; border-top: 1px solid #eee; background: #fff; }
+        .m-search-bar.active { display: block; }
+        .m-search-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; gap: 8px; }
+        .m-search-input { flex: 1; border: 1px solid #eee; border-radius: 5px; padding: 10px 16px; font-size: 15px; font-family: 'Jost', sans-serif; outline: none; }
+        .m-search-input:focus { border-color: #000; }
+        .m-search-btn { background: #000; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; font-size: 15px; font-weight: 600; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="content">
 
-                <div class="border-b border-slate-100">
-                    <div class="max-w-7xl mx-auto px-4">
-                        <div class="flex items-center justify-between h-10 text-xs text-slate-500">
-                            <div class="flex items-center gap-4">
-                                <?php
-                                $num_langs = count($allLanguages);
-                                if ($num_langs > 0) {
-                                    foreach ($allLanguages as $key_lang => $lang) {
-                                        ?>
-                                        <a href="<?= base_url($key_lang) ?>" class="flex items-center gap-1.5 hover:text-slate-900 transition-colors">
-                                            <img src="<?= base_url('attachments/lang_flags/' . $lang['flag']) ?>" alt="<?= $lang['name'] ?>" class="w-4 h-3 object-cover rounded">
-                                            <span><?= $lang['name'] ?></span>
-                                        </a>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <?php $cPhone = $footerContactPhone ?? ''; if ($cPhone != '') { ?>
-                                    <span class="flex items-center gap-1.5">
-                                        <i class="fa fa-phone text-xs"></i>
-                                        <?= $cPhone ?>
-                                    </span>
-                                <?php } ?>
-                                <a href="<?= LANG_URL . '/login' ?>" class="hover:text-slate-900 transition-colors"><?= lang('login') ?></a>
-                                <a href="<?= LANG_URL . '/register' ?>" class="hover:text-slate-900 transition-colors"><?= lang('register') ?></a>
-                            </div>
-                        </div>
-                    </div>
+        <div class="topbar">MIỄN PHÍ VẬN CHUYỂN CHO ĐƠN HÀNG TRÊN 500.000₫</div>
+
+        <header class="m-site-header">
+            <div class="m-header-inner">
+                <div class="m-header-left">
+                    <a href="<?= base_url() ?>" class="m-logo">
+                        <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG">
+                    </a>
                 </div>
 
-                <header class="border-b border-slate-100 bg-white sticky top-0 z-50">
-                    <div class="max-w-7xl mx-auto px-4">
-                        <div class="flex items-center justify-between h-16 md:h-20">
-                            <button type="button" id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl hover:bg-slate-50 transition-colors" aria-label="Menu">
-                                <i class="fa fa-bars text-lg text-slate-700"></i>
-                            </button>
-
-                            <div class="flex items-center gap-8">
-                                <a href="<?= base_url() ?>" class="flex items-center no-underline">
-                                    <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="h-9 md:h-11 w-auto">
-                                </a>
-                                <nav class="hidden md:flex items-center gap-1">
-                                    <a href="<?= LANG_URL ?>" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TRANG CHỦ</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=1" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO THUN</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=2" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">RINGER</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=3" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">TÚI CANVAS</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=4" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">ÁO BA LỖ</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=5" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">DÀI TAY</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=6" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">SWEATER</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=7" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">HOODIE</a>
-                                    <a href="<?= LANG_URL ?>/shop?category=8" class="nav-link px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-50 transition-colors">QUẦN</a>
-                                </nav>
+                <div class="m-header-center">
+                    <ul class="m-nav">
+                        <li><a href="<?= LANG_URL ?>">TRANG CHỦ</a></li>
+                        <li>
+                            <a href="<?= LANG_URL ?>/shop?category=1">ÁO THUN RELAXED FIT</a>
+                            <div class="m-mega">
+                                <a href="<?= LANG_URL ?>/shop?category=1&subcategory=Thể Thao">Thể Thao</a>
+                                <a href="<?= LANG_URL ?>/shop?category=1&subcategory=Chuyện Phòng Gym">Chuyện Phòng Gym</a>
+                                <a href="<?= LANG_URL ?>/shop?category=1&subcategory=Thèm Đi Biển">Thèm Đi Biển</a>
+                                <a href="<?= LANG_URL ?>/shop?category=1&subcategory=Love Bites">Love Bites</a>
+                                <a href="<?= LANG_URL ?>/shop?category=1&subcategory=Nghề Nghiệp">Nghề Nghiệp</a>
+                                <a href="<?= LANG_URL ?>/shop?category=1&subcategory=Trơi Bời">Trơi Bời</a>
                             </div>
-
-                            <div class="flex items-center gap-2">
-                                <button type="button" id="search-toggle" class="inline-flex items-center justify-center w-10 h-10 rounded-xl hover:bg-slate-50 transition-colors" aria-label="Search">
-                                    <i class="fa fa-search text-slate-700"></i>
-                                </button>
-                                <div class="relative">
-                                    <a href="<?= LANG_URL . '/shopping-cart' ?>" class="relative inline-flex items-center justify-center w-10 h-10 rounded-xl hover:bg-slate-50 transition-colors">
-                                        <i class="fa fa-shopping-bag text-slate-700"></i>
-                                        <?php $itemsCount = isset($sumOfItems) ? (int)$sumOfItems : 0; if ($itemsCount > 0) { ?>
-                                            <span class="sumOfItems absolute -top-0.5 -right-0.5 bg-slate-900 text-white text-[10px] font-bold rounded-full w-4.5 h-4.5 flex items-center justify-center"><?= $itemsCount ?></span>
-                                        <?php } ?>
-                                    </a>
-                                    <div id="cart-dropdown" class="dropdown-cart absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-100 hidden z-50">
-                                        <div class="p-4">
-                                            <?= $load::getCartItems($cartItems) ?>
-                                        </div>
-                                    </div>
-                                </div>
+                        </li>
+                        <li>
+                            <a href="<?= LANG_URL ?>/shop?category=2">ÁO THUN RINGER</a>
+                            <div class="m-mega">
+                                <a href="<?= LANG_URL ?>/shop?category=2&subcategory=Áo Thun Ringer Job">Áo Thun Ringer Job</a>
+                                <a href="<?= LANG_URL ?>/shop?category=2&subcategory=Áo Thun Ringer Đũy Mèo">Áo Thun Ringer Đũy Mèo</a>
+                                <a href="<?= LANG_URL ?>/shop?category=2&subcategory=Áo Thun Ringer Pickleball">Áo Thun Ringer Pickleball</a>
+                                <a href="<?= LANG_URL ?>/shop?category=2&subcategory=Áo Thun Ringer Love Bites">Áo Thun Ringer Love Bites</a>
                             </div>
-                        </div>
-                    </div>
-
-                    <div id="search-bar" class="hidden border-t border-slate-100 bg-white">
-                        <div class="max-w-7xl mx-auto px-4 py-3">
-                            <div class="flex items-center gap-2">
-                                <div class="flex-1 relative">
-                                    <form method="GET" action="<?= LANG_URL ?>" id="bigger-search" class="flex gap-2">
-                                        <input type="text" value="<?= isset($_GET['search_in_title']) ? htmlspecialchars($_GET['search_in_title']) : '' ?>" name="search_in_title" class="w-full border-0 bg-slate-50 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" placeholder="<?= lang('search_by_keyword_title') ?>">
-                                        <button type="submit" class="bg-slate-900 text-white rounded-xl px-5 py-2.5 text-sm font-semibold hover:bg-slate-800 transition-colors">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <button type="button" id="search-close" class="text-slate-400 hover:text-slate-600 p-2">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                        </li>
+                        <li><a href="<?= LANG_URL ?>/shop?category=3">TÚI CANVAS</a></li>
+                        <li>
+                            <a href="<?= LANG_URL ?>/shop?category=4">ÁO BA LỖ</a>
+                            <div class="m-mega">
+                                <a href="<?= LANG_URL ?>/shop?category=4&subcategory=Áo Ba Lỗ Bóng Đá">Áo Ba Lỗ Bóng Đá</a>
+                                <a href="<?= LANG_URL ?>/shop?category=4&subcategory=Áo Ba Lỗ Pickleball">Áo Ba Lỗ Pickleball</a>
+                                <a href="<?= LANG_URL ?>/shop?category=4&subcategory=Áo Ba Lỗ Đũy Mèo">Áo Ba Lỗ Đũy Mèo</a>
+                                <a href="<?= LANG_URL ?>/shop?category=4&subcategory=Áo Ba Lỗ Love Bites">Áo Ba Lỗ Love Bites</a>
+                                <a href="<?= LANG_URL ?>/shop?category=4&subcategory=Áo Ba Lỗ Fruitland">Áo Ba Lỗ Fruitland</a>
                             </div>
-                        </div>
-                    </div>
-                </header>
-
-                <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
-                    <div class="absolute inset-0 bg-black/40" id="mobile-menu-overlay"></div>
-                    <div class="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-xl">
-                        <div class="flex items-center justify-between p-4 border-b border-slate-100">
-                            <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="h-8 w-auto">
-                            <button type="button" id="mobile-menu-close" class="w-8 h-8 inline-flex items-center justify-center rounded-xl hover:bg-slate-50">
-                                <i class="fa fa-times text-slate-500"></i>
-                            </button>
-                        </div>
-                        <nav class="p-4 space-y-1">
-                            <a href="<?= LANG_URL ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">TRANG CHỦ</a>
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 pt-4 pb-1">DANH MỤC</div>
-                            <a href="<?= LANG_URL ?>/shop?category=1" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN RELAXED FIT</a>
-                            <a href="<?= LANG_URL ?>/shop?category=2" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN RINGER</a>
-                            <a href="<?= LANG_URL ?>/shop?category=3" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">TÚI CANVAS</a>
-                            <a href="<?= LANG_URL ?>/shop?category=4" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO BA LỖ</a>
-                            <a href="<?= LANG_URL ?>/shop?category=5" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO THUN DÀI TAY</a>
-                            <a href="<?= LANG_URL ?>/shop?category=6" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO SWEATER</a>
-                            <a href="<?= LANG_URL ?>/shop?category=7" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">ÁO HOODIE</a>
-                            <a href="<?= LANG_URL ?>/shop?category=8" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl">QUẦN JOGGER & QUẦN ỐNG SUÔNG</a>
-                            <div class="border-t border-slate-100 my-2 pt-2"></div>
-                            <a href="<?= LANG_URL . '/shopping-cart' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('shopping_cart') ?></a>
-                            <a href="<?= LANG_URL . '/checkout' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('checkout') ?></a>
-                            <a href="<?= LANG_URL . '/contacts' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('contacts') ?></a>
-                            <div class="border-t border-slate-100 my-2 pt-2"></div>
-                            <a href="<?= LANG_URL . '/login' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('login') ?></a>
-                            <a href="<?= LANG_URL . '/register' ?>" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl"><?= lang('register') ?></a>
-                        </nav>
-                    </div>
+                        </li>
+                        <li>
+                            <a href="<?= LANG_URL ?>/shop?category=5">ÁO THUN DÀI TAY</a>
+                            <div class="m-mega">
+                                <a href="<?= LANG_URL ?>/shop?category=5&subcategory=Nghỉ Lễ Hết Cỡ">Nghỉ Lễ Hết Cỡ</a>
+                                <a href="<?= LANG_URL ?>/shop?category=5&subcategory=Đời Game Thủ">Đời Game Thủ</a>
+                                <a href="<?= LANG_URL ?>/shop?category=5&subcategory=Nghề Nghiệp">Nghề Nghiệp</a>
+                                <a href="<?= LANG_URL ?>/shop?category=5&subcategory=Việt Nam Du Hí">Việt Nam Du Hí</a>
+                            </div>
+                        </li>
+                        <li><a href="<?= LANG_URL ?>/shop?category=6">ÁO SWEATER</a></li>
+                        <li><a href="<?= LANG_URL ?>/shop?category=7">ÁO HOODIE</a></li>
+                        <li><a href="<?= LANG_URL ?>/shop?category=8">QUẦN</a></li>
+                    </ul>
                 </div>
+
+                <div class="m-header-right">
+                    <a href="#" class="m-icon" id="search-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    </a>
+                    <a href="<?= LANG_URL . '/login' ?>" class="m-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+                    </a>
+                    <a href="<?= LANG_URL . '/shopping-cart' ?>" class="m-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        <?php $itemsCount = isset($sumOfItems) ? (int)$sumOfItems : 0; if ($itemsCount > 0) { ?>
+                            <span class="m-cart-count sumOfItems"><?= $itemsCount ?></span>
+                        <?php } ?>
+                    </a>
+                    <button type="button" class="m-mobile-toggle" id="mobile-menu-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="m-search-bar" id="search-bar">
+                <div class="m-search-inner">
+                    <form method="GET" action="<?= LANG_URL ?>" id="bigger-search" style="display:flex;gap:8px;width:100%">
+                        <input type="text" value="<?= isset($_GET['search_in_title']) ? htmlspecialchars($_GET['search_in_title']) : '' ?>" name="search_in_title" class="m-search-input" placeholder="Tìm kiếm sản phẩm...">
+                        <button type="submit" class="m-search-btn"><i class="fa fa-search"></i></button>
+                    </form>
+                    <button type="button" id="search-close" style="background:none;border:none;cursor:pointer;padding:8px;color:#999;font-size:18px">&times;</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="m-mobile-menu" id="mobile-menu">
+            <div class="m-mobile-header">
+                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" style="height:32px;width:auto">
+                <button type="button" class="m-mobile-close" id="mobile-menu-close">&times;</button>
+            </div>
+            <ul class="m-mobile-nav">
+                <li><a href="<?= LANG_URL ?>">TRANG CHỦ</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=1">ÁO THUN RELAXED FIT</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=2">ÁO THUN RINGER</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=3">TÚI CANVAS</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=4">ÁO BA LỖ</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=5">ÁO THUN DÀI TAY</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=6">ÁO SWEATER</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=7">ÁO HOODIE</a></li>
+                <li><a href="<?= LANG_URL ?>/shop?category=8">QUẦN</a></li>
+                <li style="border-top:1px solid #eee;margin-top:8px;padding-top:8px"><a href="<?= LANG_URL . '/login' ?>">Đăng nhập</a></li>
+                <li><a href="<?= LANG_URL . '/register' ?>">Đăng ký</a></li>
+                <li><a href="<?= LANG_URL . '/shopping-cart' ?>">Giỏ hàng</a></li>
+                <li><a href="<?= LANG_URL . '/contacts' ?>">Liên hệ</a></li>
+            </ul>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuBtn = document.getElementById('mobile-menu-btn');
+            var menuClose = document.getElementById('mobile-menu-close');
+            var mobileMenu = document.getElementById('mobile-menu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function() { mobileMenu.classList.add('active'); });
+            }
+            if (menuClose && mobileMenu) {
+                menuClose.addEventListener('click', function() { mobileMenu.classList.remove('active'); });
+            }
+            var searchToggle = document.getElementById('search-toggle');
+            var searchBar = document.getElementById('search-bar');
+            var searchClose = document.getElementById('search-close');
+            if (searchToggle && searchBar) {
+                searchToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    searchBar.classList.toggle('active');
+                });
+            }
+            if (searchClose && searchBar) {
+                searchClose.addEventListener('click', function() { searchBar.classList.remove('active'); });
+            }
+        });
+        </script>

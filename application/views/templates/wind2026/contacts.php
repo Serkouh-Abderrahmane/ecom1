@@ -5,54 +5,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     #map { height: 420px; width: 100%; }
 </style>
 
-<div class="mx-auto max-w-7xl px-4 py-8" id="contacts">
-    <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-white shadow-xl">
-        <h1 class="text-2xl font-bold tracking-tight md:text-3xl"><?= lang('contact_us') ?></h1>
-        <p class="mt-2 text-sm text-white/70"><?= lang('contact_us_feel_free') ?></p>
-    </div>
+<div class="m-page">
+    <h1 style="font-size:28px;font-weight:700;margin-bottom:8px;"><?= lang('contact_us') ?></h1>
+    <p style="font-size:16px;color:#666;margin-bottom:32px;"><?= lang('contact_us_feel_free') ?></p>
 
-    <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <div class="lg:col-span-8">
-            <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                <?php if ($this->session->flashdata('resultSend')) { ?>
-                    <div class="mb-5 rounded-2xl bg-sky-50 p-4 text-sm text-slate-800 ring-1 ring-sky-200">
-                        <?= $this->session->flashdata('resultSend') ?>
-                    </div>
-                <?php } ?>
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;">
+        <div style="border:1px solid var(--color-border);padding:32px;">
+            <?php if ($this->session->flashdata('resultSend')) { ?>
+                <div style="padding:16px;border:1px solid var(--color-border);margin-bottom:24px;font-size:14px;">
+                    <?= $this->session->flashdata('resultSend') ?>
+                </div>
+            <?php } ?>
 
-                <form method="POST" action="" class="space-y-4">
-                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div>
-                            <label for="name" class="text-sm font-semibold text-slate-700"><?= lang('name') ?></label>
-                            <input type="text" name="name" id="name" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" placeholder="<?= lang('name') ?>" required="required" />
-                        </div>
-                        <div>
-                            <label for="email" class="text-sm font-semibold text-slate-700"><?= lang('email_address') ?></label>
-                            <input type="email" name="email" id="email" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" placeholder="<?= lang('email_address') ?>" required="required" />
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="subject" class="text-sm font-semibold text-slate-700"><?= lang('subject') ?></label>
-                            <input type="text" name="subject" id="subject" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" placeholder="<?= lang('subject') ?>" />
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="message" class="text-sm font-semibold text-slate-700"><?= lang('message') ?></label>
-                            <textarea name="message" id="message" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" rows="7" required="required" placeholder="<?= lang('message') ?>"></textarea>
-                        </div>
+            <form method="POST" action="">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                    <div>
+                        <label class="m-label"><?= lang('name') ?></label>
+                        <input type="text" name="name" id="name" class="m-input" required>
                     </div>
-                    <div class="flex items-center justify-end">
-                        <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800" id="btnContactUs">
-                            <?= lang('send_message') ?>
-                            <i class="fa fa-paper-plane ml-2" aria-hidden="true"></i>
-                        </button>
+                    <div>
+                        <label class="m-label"><?= lang('email_address') ?></label>
+                        <input type="email" name="email" id="email" class="m-input" required>
                     </div>
-                </form>
-            </div>
+                    <div style="grid-column:1/-1;">
+                        <label class="m-label"><?= lang('subject') ?></label>
+                        <input type="text" name="subject" id="subject" class="m-input">
+                    </div>
+                    <div style="grid-column:1/-1;">
+                        <label class="m-label"><?= lang('message') ?></label>
+                        <textarea name="message" id="message" class="m-input" rows="7" required></textarea>
+                    </div>
+                </div>
+                <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+                    <button type="submit" class="m-btn" id="btnContactUs"><?= lang('send_message') ?> →</button>
+                </div>
+            </form>
         </div>
 
-        <div class="lg:col-span-4">
-            <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                <div class="text-sm font-semibold text-slate-900"><?= lang('our_office') ?></div>
-                <div class="prose prose-slate mt-3 max-w-none text-sm">
+        <div>
+            <div style="border:1px solid var(--color-border);padding:32px;">
+                <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;"><?= lang('our_office') ?></h3>
+                <div style="font-size:15px;color:#666;line-height:1.8;">
                     <?= html_entity_decode($contactspage) ?>
                 </div>
             </div>
@@ -60,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 
     <?php if (trim($googleApi) != null && trim($googleMaps) != null) { ?>
-        <div class="mt-6 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
+        <div style="margin-top:40px;border:1px solid var(--color-border);overflow:hidden;">
             <div id="map"></div>
         </div>
         <?php $coordinates = explode(',', $googleMaps); ?>

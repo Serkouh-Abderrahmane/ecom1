@@ -14,36 +14,37 @@ if (!empty($product['old_price']) && $product['old_price'] > 0 && $product['pric
     $discountPercent = round(($product['old_price'] - $product['price']) / $product['old_price'] * 100);
 }
 ?>
-<div class="max-w-7xl mx-auto px-4 py-6">
-    <nav class="flex items-center gap-2 text-xs font-medium text-slate-400 mb-6">
-        <a href="<?= LANG_URL ?>" class="hover:text-slate-900 transition-colors">Trang chủ</a>
+<div class="m-page">
+    <div class="m-breadcrumb">
+        <a href="<?= LANG_URL ?>">Trang chủ</a>
         <span>/</span>
-        <a href="#!" class="go-category hover:text-slate-900 transition-colors" data-categorie-id="<?= $product['shop_categorie'] ?>"><?= $product['categorie_name'] ?></a>
+        <a href="#!" class="go-category" data-categorie-id="<?= $product['shop_categorie'] ?>"><?= $product['categorie_name'] ?></a>
         <span>/</span>
-        <span class="text-slate-700 truncate max-w-[200px]"><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></span>
-    </nav>
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <span><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></span>
+    </div>
+
+    <div class="m-pd-grid">
         <div>
-            <div class="sticky top-24">
-                <div class="relative aspect-[4/5] bg-slate-50 rounded-2xl overflow-hidden group">
-                    <img src="<?= $productImage; ?>" data-num="0" class="other-img-preview img-sl the-image w-full h-full object-cover cursor-pointer" alt="<?= str_replace('"', "'", $product['title']) ?>">
+            <div style="position:sticky;top:90px;">
+                <div style="position:relative;aspect-ratio:1;background:#f5f5f5;overflow:hidden;">
+                    <img src="<?= $productImage; ?>" data-num="0" class="other-img-preview img-sl the-image" style="width:100%;height:100%;object-fit:cover;cursor:pointer;" alt="<?= str_replace('"', "'", $product['title']) ?>">
                     <?php if ($discountPercent > 0) { ?>
-                        <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">-<?= $discountPercent ?>%</span>
+                        <span class="m-badge">-<?= $discountPercent ?>%</span>
                     <?php } ?>
                 </div>
                 <?php if ($product['folder'] != null) {
                     $dir = "attachments/shop_images/" . $product['folder'] . '/'; ?>
-                    <div class="mt-3 grid grid-cols-4 gap-2">
-                        <button type="button" class="aspect-square rounded-xl overflow-hidden bg-slate-50 ring-1 ring-slate-200 hover:ring-slate-400 transition-all active">
-                            <img src="<?= $productImage ?>" data-num="0" class="other-img-preview img-sl the-image w-full h-full object-cover" alt="">
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;">
+                        <button type="button" style="aspect-ratio:1;overflow:hidden;background:#f5f5f5;border:1px solid #000;cursor:pointer;padding:0;">
+                            <img src="<?= $productImage ?>" data-num="0" class="other-img-preview img-sl the-image" style="width:100%;height:100%;object-fit:cover;" alt="">
                         </button>
                         <?php if (is_dir($dir)) {
                             if ($dh = opendir($dir)) {
                                 $i = 1;
                                 while (($file = readdir($dh)) !== false) {
                                     if (is_file($dir . $file)) { ?>
-                                        <button type="button" class="aspect-square rounded-xl overflow-hidden bg-slate-50 ring-1 ring-slate-200 hover:ring-slate-400 transition-all">
-                                            <img src="<?= base_url($dir . $file) ?>" data-num="<?= $i ?>" class="other-img-preview img-sl the-image w-full h-full object-cover" alt="">
+                                        <button type="button" style="aspect-ratio:1;overflow:hidden;background:#f5f5f5;border:1px solid var(--color-border);cursor:pointer;padding:0;">
+                                            <img src="<?= base_url($dir . $file) ?>" data-num="<?= $i ?>" class="other-img-preview img-sl the-image" style="width:100%;height:100%;object-fit:cover;" alt="">
                                         </button>
                                     <?php $i++; }
                                 } closedir($dh);
@@ -54,42 +55,38 @@ if (!empty($product['old_price']) && $product['old_price'] > 0 && $product['pric
             </div>
         </div>
         <div>
-            <h1 class="text-2xl md:text-3xl font-bold text-slate-900"><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></h1>
-            <div class="mt-4 flex items-baseline gap-3 flex-wrap">
-                <span class="text-2xl font-bold text-slate-900"><?= $product['price'] . CURRENCY ?></span>
+            <h1 style="font-size:28px;font-weight:700;margin-bottom:12px;"><?= htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8') ?></h1>
+            <div style="font-size:24px;font-weight:600;margin-bottom:20px;">
+                <?= $product['price'] . CURRENCY ?>
                 <?php if ($product['old_price'] != '') { ?>
-                    <span class="text-lg text-slate-400 line-through"><?= $product['old_price'] . CURRENCY ?></span>
-                    <span class="text-sm font-semibold text-red-500 bg-red-50 px-2 py-0.5 rounded-lg">-<?= $discountPercent ?>%</span>
+                    <span style="font-size:16px;font-weight:400;color:#999;text-decoration:line-through;margin-left:8px;"><?= $product['old_price'] . CURRENCY ?></span>
+                    <span style="font-size:14px;font-weight:600;color:var(--color-price-sale);margin-left:8px;">-<?= $discountPercent ?>%</span>
                 <?php } ?>
             </div>
 
-            <div class="mt-8 space-y-4">
-                <div>
-                    <label class="text-sm font-semibold text-slate-700"><?= lang('size') ?></label>
-                    <div class="mt-2 flex flex-wrap gap-2">
-                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-xl border border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all">XS</button>
-                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-xl border border-slate-900 bg-slate-900 text-white">S</button>
-                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-xl border border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all">M</button>
-                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-xl border border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all">L</button>
-                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-xl border border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all">XL</button>
-                        <button type="button" class="px-4 py-2 text-sm font-medium rounded-xl border border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white transition-all">XXL</button>
+            <div style="border-top:1px solid var(--color-border);padding-top:24px;margin-top:24px;">
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:14px;font-weight:500;display:block;margin-bottom:8px;"><?= lang('size') ?></label>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                        <button type="button" style="padding:8px 20px;border:1px solid var(--color-border);font-size:14px;font-weight:500;cursor:pointer;background:transparent;">XS</button>
+                        <button type="button" style="padding:8px 20px;border:1px solid #000;font-size:14px;font-weight:500;cursor:pointer;background:#000;color:#fff;">S</button>
+                        <button type="button" style="padding:8px 20px;border:1px solid var(--color-border);font-size:14px;font-weight:500;cursor:pointer;background:transparent;">M</button>
+                        <button type="button" style="padding:8px 20px;border:1px solid var(--color-border);font-size:14px;font-weight:500;cursor:pointer;background:transparent;">L</button>
+                        <button type="button" style="padding:8px 20px;border:1px solid var(--color-border);font-size:14px;font-weight:500;cursor:pointer;background:transparent;">XL</button>
+                        <button type="button" style="padding:8px 20px;border:1px solid var(--color-border);font-size:14px;font-weight:500;cursor:pointer;background:transparent;">XXL</button>
                     </div>
                 </div>
-                <div>
-                    <label class="text-sm font-semibold text-slate-700"><?= lang('quantity') ?></label>
-                    <div class="mt-2 flex items-center gap-2">
-                        <button type="button" class="w-10 h-10 inline-flex items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" onclick="adjustQty(-1)">
-                            <i class="fa fa-minus text-sm"></i>
-                        </button>
-                        <input type="number" id="product-qty" value="1" min="1" max="<?= $product['quantity'] ?>" class="w-16 text-center rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold outline-none focus:ring-2 focus:ring-slate-900/10">
-                        <button type="button" class="w-10 h-10 inline-flex items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" onclick="adjustQty(1)">
-                            <i class="fa fa-plus text-sm"></i>
-                        </button>
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:14px;font-weight:500;display:block;margin-bottom:8px;"><?= lang('quantity') ?></label>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <button type="button" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--color-border);cursor:pointer;background:transparent;" onclick="adjustQty(-1)">−</button>
+                        <input type="number" id="product-qty" value="1" min="1" max="<?= $product['quantity'] ?>" style="width:60px;text-align:center;padding:8px;border:1px solid var(--color-border);font-size:14px;font-weight:600;font-family:var(--font-body);">
+                        <button type="button" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--color-border);cursor:pointer;background:transparent;" onclick="adjustQty(1)">+</button>
                         <?php if ($publicQuantity == 1) { ?>
                             <?php if ($product['quantity'] > 0) { ?>
-                                <span class="text-xs text-emerald-600 font-semibold ml-2">✔ <?= lang('in_stock') ?></span>
+                                <span style="font-size:13px;color:#3a8735;font-weight:500;margin-left:8px;">✔ <?= lang('in_stock') ?></span>
                             <?php } else { ?>
-                                <span class="text-xs text-red-500 font-semibold ml-2">✘ <?= lang('out_of_stock') ?></span>
+                                <span style="font-size:13px;color:#da3f3f;font-weight:500;margin-left:8px;">✘ <?= lang('out_of_stock') ?></span>
                             <?php } ?>
                         <?php } ?>
                     </div>
@@ -97,62 +94,51 @@ if (!empty($product['old_price']) && $product['old_price'] > 0 && $product['pric
             </div>
 
             <?php if ($hideBuyButtonsOfOutOfStock == 0 || $product['quantity'] > 0) { ?>
-                <div class="mt-8 flex flex-col sm:flex-row gap-3">
-                    <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 transition-colors">
-                        <i class="fa fa-shopping-bag"></i>
-                        <?= lang('add_to_cart') ?>
-                    </a>
-                    <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 transition-colors">
-                        <?= lang('buy_now') ?>
-                    </a>
+                <div style="display:flex;gap:12px;margin-top:24px;">
+                    <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart m-btn" style="flex:1;"><?= lang('add_to_cart') ?></a>
+                    <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart m-btn m-btn-outline" style="flex:1;"><?= lang('buy_now') ?></a>
                 </div>
             <?php } else { ?>
-                <div class="mt-8">
-                    <div class="w-full rounded-2xl bg-slate-50 px-6 py-3.5 text-sm font-semibold text-slate-500 ring-1 ring-inset ring-slate-200 text-center"><?= lang('out_of_stock_product') ?></div>
-                </div>
+                <div style="padding:16px;border:1px solid var(--color-border);text-align:center;font-weight:500;margin-top:24px;color:#999;"><?= lang('out_of_stock_product') ?></div>
             <?php } ?>
 
             <?php if ($publicDateAdded == 1) { ?>
-                <div class="mt-4 text-xs text-slate-400"><?= lang('added_on') ?>: <?= date('m.d.Y', $product['time']) ?></div>
+                <div style="font-size:13px;color:#999;margin-top:12px;"><?= lang('added_on') ?>: <?= date('m.d.Y', $product['time']) ?></div>
             <?php } ?>
 
-            <div class="mt-8 border-t border-slate-100 pt-6">
-                <div class="text-sm font-semibold text-slate-900 mb-3"><?= lang('description') ?></div>
-                <div id="description" class="text-sm text-slate-600 leading-relaxed prose prose-slate max-w-none">
-                    <?= $product['description'] ?>
-                </div>
+            <div style="border-top:1px solid var(--color-border);padding-top:24px;margin-top:24px;">
+                <div style="font-weight:600;font-size:16px;margin-bottom:12px;"><?= lang('description') ?></div>
+                <div style="font-size:15px;color:#666;line-height:1.8;"><?= $product['description'] ?></div>
             </div>
 
-            <div class="mt-6"><?php include rtrim(APPPATH, '/') . '/views/main/social_share.php'; ?></div>
+            <div style="margin-top:24px;"><?php include rtrim(APPPATH, '/') . '/views/main/social_share.php'; ?></div>
         </div>
     </div>
 
     <?php if (!empty($sameCagegoryProducts)) { ?>
-    <div class="mt-16">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <span class="text-xs font-semibold uppercase tracking-[0.15em] text-slate-400"><?= lang('more_from_category') ?></span>
-                <h2 class="text-xl font-bold text-slate-900 mt-1"><?= $product['categorie_name'] ?></h2>
-            </div>
+    <div style="margin-top:60px;">
+        <div style="text-align:center;margin-bottom:32px;">
+            <div style="font-size:14px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;"><?= lang('more_from_category') ?></div>
+            <div style="font-size:24px;font-weight:700;"><?= $product['categorie_name'] ?></div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="m-product-grid">
             <?php foreach ($sameCagegoryProducts as $article) {
                 $img = base_url('/attachments/no-image-frontend.png');
                 if (is_file('attachments/shop_images/' . $article['image'])) { $img = base_url('/attachments/shop_images/' . $article['image']); }
                 $url = $article['vendor_url'] == null ? LANG_URL . '/' . $article['url'] : LANG_URL . '/' . $article['vendor_url'] . '/' . $article['url'];
             ?>
-            <div class="group">
-                <div class="relative aspect-[3/4] bg-slate-50 rounded-2xl overflow-hidden">
-                    <a href="<?= $url ?>"><img src="<?= $img ?>" alt="<?= htmlentities($article['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"></a>
-                    <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="m-product-card">
+                <div class="m-product-card-image">
+                    <a href="<?= $url ?>"><img src="<?= $img ?>" alt="<?= htmlentities($article['title']) ?>"></a>
+                    <div class="m-product-card-actions">
                         <?php if ($hideBuyButtonsOfOutOfStock == 0 || (int)$article['quantity'] > 0) { ?>
-                            <a href="#!" class="add-to-cart block w-full bg-white text-slate-900 text-center text-sm font-semibold py-2.5 rounded-xl hover:bg-slate-100" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>"><?= lang('add_to_cart') ?></a>
+                            <a href="#!" class="m-btn-add-cart add-to-cart" data-goto="<?= LANG_URL . '/checkout' ?>" data-id="<?= $article['id'] ?>"><?= lang('add_to_cart') ?></a>
                         <?php } ?>
                     </div>
                 </div>
-                <div class="mt-3">
-                    <a href="<?= $url ?>" class="block text-sm font-medium text-slate-900 hover:text-slate-600"><?= character_limiter($article['title'], 50) ?></a>
-                    <div class="mt-1 text-sm font-bold text-slate-900"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></div>
+                <div class="m-product-card-info">
+                    <a href="<?= $url ?>" class="m-product-card-title"><?= character_limiter($article['title'], 50) ?></a>
+                    <div class="m-product-card-price"><?= $article['price'] != '' ? number_format($article['price'], 2) : 0 ?><?= CURRENCY ?></div>
                 </div>
             </div>
             <?php } ?>

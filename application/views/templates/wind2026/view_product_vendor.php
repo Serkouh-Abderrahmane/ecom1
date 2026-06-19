@@ -14,141 +14,93 @@ if (isset($_SESSION['shopping_cart']) && is_array($_SESSION['shopping_cart'])) {
     }
 }
 ?>
-
-<div class="mx-auto max-w-7xl px-4 py-8" id="view-product">
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <div class="lg:col-span-6">
-            <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
-                <div class="flex items-center justify-center bg-slate-50 p-6">
-                    <img src="<?= $productImage; ?>" data-num="0" class="other-img-preview img-sl the-image h-[520px] w-auto max-w-full object-contain" alt="<?= str_replace('"', "'", $product['title']) ?>">
-                </div>
+<div class="m-page" id="view-product">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+        <div>
+            <div style="overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;padding:24px;">
+                <img src="<?= $productImage; ?>" data-num="0" class="other-img-preview img-sl the-image" style="max-height:520px;width:auto;object-fit:contain;" alt="<?= str_replace('"', "'", $product['title']) ?>">
             </div>
-
             <?php if ($product['folder'] != null) { ?>
                 <?php $dir = "attachments/shop_images/" . $product['folder'] . '/'; ?>
-                <div class="mt-4 grid grid-cols-3 gap-3">
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;">
                     <?php
                     if (is_dir($dir)) {
                         if ($dh = opendir($dir)) {
                             $i = 1;
                             while (($file = readdir($dh)) !== false) {
-                                if (is_file($dir . $file)) {
-                                    ?>
-                                    <button type="button" class="overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 hover:ring-slate-300">
-                                        <div class="flex items-center justify-center bg-slate-50 p-2">
-                                            <img src="<?= base_url($dir . $file) ?>" data-num="<?= $i ?>" class="other-img-preview img-sl the-image h-24 w-auto max-w-full object-contain" alt="<?= str_replace('"', "'", $product['title']) ?>">
-                                        </div>
+                                if (is_file($dir . $file)) { ?>
+                                    <button type="button" style="overflow:hidden;border:1px solid var(--color-border);cursor:pointer;background:#f5f5f5;padding:4px;">
+                                        <img src="<?= base_url($dir . $file) ?>" data-num="<?= $i ?>" class="other-img-preview img-sl the-image" style="height:80px;width:100%;object-fit:contain;" alt="">
                                     </button>
-                                    <?php
-                                    $i++;
-                                }
-                            }
-                            closedir($dh);
+                                <?php $i++; }
+                            } closedir($dh);
                         }
-                    }
-                    ?>
+                    } ?>
                 </div>
             <?php } ?>
-
-            <div class="mt-6 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-                <?php include rtrim(APPPATH, '/') . '/views/main/social_share.php'; ?>
-            </div>
+            <div style="margin-top:16px;"><?php include rtrim(APPPATH, '/') . '/views/main/social_share.php'; ?></div>
         </div>
 
-        <div class="lg:col-span-6">
-            <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                <div class="flex items-start justify-between gap-4">
-                    <div>
-                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500"><?= lang('vendor') ?></div>
-                        <a href="<?= LANG_URL . '/vendor/view/' . $vendorInfo['url'] ?>" class="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700">
-                            <?= $vendorInfo['name'] ?>
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        </a>
-                        <h1 class="mt-3 text-2xl font-bold tracking-tight text-slate-900"><?= $product['title'] ?></h1>
-                    </div>
-                </div>
+        <div style="border:1px solid var(--color-border);padding:32px;">
+            <div style="font-size:12px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;"><?= lang('vendor') ?></div>
+            <a href="<?= LANG_URL . '/vendor/view/' . $vendorInfo['url'] ?>" style="font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:4px;margin-bottom:12px;"><?= $vendorInfo['name'] ?> →</a>
+            <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;"><?= $product['title'] ?></h1>
 
-                <div class="mt-4 flex flex-wrap items-center gap-3">
-                    <div class="inline-flex items-baseline gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-white">
-                        <div class="text-xs font-semibold uppercase tracking-wider text-white/70"><?= lang('price') ?></div>
-                        <div class="text-xl font-bold"><?= $product['price'] . CURRENCY ?></div>
-                    </div>
-                    <?php if ($product['old_price'] != '') { ?>
-                        <div class="text-sm text-slate-500 line-through"><?= $product['old_price'] . CURRENCY ?></div>
-                    <?php } ?>
-                    <?php if ($publicQuantity == 1) { ?>
-                        <div class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-                            <?= lang('in_stock') ?>: <?= $product['quantity'] ?>
-                        </div>
-                    <?php } ?>
-                    <div class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-                        <?= lang('num_added_to_cart') ?>: <?= $addedCount ?>
-                    </div>
-                    <?php if ($publicDateAdded == 1) { ?>
-                        <div class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-                            <?= lang('added_on') ?>: <?= date('m.d.Y', $product['time']) ?>
-                        </div>
-                    <?php } ?>
-                </div>
+            <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:16px;">
+                <span style="font-size:24px;font-weight:700;"><?= $product['price'] . CURRENCY ?></span>
+                <?php if ($product['old_price'] != '') { ?>
+                    <span style="font-size:16px;color:#999;text-decoration:line-through;"><?= $product['old_price'] . CURRENCY ?></span>
+                <?php } ?>
+            </div>
 
-                <div class="mt-5 flex flex-wrap items-center gap-2">
-                    <div class="text-sm font-semibold text-slate-700"><?= lang('in_category') ?>:</div>
-                    <a href="#!" class="go-category inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" data-categorie-id="<?= $product['shop_categorie'] ?>">
-                        <?= $product['categorie_name'] ?>
-                    </a>
-                </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+                <?php if ($publicQuantity == 1) { ?>
+                    <span style="padding:4px 12px;border:1px solid var(--color-border);font-size:13px;"><?= lang('in_stock') ?>: <?= $product['quantity'] ?></span>
+                <?php } ?>
+                <span style="padding:4px 12px;border:1px solid var(--color-border);font-size:13px;"><?= lang('num_added_to_cart') ?>: <?= $addedCount ?></span>
+                <?php if ($publicDateAdded == 1) { ?>
+                    <span style="padding:4px 12px;border:1px solid var(--color-border);font-size:13px;"><?= lang('added_on') ?>: <?= date('m.d.Y', $product['time']) ?></span>
+                <?php } ?>
+            </div>
 
-                <div class="mt-6 flex flex-col gap-2 sm:flex-row">
-                    <?php if ($product['quantity'] > 0) { ?>
-                        <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/shopping-cart' ?>" class="add-to-cart inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            <?= lang('add_to_cart') ?>
-                        </a>
-                        <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart inline-flex items-center justify-center rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50">
-                            <i class="fa fa-bolt" aria-hidden="true"></i>
-                            <?= lang('buy_now') ?>
-                        </a>
-                    <?php } else { ?>
-                        <div class="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 ring-1 ring-inset ring-slate-200">
-                            <?= lang('out_of_stock_product') ?>
-                        </div>
-                    <?php } ?>
-                </div>
+            <div style="margin-bottom:20px;">
+                <span style="font-weight:500;font-size:14px;"><?= lang('in_category') ?>: </span>
+                <a href="#!" class="go-category" data-categorie-id="<?= $product['shop_categorie'] ?>" style="font-weight:600;font-size:14px;"><?= $product['categorie_name'] ?></a>
+            </div>
 
-                <div class="mt-8 border-t border-slate-200 pt-6">
-                    <div class="text-sm font-semibold text-slate-900"><?= lang('description') ?></div>
-                    <div id="description" class="prose prose-slate mt-3 max-w-none text-sm">
-                        <?= $product['description'] ?>
-                    </div>
-                </div>
+            <div style="display:flex;gap:12px;">
+                <?php if ($product['quantity'] > 0) { ?>
+                    <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/shopping-cart' ?>" class="add-to-cart m-btn" style="flex:1;"><?= lang('add_to_cart') ?></a>
+                    <a href="#!" data-id="<?= $product['id'] ?>" data-goto="<?= LANG_URL . '/checkout' ?>" class="add-to-cart m-btn m-btn-outline" style="flex:1;"><?= lang('buy_now') ?></a>
+                <?php } else { ?>
+                    <div style="padding:12px 20px;border:1px solid var(--color-border);font-weight:500;color:#999;text-align:center;flex:1;"><?= lang('out_of_stock_product') ?></div>
+                <?php } ?>
+            </div>
+
+            <div style="border-top:1px solid var(--color-border);padding-top:24px;margin-top:24px;">
+                <h3 style="font-weight:600;font-size:16px;margin-bottom:12px;"><?= lang('description') ?></h3>
+                <div style="font-size:15px;color:#666;line-height:1.8;"><?= $product['description'] ?></div>
             </div>
         </div>
     </div>
 
-    <div class="mt-10" id="products-side">
-        <div class="text-sm font-semibold text-slate-900"><?= lang('oder_from_category') ?></div>
-        <div class="mt-4">
-            <?php if (!empty($sameCagegoryProducts)) { ?>
-                <?= $load::getProducts($sameCagegoryProducts, '', false) ?>
-            <?php } else { ?>
-                <div class="rounded-2xl bg-white p-6 text-sm text-slate-700 shadow-sm ring-1 ring-slate-200">
-                    <?= lang('no_same_category_products') ?>
-                </div>
-            <?php } ?>
-        </div>
+    <div style="margin-top:60px;">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;"><?= lang('oder_from_category') ?></h3>
+        <?php if (!empty($sameCagegoryProducts)) { ?>
+            <?= $load::getProducts($sameCagegoryProducts, '', false) ?>
+        <?php } else { ?>
+            <div style="padding:24px;border:1px solid var(--color-border);color:#666;"><?= lang('no_same_category_products') ?></div>
+        <?php } ?>
     </div>
 </div>
 <div id="modalImagePreview" class="modal">
     <div class="image-preview-container">
         <div class="modal-content">
             <div class="inner-prev-container">
-                <img id="img01" alt="">
-                <span class="close">&times;</span>
-                <span class="img-series"></span>
+                <img id="img01" alt=""><span class="close">&times;</span><span class="img-series"></span>
             </div>
         </div>
-        <a href="#!" class="inner-next"></a>
-        <a href="#!" class="inner-prev"></a>
+        <a href="#!" class="inner-next"></a><a href="#!" class="inner-prev"></a>
     </div>
     <div id="caption"></div>
 </div>

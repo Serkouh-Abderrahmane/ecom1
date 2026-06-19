@@ -1,43 +1,38 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="mx-auto max-w-7xl px-4 py-8" id="checkout-page">
+<div class="m-page" id="checkout-page">
     <?php if (isset($cartItems['array']) && $cartItems['array'] != null) { ?>
         <?php if ($shippingOrder != 0 && $shippingOrder != null) { ?>
-            <div class="rounded-2xl bg-sky-50 p-4 ring-1 ring-sky-200">
-                <div class="text-sm font-semibold text-slate-900"><?= lang('freeShippingHeader') ?></div>
-                <div class="mt-2 text-sm text-slate-700">
-                    <span class="font-semibold"><?= lang('promo') ?></span>
-                    &mdash; <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
+            <div style="padding:16px;border:1px solid var(--color-border);margin-bottom:24px;">
+                <div style="font-weight:600;font-size:15px;"><?= lang('freeShippingHeader') ?></div>
+                <div style="margin-top:4px;font-size:14px;color:#666;">
+                    <?= str_replace(array('%price%', '%currency%'), array($shippingOrder, CURRENCY), lang('freeShipping')) ?>!
                 </div>
             </div>
         <?php } ?>
 
-        <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
-            <div class="lg:col-span-8">
-                <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-                    <div class="flex items-center justify-between gap-4">
-                        <h1 class="text-xl font-bold tracking-tight text-slate-900"><?= lang('checkout') ?></h1>
-                        <a href="<?= LANG_URL . '/shopping-cart' ?>" class="text-sm font-semibold text-slate-600 hover:text-slate-900">
-                            <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i><?= lang('shopping_cart') ?>
-                        </a>
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;">
+            <div>
+                <div style="border:1px solid var(--color-border);padding:24px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                        <h1 style="font-size:22px;font-weight:700;"><?= lang('checkout') ?></h1>
+                        <a href="<?= LANG_URL . '/shopping-cart' ?>" style="font-size:14px;color:#666;">← <?= lang('shopping_cart') ?></a>
                     </div>
 
                     <?php if ($this->session->flashdata('submit_error')) { ?>
-                        <div class="mt-4 rounded-2xl bg-rose-50 p-4 text-sm text-rose-900 ring-1 ring-rose-200">
-                            <div class="font-semibold"><?= lang('finded_errors') ?></div>
-                            <div class="mt-2 space-y-1">
-                                <?php foreach ($this->session->flashdata('submit_error') as $error) { ?>
-                                    <div><?= $error ?></div>
-                                <?php } ?>
-                            </div>
+                        <div style="padding:16px;border:1px solid var(--color-error);margin-bottom:16px;font-size:14px;">
+                            <div style="font-weight:600;margin-bottom:8px;"><?= lang('finded_errors') ?></div>
+                            <?php foreach ($this->session->flashdata('submit_error') as $error) { ?>
+                                <div style="color:var(--color-error);">• <?= $error ?></div>
+                            <?php } ?>
                         </div>
                     <?php } ?>
 
-                    <form method="POST" id="goOrder" class="mt-6 space-y-6">
-                        <div>
-                            <label class="text-xs font-semibold uppercase tracking-wider text-slate-500"><?= lang('choose_payment') ?></label>
-                            <select name="payment_type" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-900 outline-none focus:ring-2 focus:ring-slate-900/10">
+                    <form method="POST" id="goOrder">
+                        <div style="margin-bottom:20px;">
+                            <label class="m-label"><?= lang('choose_payment') ?></label>
+                            <select name="payment_type" class="m-input">
                                 <?php if ($cashondelivery_visibility == 1) { ?>
                                     <option value="cashOnDelivery"><?= lang('cash_on_delivery') ?></option>
                                 <?php } ?>
@@ -50,163 +45,117 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </select>
                         </div>
 
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                             <div>
-                                <label for="firstNameInput" class="text-sm font-semibold text-slate-700"><?= lang('first_name') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                                <input id="firstNameInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="first_name" value="<?= htmlspecialchars((string)($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('first_name') ?>">
-                            </div>
-                            <div>
-                                <label for="lastNameInput" class="text-sm font-semibold text-slate-700"><?= lang('last_name') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                                <input id="lastNameInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="last_name" value="<?= htmlspecialchars((string)($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('last_name') ?>">
+                                <label class="m-label"><?= lang('first_name') ?> (<sup style="color:var(--color-error)">*</sup>)</label>
+                                <input class="m-input" name="first_name" value="<?= htmlspecialchars((string)($_POST['first_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('first_name') ?>">
                             </div>
                             <div>
-                                <label for="emailAddressInput" class="text-sm font-semibold text-slate-700"><?= lang('email_address') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                                <input id="emailAddressInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="email" value="<?= htmlspecialchars((string)($_POST['email'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('email_address') ?>">
+                                <label class="m-label"><?= lang('last_name') ?> (<sup style="color:var(--color-error)">*</sup>)</label>
+                                <input class="m-input" name="last_name" value="<?= htmlspecialchars((string)($_POST['last_name'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('last_name') ?>">
                             </div>
                             <div>
-                                <label for="phoneInput" class="text-sm font-semibold text-slate-700"><?= lang('phone') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                                <input id="phoneInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="phone" value="<?= htmlspecialchars((string)($_POST['phone'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('phone') ?>">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label for="addressInput" class="text-sm font-semibold text-slate-700"><?= lang('address') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                                <textarea id="addressInput" name="address" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" rows="3"><?= htmlspecialchars((string)($_POST['address'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+                                <label class="m-label"><?= lang('email_address') ?> (<sup style="color:var(--color-error)">*</sup>)</label>
+                                <input class="m-input" name="email" value="<?= htmlspecialchars((string)($_POST['email'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="email@example.com">
                             </div>
                             <div>
-                                <label for="cityInput" class="text-sm font-semibold text-slate-700"><?= lang('city') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                                <input id="cityInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="city" value="<?= htmlspecialchars((string)($_POST['city'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('city') ?>">
+                                <label class="m-label"><?= lang('phone') ?> (<sup style="color:var(--color-error)">*</sup>)</label>
+                                <input class="m-input" name="phone" value="<?= htmlspecialchars((string)($_POST['phone'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('phone') ?>">
+                            </div>
+                            <div style="grid-column:1/-1;">
+                                <label class="m-label"><?= lang('address') ?> (<sup style="color:var(--color-error)">*</sup>)</label>
+                                <textarea class="m-input" name="address" rows="3"><?= htmlspecialchars((string)($_POST['address'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
                             </div>
                             <div>
-                                <label for="postInput" class="text-sm font-semibold text-slate-700"><?= lang('post_code') ?></label>
-                                <input id="postInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="post_code" value="<?= htmlspecialchars((string)($_POST['post_code'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('post_code') ?>">
+                                <label class="m-label"><?= lang('city') ?> (<sup style="color:var(--color-error)">*</sup>)</label>
+                                <input class="m-input" name="city" value="<?= htmlspecialchars((string)($_POST['city'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('city') ?>">
                             </div>
-                            <div class="md:col-span-2">
-                                <label for="notesInput" class="text-sm font-semibold text-slate-700"><?= lang('notes') ?></label>
-                                <textarea id="notesInput" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="notes" rows="3"><?= htmlspecialchars((string)($_POST['notes'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+                            <div>
+                                <label class="m-label"><?= lang('post_code') ?></label>
+                                <input class="m-input" name="post_code" value="<?= htmlspecialchars((string)($_POST['post_code'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" type="text" placeholder="<?= lang('post_code') ?>">
+                            </div>
+                            <div style="grid-column:1/-1;">
+                                <label class="m-label"><?= lang('notes') ?></label>
+                                <textarea class="m-input" name="notes" rows="3"><?= htmlspecialchars((string)($_POST['notes'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
                             </div>
                         </div>
 
                         <?php if ($codeDiscounts == 1) { ?>
-                            <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
-                                <label class="text-sm font-semibold text-slate-700"><?= lang('discount_code') ?></label>
-                                <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center">
-                                    <input class="w-full flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-900/10" name="discountCode" value="<?= htmlspecialchars((string)($_POST['discountCode'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" placeholder="<?= lang('enter_discount_code') ?>" type="text">
-                                    <a href="#!" class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-100" onclick="checkDiscountCode(); return false;">
-                                        <?= lang('check_code') ?>
-                                    </a>
+                            <div style="padding:16px;border:1px solid var(--color-border);margin-top:20px;">
+                                <label class="m-label"><?= lang('discount_code') ?></label>
+                                <div style="display:flex;gap:8px;margin-top:8px;">
+                                    <input class="m-input" name="discountCode" value="<?= htmlspecialchars((string)($_POST['discountCode'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" placeholder="<?= lang('enter_discount_code') ?>" type="text">
+                                    <a href="#!" class="m-btn m-btn-sm m-btn-outline" onclick="checkDiscountCode(); return false;"><?= lang('check_code') ?></a>
                                 </div>
                             </div>
                         <?php } ?>
-
-                        <div class="rounded-2xl bg-white ring-1 ring-slate-200">
-                            <div class="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900"><?= lang('order_summary') ?></div>
-                            <div class="space-y-3 p-4">
-                                <?php foreach ($cartItems['array'] as $item) { ?>
-                                    <?php
-                                    $productImage = base_url('/attachments/no-image-frontend.png');
-                                    if (is_file('attachments/shop_images/' . $item['image'])) {
-                                        $productImage = base_url('/attachments/shop_images/' . $item['image']);
-                                    }
-                                    ?>
-                                    <div class="flex flex-col gap-3 rounded-2xl bg-slate-50 p-3 ring-1 ring-inset ring-slate-200 md:flex-row md:items-center md:justify-between">
-                                        <div class="flex items-center gap-3">
-                                            <a href="<?= LANG_URL . '/' . $item['url'] ?>" class="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-white ring-1 ring-slate-200">
-                                                <img class="h-full w-full object-cover" src="<?= $productImage ?>" alt="">
-                                            </a>
-                                            <div class="min-w-0">
-                                                <a href="<?= LANG_URL . '/' . $item['url'] ?>" class="block truncate text-sm font-semibold text-slate-900 hover:text-slate-700"><?= $item['title'] ?></a>
-                                                <div class="mt-1 text-xs text-slate-600">
-                                                    <?= $item['price'] . CURRENCY ?> &middot; <?= lang('total') ?>: <?= $item['sum_price'] . CURRENCY ?>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex flex-wrap items-center gap-2">
-                                            <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
-                                            <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>">
-
-                                            <a class="refresh-me add-to-cart inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 <?= $item['quantity'] <= $item['num_added'] ? 'disabled' : '' ?>" data-id="<?= $item['id'] ?>" href="#!">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </a>
-                                            <span class="inline-flex min-w-[3rem] items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200">
-                                                <?= $item['num_added'] ?>
-                                            </span>
-                                             <a class="inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50" onclick="removeProduct(<?= $item['id'] ?>, true); return false;" href="#!">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="<?= base_url('home/removeFromCart?delete-product=' . $item['id'] . '&back-to=checkout') ?>" class="inline-flex items-center justify-center rounded-xl bg-rose-600 px-3 py-2 text-sm font-semibold text-white hover:bg-rose-700">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-
-                                <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-sm text-slate-900">
-                                    <div class="font-semibold"><?= lang('subtotal') ?></div>
-                                    <div class="font-semibold"><?= $cartItems['finalSum'] . CURRENCY ?></div>
-                                </div>
-
-                                <?php
-                                $total_parsed = str_replace(' ', '', str_replace(',', '', $cartItems['finalSum']));
-                                if ((int)$shippingAmount > 0 && ((int)$shippingOrder > $total_parsed)) {
-                                    ?>
-                                    <div class="flex items-center justify-between text-sm font-semibold text-slate-900">
-                                        <div><?= lang('shipping') ?></div>
-                                        <div><span class="final-amount"><?= (int)$shippingAmount ?></span><?= CURRENCY ?></div>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="flex items-center justify-between text-sm font-semibold text-green-600">
-                                        <div><?= lang('shipping') ?></div>
-                                        <div><?= lang('free') ?></div>
-                                    </div>
-                                <?php } ?>
-
-                                <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-sm font-bold text-slate-900">
-                                    <div><?= lang('total') ?></div>
-                                    <div>
-                                        <span class="final-amount"><?= $cartItems['finalSum'] ?></span><?= CURRENCY ?>
-                                        <input type="hidden" class="final-amount" name="final_amount" value="<?= $cartItems['finalSum'] ?>">
-                                        <input type="hidden" name="amount_currency" value="<?= CURRENCY ?>">
-                                        <input type="hidden" name="discountAmount" value="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </form>
 
-                    <div class="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                        <a href="<?= LANG_URL ?>" class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-200 hover:bg-slate-50">
-                            <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
-                            <?= lang('continue_shopping') ?>
-                        </a>
-                        <a href="#!" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800" onclick="document.getElementById('goOrder').submit(); return false;">
-                            <?= lang('place_order') ?>
-                            <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
-                        </a>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--color-border);">
+                        <a href="<?= LANG_URL ?>" class="m-btn m-btn-outline">← <?= lang('continue_shopping') ?></a>
+                        <a href="#!" class="m-btn" onclick="document.getElementById('goOrder').submit(); return false;"><?= lang('place_order') ?> →</a>
                     </div>
 
-                    <div class="mt-4 flex items-center gap-4 text-xs text-slate-500">
-                        <a href="<?= LANG_URL ?>/contacts" class="underline hover:text-slate-900"><?= lang('payment_policy') ?></a>
-                        <a href="<?= LANG_URL ?>/contacts" class="underline hover:text-slate-900"><?= lang('terms_of_service') ?></a>
+                    <div style="display:flex;gap:16px;margin-top:16px;font-size:13px;color:#999;">
+                        <a href="<?= LANG_URL ?>/contacts" style="text-decoration:underline;"><?= lang('payment_policy') ?></a>
+                        <a href="<?= LANG_URL ?>/contacts" style="text-decoration:underline;"><?= lang('terms_of_service') ?></a>
                     </div>
                 </div>
             </div>
 
-            <aside class="lg:col-span-4">
-                <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm font-semibold text-slate-900"><?= lang('best_sellers') ?></div>
-                        <i class="fa fa-trophy text-slate-500" aria-hidden="true"></i>
-                    </div>
-                    <div class="mt-4">
-                        <?= $load::getProducts($bestSellers, '', true) ?>
+            <aside>
+                <div style="border:1px solid var(--color-border);padding:24px;">
+                    <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--color-border);"><?= lang('order_summary') ?></h3>
+                    <?php foreach ($cartItems['array'] as $item) { ?>
+                        <?php
+                        $productImage = base_url('/attachments/no-image-frontend.png');
+                        if (is_file('attachments/shop_images/' . $item['image'])) {
+                            $productImage = base_url('/attachments/shop_images/' . $item['image']);
+                        }
+                        ?>
+                        <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f5f5f5;">
+                            <img src="<?= $productImage ?>" alt="" style="width:60px;height:60px;object-fit:cover;background:#f5f5f5;">
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-size:14px;font-weight:500;"><?= $item['title'] ?></div>
+                                <div style="font-size:13px;color:#666;">x<?= $item['num_added'] ?></div>
+                                <div style="font-size:14px;font-weight:600;margin-top:4px;"><?= $item['sum_price'] . CURRENCY ?></div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id[]" value="<?= $item['id'] ?>" form="goOrder">
+                        <input type="hidden" name="quantity[]" value="<?= $item['num_added'] ?>" form="goOrder">
+                    <?php } ?>
+
+                    <div style="padding-top:16px;margin-top:8px;">
+                        <div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px;">
+                            <span style="color:#666;"><?= lang('subtotal') ?></span>
+                            <span style="font-weight:600;"><?= $cartItems['finalSum'] . CURRENCY ?></span>
+                        </div>
+
+                        <?php
+                        $total_parsed = str_replace(' ', '', str_replace(',', '', $cartItems['finalSum']));
+                        if ((int)$shippingAmount > 0 && ((int)$shippingOrder > $total_parsed)) {
+                        ?>
+                            <div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px;">
+                                <span style="color:#666;"><?= lang('shipping') ?></span>
+                                <span style="font-weight:600;"><?= (int)$shippingAmount ?><?= CURRENCY ?></span>
+                            </div>
+                        <?php } else { ?>
+                            <div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px;color:#3a8735;">
+                                <span><?= lang('shipping') ?></span>
+                                <span style="font-weight:600;"><?= lang('free') ?></span>
+                            </div>
+                        <?php } ?>
+
+                        <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding-top:16px;border-top:1px solid var(--color-border);">
+                            <span><?= lang('total') ?></span>
+                            <span><?= $cartItems['finalSum'] ?><?= CURRENCY ?></span>
+                        </div>
                     </div>
                 </div>
             </aside>
         </div>
     <?php } else { ?>
-        <div class="rounded-2xl bg-white p-6 text-sm text-slate-700 shadow-sm ring-1 ring-slate-200">
-            <?= lang('no_products_in_cart') ?>
-        </div>
+        <div style="padding:24px;border:1px solid var(--color-border);font-size:15px;color:#666;"><?= lang('no_products_in_cart') ?></div>
     <?php } ?>
 </div>
 

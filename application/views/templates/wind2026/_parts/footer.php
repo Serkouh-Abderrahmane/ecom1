@@ -1,60 +1,62 @@
-<footer class="bg-slate-950 text-slate-300 mt-16">
-    <div class="max-w-7xl mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
-            <div class="lg:col-span-4">
-                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="h-12 w-auto brightness-0 invert">
-                <p class="mt-4 text-sm leading-relaxed text-slate-400"><?= $footerAboutUs ?? '' ?></p>
-                <div class="flex items-center gap-3 mt-6">
-                    <?php $fb = $footerSocialFacebook ?? ''; if ($fb != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $fb ?>"><i class="fa fa-facebook"></i></a><?php } ?>
-                    <?php $tw = $footerSocialTwitter ?? ''; if ($tw != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $tw ?>"><i class="fa fa-twitter"></i></a><?php } ?>
-                    <?php $pi = $footerSocialPinterest ?? ''; if ($pi != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $pi ?>"><i class="fa fa-pinterest"></i></a><?php } ?>
-                    <?php $ig = $footerSocialInstagram ?? ''; if ($ig != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $ig ?>"><i class="fa fa-instagram"></i></a><?php } ?>
-                    <?php $yt = $footerSocialYoutube ?? ''; if ($yt != '') { ?><a class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors" href="<?= $yt ?>"><i class="fa fa-youtube"></i></a><?php } ?>
+<div class="m-footer-newsletter">
+    <div class="m-footer-newsletter-inner">
+        <h3 class="m-footer-newsletter-title"><?= lang('newsletter') ?></h3>
+        <p class="m-footer-newsletter-text"><?= lang('subscribe_to_newsletter') ?></p>
+        <form method="POST" id="subscribeForm" class="m-footer-newsletter-form">
+            <input type="text" name="subscribeEmail" class="m-footer-newsletter-input" placeholder="Email của bạn">
+            <button type="button" class="m-footer-newsletter-btn" onclick="checkEmailField()"><?= lang('subscribe') ?></button>
+        </form>
+    </div>
+</div>
+
+<footer class="m-footer">
+    <div class="m-footer-inner">
+        <div class="m-footer-grid">
+            <div class="m-footer-col">
+                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="m-footer-logo">
+                <p class="m-footer-about"><?= $footerAboutUs ?? '' ?></p>
+                <div class="m-footer-social">
+                    <?php $fb = $footerSocialFacebook ?? ''; if ($fb != '') { ?><a href="<?= $fb ?>" class="m-social-circle" target="_blank"><i class="fa fa-facebook"></i></a><?php } ?>
+                    <?php $tw = $footerSocialTwitter ?? ''; if ($tw != '') { ?><a href="<?= $tw ?>" class="m-social-circle" target="_blank"><i class="fa fa-twitter"></i></a><?php } ?>
+                    <?php $pi = $footerSocialPinterest ?? ''; if ($pi != '') { ?><a href="<?= $pi ?>" class="m-social-circle" target="_blank"><i class="fa fa-pinterest"></i></a><?php } ?>
+                    <?php $ig = $footerSocialInstagram ?? ''; if ($ig != '') { ?><a href="<?= $ig ?>" class="m-social-circle" target="_blank"><i class="fa fa-instagram"></i></a><?php } ?>
+                    <?php $yt = $footerSocialYoutube ?? ''; if ($yt != '') { ?><a href="<?= $yt ?>" class="m-social-circle" target="_blank"><i class="fa fa-youtube-play"></i></a><?php } ?>
                 </div>
             </div>
-            <div class="lg:col-span-2">
-                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500">CHÍNH SÁCH</h3>
-                <ul class="mt-4 space-y-2.5 text-sm">
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách bảo mật thông tin</a></li>
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách giao nhận hàng và kiểm hàng</a></li>
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách đổi trả</a></li>
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Chính sách thanh toán</a></li>
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Điều khoản dịch vụ</a></li>
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Giới thiệu</a></li>
-                    <li><a class="text-slate-400 hover:text-white transition-colors" href="<?= LANG_URL . '/contacts' ?>">Liên hệ</a></li>
+            <div class="m-footer-col">
+                <h4 class="m-footer-heading">CHÍNH SÁCH</h4>
+                <ul class="m-footer-links">
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Chính sách bảo mật thông tin</a></li>
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Chính sách giao nhận hàng và kiểm hàng</a></li>
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Chính sách đổi trả</a></li>
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Chính sách thanh toán</a></li>
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Điều khoản dịch vụ</a></li>
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Giới thiệu</a></li>
+                    <li><a href="<?= LANG_URL . '/contacts' ?>">Liên hệ</a></li>
                 </ul>
             </div>
-            <div class="lg:col-span-3">
-                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500">THÔNG TIN CÔNG TY</h3>
-                <ul class="mt-4 space-y-2.5 text-sm">
-                    <li class="text-slate-400">MST: 0202291489</li>
-                    <li class="text-slate-400">Ngày cấp: 12/06/2025, Sở Tài Chính Thành Phố Hải Phòng</li>
-                    <li class="text-slate-400">Số 122 đường Khúc Hạo, Phường An Biên, TP Hải Phòng</li>
+            <div class="m-footer-col">
+                <h4 class="m-footer-heading">THÔNG TIN CÔNG TY</h4>
+                <ul class="m-footer-links">
+                    <li>MST: 0202291489</li>
+                    <li>Ngày cấp: 12/06/2025, Sở Tài Chính Thành Phố Hải Phòng</li>
+                    <li>Số 122 đường Khúc Hạo, Phường An Biên, TP Hải Phòng</li>
                 </ul>
             </div>
-            <div class="lg:col-span-3">
-                <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500"><?= lang('newsletter') ?></h3>
-                <p class="mt-4 text-sm text-slate-400"><?= lang('subscribe_to_newsletter') ?></p>
-                <form method="POST" id="subscribeForm" class="mt-3">
-                    <div class="flex gap-2">
-                        <input type="text" class="flex-1 rounded-xl border-0 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-white/10" name="subscribeEmail" placeholder="Email của bạn">
-                        <button class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition-colors" onclick="checkEmailField()" type="button">
-                            Đăng Ký
-                        </button>
-                    </div>
-                </form>
-                <div class="mt-6 space-y-2.5 text-sm">
-                    <div class="flex gap-2 text-slate-400"><i class="fa fa-envelope mt-0.5 w-4"></i><span>hello@luonvuituoi.co</span></div>
-                    <div class="flex gap-2 text-slate-400"><i class="fa fa-phone mt-0.5 w-4"></i><span>0386524760</span></div>
-                    <div class="flex gap-2 text-slate-400"><i class="fa fa-clock-o mt-0.5 w-4"></i><span>Thứ 2 - Thứ 7 (08h00 - 17h00)</span></div>
-                </div>
+            <div class="m-footer-col">
+                <h4 class="m-footer-heading">LIÊN HỆ</h4>
+                <ul class="m-footer-links">
+                    <li><i class="fa fa-envelope"></i> hello@luonvuituoi.co</li>
+                    <li><i class="fa fa-phone"></i> 0386524760</li>
+                    <li><i class="fa fa-clock-o"></i> Thứ 2 - Thứ 7 (08h00 - 17h00)</li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
-            <p><?= $footercopyright ?? 'Copyright © 2026, Xưởng May Nhà Công' ?></p>
-            <div class="flex items-center gap-4 text-xl">
+    <div class="m-footer-bottom">
+        <div class="m-footer-inner m-footer-bottom-inner">
+            <p class="m-footer-copy"><?= $footercopyright ?? 'Copyright © 2026, Xưởng May Nhà Công' ?></p>
+            <div class="m-footer-payments">
                 <i class="fa fa-cc-visa"></i>
                 <i class="fa fa-cc-mastercard"></i>
                 <i class="fa fa-cc-amex"></i>
@@ -63,6 +65,7 @@
         </div>
     </div>
 </footer>
+
 <?php if ($this->session->flashdata('emailAdded')) { ?>
     <script>
         $(document).ready(function () {
