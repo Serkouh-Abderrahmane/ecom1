@@ -47,28 +47,24 @@ $heroBtnLink = LANG_URL . '/shop';
         <div class="m-section__header" style="padding: 80px 20px 40px;">
             <h2 class="m-section__heading">Khám phá các bộ sưu tập</h2>
         </div>
-        <div class="m-collection-list__content" style="padding: 0 80px 80px;">
-            <div class="m-cat-grid m-cat-grid--3">
-                <?php foreach (array_slice($home_categories, 0, 3) as $cat) { ?>
-                <a href="<?= LANG_URL ?>/shop?category=<?= $cat['id'] ?>" class="m-collection-card">
-                    <div class="m-collection-card__inner">
-                        <div class="m-collection-card__image">
-                            <?php if (isset($cat['image']) && $cat['image'] != '' && is_file('attachments/shop_images/' . $cat['image'])) { ?>
-                                <img src="<?= base_url('attachments/shop_images/' . $cat['image']) ?>" alt="<?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?>">
-                            <?php } else { ?>
-                                <div class="m-collection-card__placeholder">
-                                    <i class="fa fa-image"></i>
-                                </div>
-                            <?php } ?>
+        <div class="m-collection-list__content">
+            <?php foreach (array_slice($home_categories, 0, 3) as $cat) { ?>
+            <a href="<?= LANG_URL ?>/shop?category=<?= $cat['id'] ?>" class="m-collection-card">
+                <div class="m-collection-card__media">
+                    <?php if (isset($cat['image']) && $cat['image'] != '' && is_file('attachments/shop_images/' . $cat['image'])) { ?>
+                        <img src="<?= base_url('attachments/shop_images/' . $cat['image']) ?>" alt="<?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?>">
+                    <?php } else { ?>
+                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#ccc;font-size:48px;">
+                            <i class="fa fa-image"></i>
                         </div>
-                        <div class="m-collection-card__info">
-                            <h3 class="m-collection-card__title"><?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <span class="m-collection-card__link">KHÁM PHÁ NGAY</span>
-                        </div>
-                    </div>
-                </a>
-                <?php } ?>
-            </div>
+                    <?php } ?>
+                </div>
+                <div class="m-collection-card__info">
+                    <h3 class="m-collection-card__title"><?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?></h3>
+                    <span class="m-collection-card__link">KHÁM PHÁ NGAY</span>
+                </div>
+            </a>
+            <?php } ?>
         </div>
     </div>
 </section>
@@ -81,7 +77,7 @@ $heroBtnLink = LANG_URL . '/shop';
         <h2 class="m-section__heading">Trọn Bộ Hoodie Độc Lạ!</h2>
     </div>
     <div class="m-product-grid m-product-grid--6">
-        <?php foreach (array_slice($bestSellers, 0, 6) as $article) {
+        <?php foreach (array_slice($bestSellers, 0, 4) as $article) {
             $productImage = base_url('/attachments/no-image-frontend.png');
             if (is_file('attachments/shop_images/' . $article['image'])) {
                 $productImage = base_url('/attachments/shop_images/' . $article['image']);
@@ -131,7 +127,7 @@ $heroBtnLink = LANG_URL . '/shop';
         <h2 class="m-section__heading">Các BST Sweater Mới Nhất!</h2>
     </div>
     <div class="m-product-grid m-product-grid--6">
-        <?php foreach (array_slice($newProducts, 0, 6) as $article) {
+        <?php foreach (array_slice($newProducts, 0, 4) as $article) {
             $productImage = base_url('/attachments/no-image-frontend.png');
             if (is_file('attachments/shop_images/' . $article['image'])) {
                 $productImage = base_url('/attachments/shop_images/' . $article['image']);

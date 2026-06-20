@@ -959,7 +959,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .m-collection-list__container {
+  max-width: var(--container-width);
+  margin: 0 auto;
   padding: 0 80px;
+}
+.m-collection-list__container .m-section__header {
+  padding: 80px 0 40px;
+}
+.m-collection-list__container .m-collection-list__content {
+  padding-bottom: 80px;
 }
 
 @media (max-width: 1024px) {
