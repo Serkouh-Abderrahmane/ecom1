@@ -29,7 +29,7 @@
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
     <?php } ?>
 </head>
-<body>
+<body class="<?= (($this->uri->segment(1) == '' || $this->uri->segment(1) == 'home') && $this->uri->segment(2) == '') ? 'template-index' : '' ?>">
     <div id="wrapper">
         <div id="content">
 
