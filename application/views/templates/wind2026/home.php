@@ -160,6 +160,62 @@ $heroBtnLink = LANG_URL . '/shop';
 </section>
 <?php } ?>
 
+<!-- ===== SOFT ROUTINE SECTION ===== -->
+<section class="m-section m-featured-collection-section m-gradient m-color-dark" style="background:#000;color:#fff">
+    <div class="container-fluid" style="padding:50px 80px">
+        <div class="m-section__header m:text-left">
+            <h2 class="m-section__heading" style="color:#fff">Soft Routine</h2>
+        </div>
+        <div class="m-product-list">
+            <div class="m-mixed-layout__wrapper">
+                <div class="m-mixed-layout__inner m:grid m-cols-4">
+                    <?php
+                    $softRoutineProducts = [
+                        ['img' => 'kemsau_66b15c9d-026d-439f-a68b-eec2fa054b7e.png', 'img2' => 'kemc_n1_b8607967-af7c-4a91-83ef-e61ee0a575eb.png', 'title' => 'Quần Jogger Nỉ Bông', 'price' => '390.000₫', 'old_price' => '490.000₫', 'pct' => '-20%'],
+                        ['img' => 'h_ngtr_c_ab3b58ed-2b38-4ee5-8ec5-7a22740b5718.png', 'img2' => 'h_ngc_n2_b2ff1e3a-28e3-4958-a196-45b5cecfd9dc.png', 'title' => 'Quần Ống Suông Nỉ Bông', 'price' => '391.000₫', 'old_price' => '491.000₫', 'pct' => '-20%'],
+                        ['img' => 'kemtr_c_2869a7e5-42d8-4dc4-84c1-fe43ec195c80.png', 'img2' => 'kemng_c_746c4409-4890-4228-abd8-a9c6ae0086b2.png', 'title' => 'Áo Thun Relaxed Fit', 'price' => '165.000₫', 'old_price' => '318.000₫', 'pct' => '-48%'],
+                        ['img' => 'dentr_c_fd141e1a-00f2-4d74-9dbd-6ba47d55991d.png', 'img2' => 'Dentay_130e7b16-9eda-4074-9db2-85260a25b9b2.png', 'title' => 'Áo Thun Dài Tay', 'price' => '189.000₫', 'old_price' => '375.000₫', 'pct' => '-50%'],
+                    ];
+                    foreach ($softRoutineProducts as $i => $p) {
+                    ?>
+                    <div class="m:column">
+                        <div class="m-product-card m-product-card--style-1 m-product-card--onsale" data-view="card" style="--animation-order: <?= $i + 1 ?>">
+                            <div class="m-product-card__media">
+                                <a class="m-product-card__link m:block m:w-full" href="<?= LANG_URL ?>/shop">
+                                    <div class="m-product-card__main-image">
+                                        <img src="<?= base_url('assets/products/' . $p['img']) ?>" alt="<?= $p['title'] ?>" style="width:100%;height:auto;aspect-ratio:0.75">
+                                    </div>
+                                    <div class="m-product-card__hover-image">
+                                        <img src="<?= base_url('assets/products/' . $p['img2']) ?>" alt="<?= $p['title'] ?>" style="width:100%;height:auto;aspect-ratio:0.75">
+                                    </div>
+                                </a>
+                                <span class="m-product-card__tag-name"><?= $p['pct'] ?></span>
+                            </div>
+                            <div class="m-product-card__content" style="color:#fff">
+                                <div class="m-product-card__info">
+                                    <div class="m-product-card__title">
+                                        <a href="<?= LANG_URL ?>/shop" class="m-product-card__name" style="color:#fff"><?= $p['title'] ?></a>
+                                    </div>
+                                    <div class="m-product-card__price">
+                                        <span class="m-price m-price--on-sale">
+                                            <span class="m-price-item--last" style="color:#fff"><?= $p['price'] ?></span>
+                                            <span class="m-price-item--regular"><?= $p['old_price'] ?></span>
+                                        </span>
+                                    </div>
+                                    <a href="<?= LANG_URL ?>/shop" class="m-product-card__btn" style="background:#fff;color:#000">Mua Ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var slides = document.querySelectorAll('#hero-slideshow .m-hero__slide');
