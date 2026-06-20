@@ -895,7 +895,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   margin: 0 auto;
   max-width: var(--container-width);
-  padding: 60px 80px 40px;
+  padding: 40px 80px 20px;
 }
 
 @media (max-width: 768px) {

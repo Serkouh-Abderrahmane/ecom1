@@ -159,16 +159,6 @@ $heroBtnLink = LANG_URL . '/shop';
 </section>
 <?php } ?>
 
-<!-- ===== NEWSLETTER ===== -->
-<section class="m-newsletter-section">
-    <h2><?= lang('newsletter_title') ?></h2>
-    <p><?= lang('newsletter_description') ?></p>
-    <form method="POST" class="m-newsletter-form">
-        <input type="text" name="subscribeEmail" class="m-newsletter-input" placeholder="<?= lang('email_address') ?>">
-        <button type="submit" class="m-button m-button--primary" onclick="checkEmailField()"><?= lang('subscribe') ?></button>
-    </form>
-</section>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var slides = document.querySelectorAll('#hero-slideshow .m-hero__slide');
