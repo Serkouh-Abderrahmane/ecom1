@@ -3,30 +3,7 @@
    Adapted from luonvuituoi.co reference
    ======================================== */
 
-@font-face {
-  font-family: Jost;
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url("//luonvuituoi.co/cdn/fonts/jost/jost_n4.d47a1b6347ce4a4c9f437608011273009d91f2b7.woff2") format("woff2"),
-       url("//luonvuituoi.co/cdn/fonts/jost/jost_n4.791c46290e672b3f85c3d1c651ef2efa3819eadd.woff") format("woff");
-}
-@font-face {
-  font-family: Jost;
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url("//luonvuituoi.co/cdn/fonts/jost/jost_n7.921dc18c13fa0b0c94c5e2517ffe06139c3615a3.woff2") format("woff2"),
-       url("//luonvuituoi.co/cdn/fonts/jost/jost_n7.cbfc16c98c1e195f46c536e775e4e959c5f2f22b.woff") format("woff");
-}
-@font-face {
-  font-family: Jost;
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-  src: url("//luonvuituoi.co/cdn/fonts/jost/jost_n5.27698701ced3020e7737147c9afb5e3381ed2cc7.woff2") format("woff2"),
-       url("//luonvuituoi.co/cdn/fonts/jost/jost_n5.7042cbd29622daa9b9b09967bbb7fe26a9cadeb1.woff") format("woff");
-}
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap');
 @font-face {
   font-family: Jost;
   font-weight: 600;
@@ -100,6 +77,10 @@
   --text-white: 255, 255, 255;
   --bg-black: 0, 0, 0;
   --bg-white: 255, 255, 255;
+
+  --m-topbar-height: 0px;
+  --m-header-height: 186px;
+  --container-width: 1440px;
 
   --spacing-sections-desktop: 0px;
   --spacing-sections-mobile: 0px;
