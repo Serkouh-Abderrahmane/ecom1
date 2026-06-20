@@ -32,8 +32,8 @@
   --m-topbar-height: 0px;
   --m-header-height: 110px;
 
-  --container-width: 1200px;
-  --page-width: 1200px;
+  --container-width: 1440px;
+  --page-width: 1440px;
   --spacing-sections-desktop: 0px;
   --spacing-sections-mobile: 0px;
 
@@ -444,12 +444,11 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90vh;
-  min-height: 90vh;
-  max-height: 90vh;
+  height: 900px;
+  max-height: 900px;
 }
 @media screen and (max-width: 768px) {
-  .m-hero { height: 60vh; min-height: 60vh; max-height: 60vh; }
+  .m-hero { height: 60vw; max-height: 60vw; }
 }
 .m-slideshow-wrapper {
   position: relative;
@@ -588,15 +587,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== SECTION ===== */
 .m-section {
-  padding: 60px 0;
+  padding: 0;
 }
 .m-section__header {
   text-align: center;
-  margin-bottom: 40px;
   max-width: var(--container-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
+  margin: 0 auto;
+  padding: 60px 20px 40px;
 }
 .m-section__heading {
   font-size: 34px;
@@ -895,7 +892,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== NEWSLETTER SECTION ===== */
 .m-newsletter-section {
-  padding: 80px 20px;
+  padding: 60px 20px;
   text-align: center;
   background: #000;
   color: #fff;
@@ -959,7 +956,7 @@ h1, h2, h3, h4, h5, h6 {
 .m-footer--middle {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 80px 20px;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 40px;
@@ -1013,7 +1010,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .m-footer--bottom {
   border-top: 1px solid rgb(var(--color-border));
-  padding: 12px 0;
+  padding: 20px 0 32px;
 }
 .m-footer--bottom-inner {
   max-width: var(--container-width);
@@ -1174,7 +1171,7 @@ select, input, textarea, button { font-family: var(--font-body); }
 .m-page {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0 20px 40px;
 }
 .m-page-narrow {
   max-width: 500px;
@@ -1354,13 +1351,14 @@ select, input, textarea, button { font-family: var(--font-body); }
   .m-pd-grid { grid-template-columns: 1fr; gap: 30px; }
   .m-drawer__content { width: calc(100% - 40px); }
   .m-sidebar { margin-bottom: 16px; }
-  .m-section { padding: 40px 0; }
-  .m-newsletter-section { padding: 60px 20px; }
+  .m-section__header { padding: 40px 16px 24px; }
+  .m-newsletter-section { padding: 40px 16px; }
   .m-newsletter-section h2 { font-size: 28px; }
-  .m-footer--middle { padding: 40px 20px; }
+  .m-footer--middle { padding: 40px 16px; }
+  .m-footer--bottom-inner { padding: 0 16px; }
   .m-newsletter-form { flex-direction: column; gap: 12px; }
   .m-footer-newsletter-btn { width: 100%; }
-  .m-page { padding: 24px 16px; }
+  .m-page { padding: 0 16px 24px; }
   .m-pd-grid { padding: 24px 16px; }
 
   .m-slideshow-nav { display: none; }
