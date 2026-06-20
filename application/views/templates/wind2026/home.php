@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$bannerDir = 'assets/banners/';
 $slides = [
-    ['img' => 'slide-1.png', 'title' => 'BỘ SƯU TẬP MỚI', 'desc' => 'Phong cách đường phố cá tính', 'btn' => 'KHÁM PHÁ NGAY', 'link' => LANG_URL . '/shop'],
-    ['img' => 'slide-2.png', 'title' => 'ÁO THUN CHẤT LƯỢNG', 'desc' => 'Thoải mái và bền bỉ theo thời gian', 'btn' => 'MUA NGAY', 'link' => LANG_URL . '/shop?category=1'],
-    ['img' => 'slide-3.png', 'title' => 'PHONG CÁCH RIÊNG', 'desc' => 'Thể hiện cá tính qua từng đường may', 'btn' => 'XEM THÊM', 'link' => LANG_URL . '/shop'],
-    ['img' => 'slide-4.png', 'title' => 'XƯỞNG MAY NHÀ CÔNG', 'desc' => 'Thương hiệu may mặc Việt Nam', 'btn' => 'MUA NGAY', 'link' => LANG_URL . '/shop'],
-    ['img' => 'slide-5.png', 'title' => 'ÁO THUN DÀI TAY', 'desc' => 'Ấm áp và phong cách', 'btn' => 'MUA NGAY', 'link' => LANG_URL . '/shop?category=5'],
-    ['img' => 'slide-6.png', 'title' => 'PHỤ KIỆN THỜI TRANG', 'desc' => 'Hoàn thiện phong cách của bạn', 'btn' => 'XEM THÊM', 'link' => LANG_URL . '/shop'],
+    ['img' => 'Banner_Ngang_1.png', 'title' => 'BỘ SƯU TẬP MỚI', 'desc' => 'Phong cách đường phố cá tính', 'btn' => 'KHÁM PHÁ NGAY', 'link' => LANG_URL . '/shop'],
+    ['img' => 'Banner_Ngang_2.png', 'title' => 'ÁO THUN CHẤT LƯỢNG', 'desc' => 'Thoải mái và bền bỉ theo thời gian', 'btn' => 'MUA NGAY', 'link' => LANG_URL . '/shop?category=1'],
+    ['img' => 'Banner_Ngang_3.png', 'title' => 'PHONG CÁCH RIÊNG', 'desc' => 'Thể hiện cá tính qua từng đường may', 'btn' => 'XEM THÊM', 'link' => LANG_URL . '/shop'],
+    ['img' => 'Banner_Ngang_4_613c644d-34b9-4f3d-b7f9-7c56bb32c377.png', 'title' => 'XƯỞNG MAY NHÀ CÔNG', 'desc' => 'Thương hiệu may mặc Việt Nam', 'btn' => 'MUA NGAY', 'link' => LANG_URL . '/shop'],
+    ['img' => 'Banner_Ngang_5.png', 'title' => 'ÁO THUN DÀI TAY', 'desc' => 'Ấm áp và phong cách', 'btn' => 'MUA NGAY', 'link' => LANG_URL . '/shop?category=5'],
+    ['img' => 'Banner_Ngang_3_98ba563d-67cf-41fc-8727-118e7a30d779.png', 'title' => 'PHỤ KIỆN THỜI TRANG', 'desc' => 'Hoàn thiện phong cách của bạn', 'btn' => 'XEM THÊM', 'link' => LANG_URL . '/shop'],
 ];
 $heroBtnText = 'MUA NGAY';
 $heroBtnLink = LANG_URL . '/shop';
@@ -18,7 +19,7 @@ $heroBtnLink = LANG_URL . '/shop';
         <?php foreach ($slides as $i => $slide) { ?>
         <div class="m-hero__slide<?= $i === 0 ? ' active' : '' ?>">
             <div class="m-hero__media">
-                <div class="m-hero__image" style="background-image: url('<?= base_url('assets/imgs/slideshow/' . $slide['img']) ?>'); background-size: cover; background-position: center; width: 100%; height: 100%;"></div>
+                <div class="m-hero__image" style="background-image: url('<?= base_url($bannerDir . $slide['img']) ?>'); background-size: cover; background-position: center; width: 100%; height: 100%;"></div>
             </div>
             <div class="m-hero__overlay"></div>
             <div class="m-hero__content">

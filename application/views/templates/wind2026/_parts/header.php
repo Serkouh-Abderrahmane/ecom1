@@ -12,8 +12,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="<?= isset($image) && !is_null($image) ? $image : base_url('assets/img/site-overview.png') ?>" />
     <title><?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?></title>
-    <link rel="icon" type="image/png" href="<?= base_url('assets/imgs/logo.png') ?>" />
-    <link rel="apple-touch-icon" href="<?= base_url('assets/imgs/logo.png') ?>" />
+    <link rel="icon" type="image/png" href="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" />
+    <link rel="apple-touch-icon" href="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@
                     <div class="m-logo m-logo--mobile m:justify-center m:w-6/12 m-logo--has-image">
                         <a href="<?= base_url() ?>" class="m-logo__image m:block" title="XƯỞNG MAY NHÀ CÔNG">
                             <div class="m-logo__image-default m:display-flex m-image" style="--aspect-ratio: 9.09;--aspect-ratio-mobile: 9.09">
-                                <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="m:inline-block">
+                                <img src="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" class="m:inline-block">
                             </div>
                         </a>
                     </div>
@@ -89,7 +89,7 @@
                                 <div class="m-logo m-logo--desktop m-logo--has-image">
                                     <a href="<?= base_url() ?>" class="m-logo__image m:block" title="XƯỞNG MAY NHÀ CÔNG">
                                         <div class="m-logo__image-default m-image">
-                                            <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" width="180" height="20" style="--aspect-ratio: 9.09;">
+                                            <img src="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" width="180" height="20" style="--aspect-ratio: 9.09;">
                                         </div>
                                     </a>
                                 </div>
@@ -180,7 +180,7 @@
         <div class="m-drawer__wrapper" id="mobile-menu">
             <div class="m-drawer__content">
                 <div class="m-drawer__header">
-                    <img src="<?= base_url('assets/imgs/logo.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" style="height:32px;width:auto">
+                    <img src="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" alt="XƯỞNG MAY NHÀ CÔNG" style="height:32px;width:auto">
                     <button type="button" class="m-drawer__close" id="mobile-menu-close">&times;</button>
                 </div>
                 <div class="m-drawer__body">
