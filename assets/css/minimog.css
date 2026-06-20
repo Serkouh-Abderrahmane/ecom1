@@ -707,7 +707,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .m-product-card__content { position: relative; }
-.m-product-card__info { padding: 28px 0; text-align: center; margin-top: 20px; }
+.m-product-card__info { padding: 32px 0; text-align: center; margin-top: 20px; }
 @media screen and (max-width: 768px) {
   .m-product-card__info { padding: 16px 0; text-align: left; margin-top: 12px; }
 }

@@ -4,7 +4,7 @@
     "id": "wrapper",
     "cls": "",
     "w": 1920,
-    "h": 6584,
+    "h": 6976,
     "display": "flex",
     "position": "static",
     "flexDirection": "column",
@@ -32,7 +32,7 @@
     "id": "content",
     "cls": "",
     "w": 1920,
-    "h": 6584,
+    "h": 6976,
     "display": "block",
     "position": "static",
     "flexDirection": "row",
@@ -61,7 +61,7 @@
       "id": "wrapper",
       "cls": "",
       "w": 1920,
-      "h": 6584,
+      "h": 6976,
       "display": "flex",
       "mt": 0,
       "mb": 0,
@@ -453,7 +453,7 @@
     {
       "cls": "m-section",
       "w": 1920,
-      "h": 1330,
+      "h": 1442,
       "display": "block",
       "mt": 0,
       "mb": 0,
@@ -491,7 +491,7 @@
     {
       "cls": "m-section",
       "w": 1920,
-      "h": 1245,
+      "h": 1357,
       "display": "block",
       "mt": 0,
       "mb": 0,
@@ -523,7 +523,7 @@
   ],
   "productCard": {
     "w": 335,
-    "h": 521,
+    "h": 577,
     "mb": 0
   },
   "productCardMedia": {
@@ -604,7 +604,7 @@
     {
       "cls": "m-page",
       "w": 1440,
-      "h": 1437,
+      "h": 1605,
       "pt": 0,
       "pb": 40,
       "mt": 0,
