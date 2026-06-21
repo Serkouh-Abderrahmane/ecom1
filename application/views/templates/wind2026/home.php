@@ -34,10 +34,10 @@ ob_start(function($h) { return preg_replace('/\s+(srcset|loading)="[^"]*"/i', ''
       @media (min-width: 1280px) { div[data-products-container] { grid-template-columns: repeat(4, 1fr); } }
       @media (min-width: 1024px) and (max-width: 1279px) { div[data-products-container] { grid-template-columns: repeat(3, 1fr); } }
       @media (max-width: 1023px) { div[data-products-container] { grid-template-columns: repeat(2, 1fr); } }
-      .m-collection-list .swiper-wrapper.m\:grid { display: grid !important; gap: 30px; }
-      .m-collection-list .swiper-wrapper.m\:grid > .swiper-slide { width: 100% !important; }
-      @media (min-width: 1024px) { .m-collection-list .swiper-wrapper { grid-template-columns: repeat(3, 1fr); } }
-      @media (max-width: 1023px) { .m-collection-list .swiper-wrapper { grid-template-columns: repeat(2, 1fr); } }
+      .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { display: grid !important; gap: 30px; }
+      .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner > .swiper-slide { width: 100% !important; }
+      @media (min-width: 1024px) { .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 1023px) { .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { grid-template-columns: repeat(2, 1fr); } }
     </style>
 
   <!-- BEGIN app snippet: klip-cart --><!-- END app snippet -->
