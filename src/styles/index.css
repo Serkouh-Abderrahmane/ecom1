@@ -200,6 +200,20 @@ h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 700; line-height: 1.2; }
   display: flex;
 }
 
+/* Desktop-only icons */
+.header-icon--search-dt {
+  display: flex;
+}
+
+.header-icon--user {
+  display: flex;
+}
+
+/* Mobile-only search (right side) */
+.header-icon--search-mb {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .header-top {
     height: 56px;
@@ -210,6 +224,15 @@ h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 700; line-height: 1.2; }
   }
   .header-logo-img {
     width: 140px;
+  }
+  .header-icon--search-dt {
+    display: none;
+  }
+  .header-icon--user {
+    display: none;
+  }
+  .header-icon--search-mb {
+    display: flex;
   }
 }
 
