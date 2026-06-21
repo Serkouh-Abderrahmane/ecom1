@@ -18,7 +18,7 @@ export default function Footer() {
           <a href="#">Điều khoản dịch vụ</a>
         </div>
         <div className="footer-col">
-          <h3 className="footer-col-title">Thông tin công ty</h3>
+          <h3 className="footer-col-title">Hỗ trợ khách hàng</h3>
           <a href="#">Về chúng tôi</a>
           <a href="#">Liên hệ</a>
           <a href="#">Tuyển dụng</a>
