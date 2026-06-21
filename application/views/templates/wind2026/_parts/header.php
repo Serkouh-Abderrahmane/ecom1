@@ -14,14 +14,42 @@
     <title><?= htmlspecialchars($title ?? '', ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="icon" type="image/png" href="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" />
     <link rel="apple-touch-icon" href="<?= base_url('assets/images/Luon_Vuituoi_Bold_Den_New.png') ?>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
-    <link href="<?= base_url('assets/css/minimog.css') ?>" rel="stylesheet" />
-    <link href="<?= base_url('templatecss/custom.css') ?>" rel="stylesheet" />
+    <link href="<?= base_url('cdn/shop/t/4/assets/main0718.css') ?>" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="<?= base_url('cdn/shop/t/4/assets/cart9e89.css') ?>" media="print" onload="this.media='all'">
+    <noscript><link href="<?= base_url('cdn/shop/t/4/assets/cart9e89.css') ?>" rel="stylesheet" type="text/css" media="all" /></noscript>
+    <link href="<?= base_url('cdn/shop/t/4/assets/vendor8d82.css') ?>" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="<?= base_url('cdn/shop/t/4/assets/custom-styled8d7.css') ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?= base_url('cdn/shop/t/4/assets/custom72f8.css') ?>" media="print" onload="this.media='all'">
+    <noscript><link href="<?= base_url('cdn/shop/t/4/assets/custom-styled8d7.css') ?>" rel="stylesheet" type="text/css" media="all" /></noscript>
+    <noscript><link href="<?= base_url('cdn/shop/t/4/assets/custom72f8.css') ?>" rel="stylesheet" type="text/css" media="all" /></noscript>
+    <style data-shopify>
+      :root,.m-color-default { --color-background: 255,255,255; --color-background-secondary: 245,245,245; --gradient-background: #ffffff; --color-foreground: 38,38,38; --color-foreground-secondary: 43,43,43; --color-heading: 34,34,34; --color-button: 0,0,0; --color-button-text: 255,255,255; --color-outline-button: 0,0,0; --color-button-hover: 34, 34, 34; --color-button-text-hover: 255, 255, 255; --color-border: 238,238,238; --color-price-sale: 232,78,78; --color-price-regular: 0,0,0; --color-form-field: 255,255,255; --color-form-field-text: 0,0,0; --color-tooltip: 34,34,34; --color-tooltip-text: 255,255,255; }
+      .m-color-dark { --color-background: 0,0,0; --color-background-secondary: 245,245,245; --gradient-background: #000000; --color-foreground: 255,255,255; --color-foreground-secondary: 255,255,255; --color-heading: 255,255,255; --color-button: 255,255,255; --color-button-text: 34,34,34; --color-outline-button: 255,255,255; --color-button-hover: 255, 255, 255; --color-button-text-hover: 34, 34, 34; --color-border: 75,75,75; --color-price-sale: 232,78,78; --color-price-regular: 255,255,255; --color-form-field: 255,255,255; --color-form-field-text: 34,34,34; --color-tooltip: 255,255,255; --color-tooltip-text: 34,34,34; }
+      .m-color-footer { --color-background: 245,245,245; --color-background-secondary: 245,245,245; --gradient-background: #f5f5f5; --color-foreground: 0,0,0; --color-foreground-secondary: 102,102,102; --color-heading: 34,34,34; --color-button: 34,34,34; --color-button-text: 255,255,255; --color-outline-button: 34,34,34; --color-button-hover: 34, 34, 34; --color-button-text-hover: 255, 255, 255; --color-border: 222,222,222; --color-price-sale: 232,78,78; --color-price-regular: 0,0,0; --color-form-field: 255,255,255; --color-form-field-text: 0,0,0; --color-tooltip: 34,34,34; --color-tooltip-text: 255,255,255; }
+      .m-color-badge-hot { --color-background: 154,132,200; --color-background-secondary: 245,245,245; --gradient-background: #9a84c8; --color-foreground: 255,255,255; --color-foreground-secondary: 255,255,255; --color-heading: 255,255,255; --color-button: 255,255,255; --color-button-text: 34,34,34; --color-outline-button: 255,255,255; --color-button-hover: 255, 255, 255; --color-button-text-hover: 34, 34, 34; --color-border: 222,222,222; --color-price-sale: 255,255,255; --color-price-regular: 255,255,255; --color-form-field: 255,255,255; --color-form-field-text: 0,0,0; --color-tooltip: 255,255,255; --color-tooltip-text: 34,34,34; }
+      .m-color-badge-new { --color-background: 73,165,148; --color-background-secondary: 245,245,245; --gradient-background: #49a594; --color-foreground: 255,255,255; --color-foreground-secondary: 255,255,255; --color-heading: 255,255,255; --color-button: 255,255,255; --color-button-text: 34,34,34; --color-outline-button: 255,255,255; --color-button-hover: 255, 255, 255; --color-button-text-hover: 34, 34, 34; --color-border: 222,222,222; --color-price-sale: 255,255,255; --color-price-regular: 255,255,255; --color-form-field: 255,255,255; --color-form-field-text: 0,0,0; --color-tooltip: 255,255,255; --color-tooltip-text: 34,34,34; }
+      .m-color-badge-sale { --color-background: 218,63,63; --color-background-secondary: 245,245,245; --gradient-background: #da3f3f; --color-foreground: 255,255,255; --color-foreground-secondary: 255,255,255; --color-heading: 255,255,255; --color-button: 255,255,255; --color-button-text: 34,34,34; --color-outline-button: 255,255,255; --color-button-hover: 255, 255, 255; --color-button-text-hover: 34, 34, 34; --color-border: 222,222,222; --color-price-sale: 255,255,255; --color-price-regular: 255,255,255; --color-form-field: 255,255,255; --color-form-field-text: 0,0,0; --color-tooltip: 255,255,255; --color-tooltip-text: 34,34,34; }
+      .m-color-default, .m-color-dark, .m-color-footer, .m-color-badge-hot, .m-color-badge-new, .m-color-badge-sale { color: rgb(var(--color-foreground)); background-color: rgb(var(--color-background)); }
+      :root { --m-duration-short: .1s; --m-duration-default: .25s; --m-duration-long: .5s; --m-duration-image: .65s; --m-duration-animate: 1s; --m-animation-duration: 600ms; --base-line-height: 28; --inputs-border-width: 1px; --inputs-radius: 5px; --btn-letter-spacing: 0px; --btn-border-radius: 5px; --btn-border-width: 1px; --btn-line-height: 23px; --color-cart-wishlist-count: #ffffff; --bg-cart-wishlist-count: #da3f3f; --color-image-overlay: #000000; --opacity-image-overlay: 0.2; --color-success: 58,135,53; --color-warning: 210,134,26; --color-error: 218, 63, 63; --color-error-bg: #fbeaea; --color-warning-bg: #faecd7; --color-success-bg: #d1eccf; --text-black: 0,0,0; --text-white: 255,255,255; --bg-black: 0,0,0; --bg-white: 255,255,255; --rounded-full: 9999px; --bg-card-placeholder: rgba(243,243,243,1); --arrow-select-box: url(cdn/shop/t/4/assets/ar-down8413.svg?v=92728264558441377851740233661); --font-base-size: 16; --font-btn-size: 16px; --font-btn-weight: 500; }
+    </style>
+    <script>window.MinimogTheme = {};window.MinimogLibs = {};</script>
+    <script>
+      window.MinimogStrings = {
+        addToCart: "Thêm vào giỏ hàng", soldOut: "Bán hết", unavailable: "Không có sẵn",
+        inStock: "Trong kho", lowStock: 'Sắp hết hàng',
+        checkout: "Thanh toán", viewCart: "Xem giỏ hàng", cartRemove: "Xóa",
+        itemAdded: "Sản phẩm được thêm vào giỏ hàng thành công",
+        cartError: "Đã xảy ra lỗi khi cập nhật giỏ hàng của bạn. Vui lòng thử lại.",
+        selectVariant: "Vui lòng chọn một mẫu mã trước khi thêm sản phẩm vào giỏ hàng của bạn."
+      };
+    </script>
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
+    <script src="<?= base_url('cdn/shop/t/4/assets/vendor36d2.js') ?>" defer="defer"></script>
+    <script src="<?= base_url('cdn/shop/t/4/assets/theme-globalc2d1.js') ?>" defer="defer"></script>
+    <script src="<?= base_url('cdn/shop/t/4/assets/product-list98d8.js') ?>" defer="defer"></script>
+    <script src="<?= base_url('cdn/shop/t/4/assets/animationsb005.js') ?>" defer="defer"></script>
     <?php if ($cookieLaw != false) { ?>
         <script type="text/javascript">
             window.cookieconsent_options = {"message": "<?= $cookieLaw['message'] ?>", "dismiss": "<?= $cookieLaw['button_text'] ?>", "learnMore": "<?= $cookieLaw['learn_more'] ?>", "link": "<?= $cookieLaw['link'] ?>", "theme": "<?= $cookieLaw['theme'] ?>"};
@@ -37,6 +65,7 @@
             <div class="m-announcement-bar__content">MIỄN PHÍ VẬN CHUYỂN CHO ĐƠN HÀNG TRÊN 500.000₫</div>
         </div>
 
+        <link href="<?= base_url('assets/css/theme/header.css') ?>" rel="stylesheet" type="text/css" media="all" />
         <m-header data-section-type="header" class="m-header m:block" data-transparent="false" data-sticky="always">
             <div class="m-header__wrapper">
                 <header class="m-header__mobile container-fluid m:flex m:items-center m-gradient m-color-default" data-screen="m-header__mobile" data-transparent="false">
@@ -175,6 +204,9 @@
                     <button type="button" id="search-close" class="m-drawer__close" style="font-size:18px;color:rgb(var(--color-foreground-secondary))">&times;</button>
                 </div>
             </div>
+        <script src="<?= base_url('assets/js/theme/mega-menu.js') ?>" defer></script>
+        <script src="<?= base_url('assets/js/theme/header.js') ?>" defer></script>
+        <script src="<?= base_url('assets/js/theme/localization-form.js') ?>" defer></script>
         </m-header>
 
         <div class="m-drawer__wrapper" id="mobile-menu">
