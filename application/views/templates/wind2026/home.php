@@ -31,6 +31,11 @@ ob_start(function($h) { return preg_replace('/\s+(srcset|loading)="[^"]*"/i', ''
   <!-- BEGIN app snippet: klip-app -->
 
 <script>
+  window.MinimogSettings = {};
+  window.MinimogLibs = {};
+  window.MinimogTheme = {};
+  window.MinimogStrings = {};
+  window.Shopify = window.Shopify || {};
   (function(){
   
 
@@ -546,6 +551,7 @@ first.parentNode.insertBefore(script, first);
 <!-- BEGIN sections: header-group -->
 <div id="shopify-section-sections--23956494123328__header" class="shopify-section shopify-section-group-header-group m-section-header"><link href="cdn/shop/t/4/assets/header524a.css?v=26824867878892557311740233661" rel="stylesheet" type="text/css" media="all" />
 
+<script src="cdn/shop/t/4/assets/theme-globalc2d1.js?v=175054158906313379421740233661" defer="defer"></script>
 <script src="cdn/shop/t/4/assets/mega-menu06b9.js?v=171931932604055704821740233661" defer="defer"></script>
 <script src="cdn/shop/t/4/assets/header4e19.js?v=139348793745598728721740233660" defer="defer"></script>
 <script src="cdn/shop/t/4/assets/localization-formf70e.js?v=78680935164192769481740233660" defer="defer"></script>
