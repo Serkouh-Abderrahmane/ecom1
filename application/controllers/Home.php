@@ -17,26 +17,7 @@ class Home extends MY_Controller
     {
         $data = array();
         $head = array();
-        $arrSeo = $this->Public_model->getSeo('home');
-        $head['title'] = @$arrSeo['title'];
-        $head['description'] = @$arrSeo['description'];
-        $head['keywords'] = $head['title'] !== null ? str_replace(" ", ",", $head['title']) : '';
-        $all_categories = $this->Public_model->getShopCategories();
-        $data['home_categories'] = $this->getHomeCategories($all_categories);
-        $data['all_categories'] = $all_categories;
-        $data['countQuantities'] = $this->Public_model->getCountQuantities();
-        $data['bestSellers'] = $this->Public_model->getbestSellers();
-        $data['newProducts'] = $this->Public_model->getNewProducts();
-        $data['sliderProducts'] = $this->Public_model->getSliderProducts();
-        $data['lastBlogs'] = $this->Public_model->getLastBlogs();
-        $data['products'] = $this->Public_model->getProducts($this->num_rows, $page, $_GET);
-        $rowscount = $this->Public_model->productsCount($_GET);
-        $data['shippingOrder'] = $this->Home_admin_model->getValueStore('shippingOrder');
-        $data['showOutOfStock'] = $this->Home_admin_model->getValueStore('outOfStock');
-        $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
-        $data['brands'] = $this->Brands_model->getBrands();
-        $data['links_pagination'] = pagination('home', $rowscount, $this->num_rows);
-        $this->render('home', $head, $data);
+        $this->renderFull('home', $head, $data);
     }
 
     /*
@@ -131,6 +112,30 @@ class Home extends MY_Controller
         if ($data['product'] === null) {
             show_404();
         }
+        $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
+        $this->load->vars($vars);
+        $head['title'] = $data['product']['title'];
+        $description = url_title(character_limiter(strip_tags($data['product']['description']), 130));
+        $description = str_replace("-", " ", $description) . '..';
+        $head['description'] = $description;
+        $head['keywords'] = str_replace(" ", ",", $data['product']['title']);
+        $head['image'] = null;
+        if(isset($data['product']['image'])) {
+            $head['image'] = base_url('/attachments/shop_images/' . $data['product']['image']);
+        }
+        $this->render('view_product', $head, $data);
+    }
+
+    public function viewProductBySlug($slug)
+    {
+        $data = array();
+        $head = array();
+        $data['product'] = $this->Public_model->getOneProductByUrl($slug);
+        if ($data['product'] === null) {
+            show_404();
+        }
+        $id = $data['product']['id'];
+        $data['sameCagegoryProducts'] = $this->Public_model->sameCagegoryProducts($data['product']['shop_categorie'], $id);
         $vars['publicDateAdded'] = $this->Home_admin_model->getValueStore('publicDateAdded');
         $this->load->vars($vars);
         $head['title'] = $data['product']['title'];

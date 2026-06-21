@@ -51,6 +51,14 @@ class MY_Controller extends MX_Controller
         $this->load->view($this->template . '_parts/footer', $footer);
     }
 
+    public function renderFull($view, $head = null, $data = null)
+    {
+        if ($head !== null) {
+            $this->load->vars($head);
+        }
+        $this->load->view($this->template . $view, $data);
+    }
+
     /*
      * Load variables from values-store
      * texts, social media links, logos, etc.
