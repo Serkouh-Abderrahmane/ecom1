@@ -1,6 +1,7 @@
 <?php
 $defined = 'BASEPATH';
 if (!defined($defined)) { exit('No direct script access allowed'); }
+ob_start(function($h) { return preg_replace('/\s+srcset="[^"]*"/i', '', $h); });
 ?>
 
 <!doctype html>
