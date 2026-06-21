@@ -12,9 +12,9 @@ if (!defined($defined)) { exit('No direct script access allowed'); }
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="<?= base_url() ?>">
     <title><?= isset($title) ? $title : 'Ecom1' ?></title>
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
-    <link href="<?= base_url('assets/css/minimog.css') ?>" rel="stylesheet" />
 
   <!-- BEGIN app snippet: klip-cart --><!-- END app snippet -->
   <!-- BEGIN app snippet: klip-app -->
