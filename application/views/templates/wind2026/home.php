@@ -21,7 +21,10 @@ ob_start(function($h) { return preg_replace('/\s+(srcset|loading)="[^"]*"/i', ''
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
       body { font-family: Jost, sans-serif; margin: 0; background: #fff; color: #222; }
-      .m-hero-slider, .m-slideshow, [id*="slideshow"] { min-height: 500px; overflow: hidden; }
+      .m-slideshow-section .swiper-wrapper { display: block; }
+      .m-slideshow-section .swiper-slide { display: block; height: auto; width: 100%; }
+      .m-slideshow-section .swiper-slide img { width: 100%; height: auto; display: block; }
+      .m-slideshow-section .container-full { max-width: 100%; }
     </style>
 
   <!-- BEGIN app snippet: klip-cart --><!-- END app snippet -->
