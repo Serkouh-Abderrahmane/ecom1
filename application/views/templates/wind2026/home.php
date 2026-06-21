@@ -29,15 +29,17 @@ ob_start(function($h) { return preg_replace('/\s+(srcset|loading)="[^"]*"/i', ''
       .m-slideshow-section .swiper-slide { display: block !important; height: auto !important; width: 100% !important; position: relative !important; }
       .m-slideshow-section .swiper-slide img { width: 100%; height: auto; display: block; }
       .m-slideshow-section .container-full { max-width: 100%; }
-      div[data-products-container] { display: grid !important; gap: 30px; }
-      div[data-products-container] > .m\:column { width: 100%; }
+      div[data-products-container] { display: grid !important; gap: 30px; width: 100%; max-width: 100%; }
+      div[data-products-container] > .m\:column { min-width: 0; width: 100%; }
+      .m-product-card { width: 100% !important; max-width: 100% !important; }
       @media (min-width: 1280px) { div[data-products-container] { grid-template-columns: repeat(4, 1fr); } }
       @media (min-width: 1024px) and (max-width: 1279px) { div[data-products-container] { grid-template-columns: repeat(3, 1fr); } }
       @media (max-width: 1023px) { div[data-products-container] { grid-template-columns: repeat(2, 1fr); } }
-      .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { display: grid !important; gap: 30px; }
-      .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner > .swiper-slide { width: 100% !important; }
+      .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { display: grid !important; gap: 30px; width: 100%; max-width: 100%; }
+      .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner > .swiper-slide { min-width: 0; width: 100% !important; }
       @media (min-width: 1024px) { .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { grid-template-columns: repeat(3, 1fr); } }
       @media (max-width: 1023px) { .m-collection-list__content > .m-mixed-layout > .m-mixed-layout__wrapper > .m-mixed-layout__inner { grid-template-columns: repeat(2, 1fr); } }
+      .m-collection-card .responsive-image img, .m-collection-card .m-image img { max-width: 100%; height: auto; }
     </style>
 
   <!-- BEGIN app snippet: klip-cart --><!-- END app snippet -->
