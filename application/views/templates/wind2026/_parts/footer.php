@@ -72,13 +72,7 @@ var variable = {
     discountCodeChecker: "<?= base_url('discountCodeChecker') ?>"
 };
 </script>
-<script src="<?= base_url('assets/js/theme/product-list.js') ?>" defer></script>
-<script src="<?= base_url('assets/js/theme/footer.js') ?>" defer></script>
-<script src="<?= base_url('assets/js/theme/cart.js') ?>" defer></script>
-<script src="<?= base_url('assets/js/theme/cart-drawer.js') ?>" defer></script>
-<script src="<?= base_url('assets/js/theme/cart-addon.js') ?>" defer></script>
-<script src="<?= base_url('assets/js/theme/product-card-swatch.js') ?>" defer></script>
 <script src="<?= base_url('assets/js/system.js') ?>"></script>
-<script src="<?= base_url('assets/js/theme/slideshow.js') ?>" defer></script>
+<script src="<?= base_url('templatejs/mine.js') ?>"></script>
 </body>
 </html>
