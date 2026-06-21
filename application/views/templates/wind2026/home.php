@@ -16,6 +16,13 @@ ob_start(function($h) { return preg_replace('/\s+(srcset|loading)="[^"]*"/i', ''
     <base href="<?= base_url() ?>">
     <title><?= isset($title) ? $title : 'Ecom1' ?></title>
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: Jost, sans-serif; margin: 0; background: #fff; color: #222; }
+      .m-hero-slider, .m-slideshow, [id*="slideshow"] { min-height: 500px; overflow: hidden; }
+    </style>
 
   <!-- BEGIN app snippet: klip-cart --><!-- END app snippet -->
   <!-- BEGIN app snippet: klip-app -->
