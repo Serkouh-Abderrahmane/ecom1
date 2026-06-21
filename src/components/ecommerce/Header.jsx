@@ -6,7 +6,7 @@ const menuItems = [
   'ÁO THUN RINGER',
   'TÚI CANVAS',
   'ÁO BA LỖ',
-  'ÁO THUN ĐI TAY',
+  'ÁO THUN DÀI TAY',
   'ÁO SWEATER',
   'ÁO HOODIE',
   'QUẦN JOGGER & QUẦN ỐNG SUÔNG',
