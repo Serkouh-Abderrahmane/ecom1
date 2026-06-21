@@ -23,10 +23,17 @@ ob_start(function($h) { return preg_replace('/\s+(srcset|loading)="[^"]*"/i', ''
       body { font-family: Jost, sans-serif; margin: 0; background: #fff; color: #222; }
       m-header { display: block; }
       .m-search-popup, .m-header__overlay { display: none !important; }
-      .m-slideshow-section .swiper-wrapper { display: block; }
-      .m-slideshow-section .swiper-slide { display: block !important; height: auto; width: 100%; }
+      .m-slideshow-section { min-height: 500px; position: relative; overflow: hidden; }
+      .m-slideshow-section .swiper-container { height: auto !important; }
+      .m-slideshow-section .swiper-wrapper { display: block; height: auto !important; }
+      .m-slideshow-section .swiper-slide { display: block !important; height: auto !important; width: 100% !important; position: relative !important; }
       .m-slideshow-section .swiper-slide img { width: 100%; height: auto; display: block; }
       .m-slideshow-section .container-full { max-width: 100%; }
+      div[data-products-container] { display: grid !important; gap: 30px; }
+      div[data-products-container] > .m\:column { width: 100%; }
+      @media (min-width: 1280px) { div[data-products-container] { grid-template-columns: repeat(4, 1fr); } }
+      @media (min-width: 1024px) and (max-width: 1279px) { div[data-products-container] { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 1023px) { div[data-products-container] { grid-template-columns: repeat(2, 1fr); } }
     </style>
 
   <!-- BEGIN app snippet: klip-cart --><!-- END app snippet -->
