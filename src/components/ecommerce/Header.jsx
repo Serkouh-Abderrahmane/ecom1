@@ -152,16 +152,6 @@ const menuData = [
       { label: 'Rạp Xiếc Động Vật', href: '/collections/rap-xiec-dong-vat' },
     ],
   },
-  {
-    label: 'QUẦN JOOGER & QUẦN ỐNG SUÔNG',
-    href: '/collections/quan-jogger-quan-ong-suong',
-    dropdown: false,
-  },
-  {
-    label: 'SOFT ROUTINE',
-    href: '/collections/soft-routine',
-    dropdown: false,
-  },
 ];
 
 function DropdownContent({ item }) {

@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 
 const collections = [
   { name: 'Chuyện Phòng Gym', count: '45 mục', image: '/images/Banner_1_913eba2c-50de-4efb-9407-118b1c8bfc7dd0a0.png' },
@@ -30,22 +30,21 @@ export default function CollectionShowcase() {
           <a href="/collections/ao-thun" className="collections-view-all">Xem thêm</a>
         </div>
         <div className="collections-slider-wrapper">
+          <button className="collections-nav collections-nav-prev" aria-label="Previous">
+            <span className="animate-icon" />
+          </button>
           <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={40}
+            modules={[Navigation]}
+            spaceBetween={24}
             slidesPerView={3}
             navigation={{
-              prevEl: '.collections-prev',
-              nextEl: '.collections-next',
-            }}
-            pagination={{
-              type: 'fraction',
-              el: '.collections-fraction',
+              prevEl: '.collections-nav-prev',
+              nextEl: '.collections-nav-next',
             }}
             breakpoints={{
-              0: { slidesPerView: 1.5, spaceBetween: 16 },
+              0: { slidesPerView: 1.5, spaceBetween: 12 },
               640: { slidesPerView: 2, spaceBetween: 16 },
-              1024: { slidesPerView: 3, spaceBetween: 40 },
+              1024: { slidesPerView: 3, spaceBetween: 24 },
             }}
             className="collections-swiper"
           >
@@ -59,26 +58,15 @@ export default function CollectionShowcase() {
                     <div className="collection-card-info">
                       <h3 className="collection-card-title">{col.name}</h3>
                       <p className="collection-card-count">{col.count}</p>
-                      <span className="collection-card-arrow">
-                        <svg width="14" height="13" fill="none" viewBox="0 0 14 13">
-                          <path fill="currentColor" d="M6.78594.789062c.16406-.145833.31901-.145833.46484 0L12.9656 6.53125c.1641.14583.1641.29167 0 .4375L7.25078 12.7109c-.14583.1459-.30078.1459-.46484 0l-.54688-.5468c-.05469-.0547-.08203-.1276-.08203-.2188 0-.0911.02734-.1732.08203-.2461l4.23824-4.23826H1.15312c-.218745 0-.32812-.10938-.32812-.32813v-.76562c0-.21875.109375-.32813.32812-.32813h9.32418L6.23906 1.80078c-.14583-.16406-.14583-.31901 0-.46484l.54688-.546878z"/>
-                        </svg>
-                      </span>
                     </div>
                   </a>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="collections-controls">
-            <button className="collections-prev" aria-label="Previous">
-              <span className="animate-icon" />
-            </button>
-            <div className="collections-fraction" />
-            <button className="collections-next" aria-label="Next">
-              <span className="animate-icon" />
-            </button>
-          </div>
+          <button className="collections-nav collections-nav-next" aria-label="Next">
+            <span className="animate-icon" />
+          </button>
         </div>
       </div>
     </section>

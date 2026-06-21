@@ -47,11 +47,6 @@ export default function Footer() {
               <p>Thứ 2 - Thứ 7 (08h00 - 17h00)</p>
             </div>
 
-            <div className="footer-col footer-col-badge">
-              <a href="http://online.gov.vn/Home/WebDetails/142331" target="_blank" rel="noopener noreferrer">
-                <img src="/images/bct_badge.png" alt="Đã thông báo Bộ Công Thương" loading="lazy" />
-              </a>
-            </div>
           </div>
         </div>
       </div>

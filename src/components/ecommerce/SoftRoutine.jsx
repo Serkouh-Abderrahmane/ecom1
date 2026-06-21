@@ -47,6 +47,22 @@ const products = [
     oldPrice: '499.000₫',
     badge: '-20%',
   },
+  {
+    image: '/images/love_SWTce35.png',
+    imageHover: '/images/Game_e927ebc6-0775-41a4-ba57-ee8013f36e81709f.png',
+    name: 'Áo Sweater Love Bites',
+    price: '399.000₫',
+    oldPrice: '499.000₫',
+    badge: '-20%',
+  },
+  {
+    image: '/images/ngh_l8b83.png',
+    imageHover: '/images/di_n_nh962d.png',
+    name: 'Áo Hoodie Nghỉ Lễ',
+    price: '420.000₫',
+    oldPrice: '598.000₫',
+    badge: '-30%',
+  },
 ];
 
 export default function SoftRoutine() {
@@ -70,7 +86,7 @@ export default function SoftRoutine() {
                   </div>
                 </a>
                 {product.badge && (
-                  <span className="m-product-tag m-product-tag--sale">-{product.badge}</span>
+                  <span className="m-product-tag m-product-tag--sale">{product.badge}</span>
                 )}
               </div>
               <div className="m-product-card__content">
