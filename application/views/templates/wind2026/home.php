@@ -1,7 +1,7 @@
 <?php
 $defined = 'BASEPATH';
 if (!defined($defined)) { exit('No direct script access allowed'); }
-?>
+?><!-- COMMIT=97408bf FIX=head-section -->
 
 <!doctype html>
 <html
