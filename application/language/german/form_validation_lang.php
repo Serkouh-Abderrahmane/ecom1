@@ -1,4 +1,0 @@
-<?php
-
-$lang['required'] = 'Pflichtfeld';
-
