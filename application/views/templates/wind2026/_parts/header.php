@@ -19,8 +19,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>" />
     <link href="<?= base_url('assets/css/minimog.css') ?>" rel="stylesheet" />
-    <link href="<?= base_url('assets/css/theme/custom.css') ?>" rel="stylesheet" />
-    <link href="<?= base_url('assets/css/theme/header.css') ?>" rel="stylesheet" />
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('loadlanguage/all.js') ?>"></script>
     <?php if ($cookieLaw != false) { ?>
